@@ -25,3 +25,23 @@ class Cave:
     #link cave methods
     def link_cave(self, cave_to_link, direction):
         self.linked_caves[direction] = cave_to_link
+
+    #get details of the cave
+    def get_details(self):
+        print(self.name)
+        print("----------")
+        print(" " + self.description)
+
+        for direction in self.linked_caves:
+            cave = self.linked_caves[direction]
+
+            print(f"The {cave.get_name()} is {direction}")
+
+    #move to a different cave
+    def move(self, direction):
+        if direction in self.linked_caves:
+            return self.linked_caves[direction]
+        
+        else:
+            print("You can't go that way")
+            return self
