@@ -1,4 +1,6 @@
 from cave import Cave
+from character import Character
+from character import Enemy
 
 #create Cave instances
 cavern = Cave("Cavern")
@@ -17,13 +19,24 @@ dungeon.link_cave(cavern, "north")
 grotto.link_cave(dungeon, "east")
 dungeon.link_cave(grotto, "west")
 
+harry = Enemy(char_name= "Harry", 
+              char_description= "A smelly Wumpus")
+harry.set_conversation("Hangry...Hanggrry")
+harry.set_weakness("vegemite")
+
+dungeon.set_character(harry)
 
 current_cave = cavern
 
 while True:
     print("\n")
     current_cave.get_details()
+
+    inhabitant = current_cave.get_character()
+
+    if inhabitant is not None:
+        inhabitant.describe()
     
-    command = input(">")
+    command = input("> ")
 
     current_cave = current_cave.move(command)
