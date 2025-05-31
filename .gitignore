@@ -1,5 +1,6 @@
 #credit: https://github.com/github/gitignore/blob/main/Python.gitignore
 
+settings.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
