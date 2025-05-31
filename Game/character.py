@@ -27,6 +27,7 @@ class Character():
         print(f"{self.name} doesn't want to fight with you")
         return True
     
+#extends Character class
 class Enemy(Character):
     def __init__(self, char_name, char_description):
         super().__init__(char_name, char_description)
@@ -46,3 +47,16 @@ class Enemy(Character):
         else:
             print(f"{self.name} swallows you, little wimp")
             return False
+        
+    def steal(self):
+        print(f"You steal from {self.name}")
+
+#extends Character class
+class Friend(Character):
+    #constructor method
+    def __init__(self, char_name, char_description):
+        super().__init__(char_name, char_description)
+        self.feeling = None
+
+    def pat(self):
+        print(f"{self.name} pats you back")
