@@ -1,5 +1,5 @@
 from cave import Cave
-from character import Enemy, Friend
+from character import Enemy, Friend, Trader
 from item import Item
 
 #create Cave instances
@@ -12,12 +12,40 @@ grotto.set_description("A small cave with ancient graffiti")
 dungeon = Cave("Dungeon")
 dungeon.set_description("A large cave with a rack")
 
+underground_lake = Cave("Underground Lake")
+underground_lake.set_description("A massive cave with a mysterious lake in the centre")
+
+abandoned_mine = Cave("Abandoned Mine")
+abandoned_mine.set_description("An old mine covered in dust and cobwebs")
+
 #Cave links
 cavern.link_cave(dungeon, "south")
 dungeon.link_cave(cavern, "north")
 
 grotto.link_cave(dungeon, "east")
 dungeon.link_cave(grotto, "west")
+
+underground_lake.link_cave(grotto, "east")
+grotto.link_cave(underground_lake, "west")
+
+abandoned_mine.link_cave(dungeon, "west")
+dungeon.link_cave(abandoned_mine, "east")
+
+#item
+vegemite = Item("vegemite")
+vegemite.set_description("A Wumpuses worst nightmare")
+grotto.set_item(vegemite)
+
+torch = Item("torch")
+torch.set_description("A light for the end of the tunnel")
+dungeon.set_item(torch)
+
+sunken_treasure = Item("sunken treasure")
+sunken_treasure.set_description("A waterlogged chest filled with gold coins")
+underground_lake.set_item(sunken_treasure)
+
+pickaxe = Item("pickaxe")
+pickaxe.set_description("A sturdy iron pickaxe")
 
 #characters
 harry = Enemy("Harry", "A smelly Wumpus")
@@ -29,14 +57,13 @@ josephine = Friend("Josephine", "A friendly bat")
 josephine.set_conversation("Gidday")
 grotto.set_character(josephine)
 
-#item
-vegemite = Item("vegemite")
-vegemite.set_description("A Wumpuses worst nightmare")
-grotto.set_item(vegemite)
-
-torch = Item("torch")
-torch.set_description("A light for the end of the tunnel")
-dungeon.set_item(torch)
+josh = Trader("Josh", "An undead miner looking for gold")
+josh.set_conversation("GOLLLD!")
+josh.set_trade(
+    item_give= "pickaxe", 
+    item_takes = "sunken treasure"
+    )
+abandoned_mine.set_character(josh)
 
 #main game loop
 current_cave = cavern
@@ -113,6 +140,25 @@ while dead == False:
             print(f"You put the {item.get_name()} in your bag")
             bag.append(item.get_name())
             current_cave.set_item(None)
+            
+    elif command == "trade":
+        if inhabitant is not None and isinstance(inhabitant, Trader):
+                print("What do you have to trade")
+                player_gives = input("> ")
+                
+                if player_gives not in bag: 
+                    print(f"You don't have a {player_gives}") 
+                    continue
+                
+                if player_gives == inhabitant.get_item_takes():
+                    print(f"You trade a {player_gives} for a {inhabitant.get_item_give()}")
+                    bag.remove(player_gives)
+                    bag.append(inhabitant.get_item_give())
+                    
+                else:
+                    print(f"{inhabitant.name} doesn't want a {player_gives}")
+        else:
+            print("There is no one here to trade with")
             
             
     

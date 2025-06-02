@@ -63,3 +63,20 @@ class Friend(Character):
 
     def pat(self):
         print(f"{self.name} pats you back")
+        
+class Trader(Character):
+    #constructor method
+    def __init__(self, char_name, char_description):
+        super().__init__(char_name, char_description)
+        self.item_give = None
+        self.item_takes = None
+        
+    def get_item_give(self):
+        return self.item_give
+    
+    def get_item_takes(self):
+        return self.item_takes
+        
+    def set_trade(self, item_give, item_takes):
+        self.item_give = item_give
+        self.item_takes = item_takes
