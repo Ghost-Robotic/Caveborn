@@ -31,7 +31,7 @@ grotto.link_cave(underground_lake, "west")
 abandoned_mine.link_cave(dungeon, "west")
 dungeon.link_cave(abandoned_mine, "east")
 
-#item
+#item instances
 vegemite = Item("vegemite")
 vegemite.set_description("A Wumpuses worst nightmare")
 grotto.set_item(vegemite)
@@ -47,7 +47,7 @@ underground_lake.set_item(sunken_treasure)
 pickaxe = Item("pickaxe")
 pickaxe.set_description("A sturdy iron pickaxe")
 
-#characters
+#characters instances
 harry = Enemy("Harry", "A smelly Wumpus")
 harry.set_conversation("Hangry...Hanggrry")
 harry.set_weakness("vegemite")
@@ -70,13 +70,16 @@ current_cave = cavern
 dead = False
 bag = []
 
+#loops while player is still alive
 while dead == False:
     print("\n")
     current_cave.get_details()
-
+    
+    #get and store cave entities
     inhabitant = current_cave.get_character()
     item = current_cave.get_item()
 
+    #describe entities within cave
     if inhabitant is not None:
         inhabitant.describe()
         
@@ -90,11 +93,13 @@ while dead == False:
         #move to new cave
         current_cave = current_cave.move(command)
 
+    #talk with current inhabitant
     elif command == "talk":
         #talk to 
         if inhabitant is not None:
             inhabitant.talk()
     
+    #fight current inhabitant
     elif command == "fight":
         #attempt to fight enemy
         if inhabitant is not None and isinstance(inhabitant, Enemy):
@@ -124,6 +129,7 @@ while dead == False:
         else:
             print("There is no one here to fight with")
 
+    #pat current inhabitant
     elif command == "pat":
         if inhabitant is not None:
             if isinstance(inhabitant, Enemy):
@@ -134,13 +140,15 @@ while dead == False:
 
         else:
             print(f"There is no one here to pat :(")
-            
+          
+    #take current item  
     elif command == "take":
         if item is not None:
             print(f"You put the {item.get_name()} in your bag")
             bag.append(item.get_name())
             current_cave.set_item(None)
-            
+         
+    #trade with current inhabitant   
     elif command == "trade":
         if inhabitant is not None and isinstance(inhabitant, Trader):
                 print("What do you have to trade")

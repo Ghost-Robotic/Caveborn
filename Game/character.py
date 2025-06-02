@@ -27,7 +27,7 @@ class Character():
         print(f"{self.name} doesn't want to fight with you")
         return True
     
-#extends Character class
+#extends Character class, allows players to fight character
 class Enemy(Character):
     enemies_to_defeat = 0
     def __init__(self, char_name, char_description):
@@ -64,6 +64,7 @@ class Friend(Character):
     def pat(self):
         print(f"{self.name} pats you back")
         
+#extends Character class, allows players to trade item with character
 class Trader(Character):
     #constructor method
     def __init__(self, char_name, char_description):
