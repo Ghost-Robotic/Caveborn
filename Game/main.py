@@ -1,6 +1,6 @@
-from cave import Cave
-from character import Enemy, Friend, Trader
-from item import Item
+from src.entities.cave import Cave
+from src.entities.character import Enemy, Friend, Trader
+from src.entities.item import Item
 
 #create Cave instances
 cavern = Cave("Cavern")
