@@ -65,7 +65,7 @@ class Friend(Character):
         print(f"{self.name} pats you back")
         
 #extends Character class, allows players to trade item with character
-class Trader(Character):
+class Trader(Friend):
     #constructor method
     def __init__(self, char_name, char_description):
         super().__init__(char_name, char_description)
