@@ -1,9 +1,9 @@
-# Cave Game
+# Caveborn
 
 ## Description
-Text Based Adventure Game
+Caveborn is a text based game where you explore caves, trade items and fight enemies!
 
-## How it works
+## How to play
 
 ## Available Commands
 * __north, south, east, west__: move the player in the cardinal directions
