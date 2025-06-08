@@ -167,6 +167,7 @@ class Game():
     
     @classmethod
     def update_state(cls):
+        """Updates Game class variables"""
         cls.cave_inhabitant = Game.current_cave.get_character()
         cls.cave_item = Game.current_cave.get_item()
         
