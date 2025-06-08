@@ -17,6 +17,7 @@ class Config():
         Links.initialise_character_locations()
         
         Player.initialise()    
+        Game.initialise()
 
 
 class Cave_Entities(Cave):
@@ -134,23 +135,42 @@ class Links(Cave_Entities, Item_Entities, Character_Entities):
         
 class Player():
     """This class contains all the information about the Player"""
-    current_cave = None
     bag = None
     dead = None
+    health = None
     
     @classmethod
     def initialise(cls):
         """Initialise Player object"""
-        cls.current_cave = Cave_Entities.cavern
         cls.bag = []
         cls.dead = False
+        cls.health = 100
+        
+    @classmethod
+    def damage(cls, damage):
+        cls.health = cls.health - damage
+        
+    @classmethod
+    def heal(cls, heal):
+        cls.health = cls.health + heal
         
 class Game():
-    
+    """This class store Game wide variable"""
+    current_cave = None
     cave_inhabitant = None
     cave_item = None
     
     @classmethod
+    def initialise(cls):
+        """Initialise Game objects"""
+        cls.current_cave = Cave_Entities.cavern
+    
+    @classmethod
     def update_state(cls):
-        cls.cave_inhabitant = Player.current_cave.get_character()
-        cls.cave_item = Player.current_cave.get_item()
+        cls.cave_inhabitant = Game.current_cave.get_character()
+        cls.cave_item = Game.current_cave.get_item()
+        
+        Player.health = (Player.health if Player.health <= 100 else 100)
+        
+        if Player.health <= 0:
+            Player.dead = True
