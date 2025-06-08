@@ -1,25 +1,18 @@
 from src.entities.character import Enemy, Trader
-from config import Config, Player
+from config import Config, Player, Game
+from commands.game_commands import GameCommand
 
 Config.initialise()
 
 #loops while player is still alive
 while Player.dead == False:
     print("\n")
-    Player.current_cave.get_details()
+    #GameCommand.clear_terminal()
     
-    #get and store cave entities
-    inhabitant = Player.current_cave.get_character()
-    item = Player.current_cave.get_item()
+    Game.update_state()
+    GameCommand.display_details()
 
-    #describe entities within cave
-    if inhabitant is not None:
-        inhabitant.describe()
-        
-    if item is not None:
-        item.describe()
-
-    command = input("> ").lower()
+    command = input("> ").lower().strip()
     
     #check and execute command  given
     if command in ["north", "south", "east", "west"]:
@@ -29,19 +22,19 @@ while Player.dead == False:
     #talk with current inhabitant
     elif command == "talk":
         #talk to 
-        if inhabitant is not None:
-            inhabitant.talk()
+        if Game.cave_inhabitant is not None:
+            Game.cave_inhabitant.talk()
     
     #fight current inhabitant
     elif command == "fight":
         #attempt to fight enemy
-        if inhabitant is not None and isinstance(inhabitant, Enemy):
+        if Game.cave_inhabitant is not None and isinstance(Game.cave_inhabitant, Enemy):
             #Fight with the inhabitant if there is one
             print("What will you fight with")
             fight_with = input("> ")
 
             if fight_with in Player.bag:
-                if inhabitant.fight(combat_item= fight_with) == True:
+                if Game.cave_inhabitant.fight(combat_item= fight_with) == True:
                     #win message
                     print("Bravo, hero you won the fight!")
                     Player.current_cave.set_character(None)
@@ -64,39 +57,39 @@ while Player.dead == False:
 
     #pat current inhabitant
     elif command == "pat":
-        if inhabitant is not None:
-            if isinstance(inhabitant, Enemy):
+        if Game.cave_inhabitant is not None:
+            if isinstance(Game.cave_inhabitant, Enemy):
                 print("I wouldn't do that if I were you...")
 
             else:
-                inhabitant.pat()
+                Game.cave_inhabitant.pat()
 
         else:
             print(f"There is no one here to pat :(")
           
     #take current item  
     elif command == "take":
-        if item is not None:
-            print(f"You put the {item.get_name()} in your bag")
-            Player.bag.append(item.get_name())
+        if Game.cave_item is not None:
+            print(f"You put the {Game.cave_item.get_name()} in your bag")
+            Player.bag.append(Game.cave_item.get_name())
             Player.current_cave.set_item(None)
          
     #trade with current inhabitant   
     elif command == "trade":
-        if inhabitant is not None and isinstance(inhabitant, Trader):
+        if Game.cave_inhabitant is not None and isinstance(Game.cave_inhabitant, Trader):
                 print("What do you have to trade")
-                player_gives = input("> ")
+                player_trades = input("> ")
                 
-                if player_gives not in Player.bag: 
-                    print(f"You don't have a {player_gives}") 
+                if player_trades not in Player.bag: 
+                    print(f"You don't have a {player_trades}") 
                     continue
                 
-                if player_gives == inhabitant.get_item_takes():
-                    print(f"You trade a {player_gives} for a {inhabitant.get_item_give()}")
-                    Player.bag.remove(player_gives)
-                    Player.bag.append(inhabitant.get_item_give())
+                if player_trades == Game.cave_inhabitant.get_item_wants():
+                    print(f"You trade a {player_trades} for a {Game.cave_inhabitant.get_item_trades()}")
+                    Player.bag.remove(player_trades)
+                    Player.bag.append(Game.cave_inhabitant.get_item_trades())
                     
                 else:
-                    print(f"{inhabitant.name} doesn't want a {player_gives}")
+                    print(f"{Game.cave_inhabitant.name} doesn't want a {player_trades}")
         else:
             print("There is no one here to trade with")
