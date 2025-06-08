@@ -39,8 +39,8 @@ class Cave:
 
     #get details of the cave
     def describe(self):
-        print(self.name)
-        print("----------")
+        # print(self.name)
+        # print("----------")
         print(" " + self.description)
 
         for direction in self.linked_caves:
