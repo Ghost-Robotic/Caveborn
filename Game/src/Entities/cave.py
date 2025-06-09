@@ -33,18 +33,12 @@ class Cave:
     def set_item(self, item):
         self.item = item
 
-    #describe cave
-    def describe(self):
-        print(self.description)
-
     #link cave methods
     def link_cave(self, cave_to_link, direction):
         self.linked_caves[direction] = cave_to_link
 
     #get details of the cave
-    def get_details(self):
-        print(self.name)
-        print("----------")
+    def describe(self):
         print(" " + self.description)
 
         for direction in self.linked_caves:
