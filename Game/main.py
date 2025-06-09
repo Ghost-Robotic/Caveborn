@@ -1,5 +1,5 @@
-from src.entities.character import Enemy, Trader
-from config import Config, Player, Game
+from src.entities.Player import Player
+from config import Config
 from commands.game_commands import GameCommand
 from commands.player_commands import PlayerCommand
 
@@ -10,7 +10,7 @@ while Player.dead == False:
     print("\n")
     #GameCommand.clear_terminal()
     
-    Game.update_state()
+    GameCommand.update_state()
     GameCommand.display_details()
 
     command = input("> ").lower().strip()
