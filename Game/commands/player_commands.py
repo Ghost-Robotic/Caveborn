@@ -1,5 +1,6 @@
 from src.entities.character import Enemy, Trader
-from config import Player, Game
+from config import Game
+from src.entities.Player import Player
 
 class PlayerCommand():
     
@@ -11,7 +12,7 @@ class PlayerCommand():
         Args:
             direction (str): Direction to move in.
         """
-        Player.current_cave = Player.current_cave.move(direction)
+        Game.current_cave = Game.current_cave.move(direction)
     
     @staticmethod
     def talk():
@@ -34,7 +35,7 @@ class PlayerCommand():
                 if Game.cave_inhabitant.fight(combat_item= fight_with) == True:
                     #win message
                     print("Bravo, hero you won the fight!")
-                    Player.current_cave.set_character(None)
+                    Game.current_cave.set_character(None)
                     
                     if Enemy.enemies_to_defeat == 0:
                         print("Congratulations, you have survived another adventure!")  
@@ -71,7 +72,7 @@ class PlayerCommand():
         if Game.cave_item is not None:
             print(f"You put the {Game.cave_item.get_name()} in your bag")
             Player.bag.append(Game.cave_item.get_name())
-            Player.current_cave.set_item(None)
+            Game.current_cave.set_item(None)
             
         else:
             print("The floor is empty...")
