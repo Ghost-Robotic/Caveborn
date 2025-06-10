@@ -1,12 +1,12 @@
-from src.entities.Player import Player
-from config import Config
-from commands.game_commands import GameCommand
-from commands.player_commands import PlayerCommand
+#from src.entities.Player import Player
+from config import Config, PlayerEntity
+from src.commands.game_commands import GameCommand
+from src.commands.player_commands import PlayerCommand
 
 Config.initialise()
 
 #loops while player is still alive
-while Player.dead == False:
+while PlayerEntity.dead == False:
     print("\n")
     #GameCommand.clear_terminal()
     

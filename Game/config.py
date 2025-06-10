@@ -1,6 +1,7 @@
 from src.entities.cave import Cave
 from src.entities.character import Character, Enemy, Friend, Trader
 from src.entities.item import Item
+from src.entities.player import Player
 
 class Config():
     """This class initialise all game entities"""
@@ -8,9 +9,9 @@ class Config():
     @classmethod
     def initialise(cls):
         """Initialise game entities"""
-        Cave_Entities.initialise()
-        Item_Entities.initialise()
-        Character_Entities.initialise()
+        CaveEntities.initialise()
+        ItemEntities.initialise()
+        CharacterEntities.initialise()
         
         Links.initialise_cave_relationships() 
         Links.initialise_item_locations()
@@ -20,7 +21,7 @@ class Config():
         Game.initialise()
 
 
-class Cave_Entities(Cave):
+class CaveEntities(Cave):
     """This class contains all the Cave objects"""
     
     cavern = None
@@ -32,7 +33,7 @@ class Cave_Entities(Cave):
     @classmethod 
     def initialise(cls):
         """Initialise Cave objects"""
-        cls.cavern = Cave( "Cavern")
+        cls.cavern = Cave("Cavern")
         cls.cavern.set_description("A damp and dirty cave.")
 
         cls.grotto = Cave("Grotto")
@@ -48,7 +49,7 @@ class Cave_Entities(Cave):
         cls.abandoned_mine.set_description("An old mine covered in dust and cobwebs")    
         
         
-class Item_Entities(Item):
+class ItemEntities(Item):
     """""This class contains all Item objects:"""""
     vegemite = None
     torch = None
@@ -71,7 +72,7 @@ class Item_Entities(Item):
         cls.pickaxe.set_description("A sturdy iron pickaxe")
 
 
-class Character_Entities(Character):
+class CharacterEntities(Character):
     """This class contains all Character objects"""
     
     harry = None 
@@ -100,7 +101,7 @@ class Character_Entities(Character):
             item_wants = "sunken treasure") 
         
         
-class Links(Cave_Entities, Item_Entities, Character_Entities):
+class Links(CaveEntities, ItemEntities, CharacterEntities):
     """This class contains the relationship between Cave objects"""
     
     @classmethod
@@ -133,11 +134,8 @@ class Links(Cave_Entities, Item_Entities, Character_Entities):
         cls.abandoned_mine.set_character(cls.josh)
           
         
-class PlayerEntity():
+class PlayerEntity(Player):
     """This class contains all the information about the Player"""
-    bag = None
-    dead = None
-    health = None
     
     @classmethod
     def initialise(cls):
@@ -155,4 +153,4 @@ class Game():
     @classmethod
     def initialise(cls):
         """Initialise Game objects"""
-        cls.current_cave = Cave_Entities.cavern
+        cls.current_cave = CaveEntities.cavern
