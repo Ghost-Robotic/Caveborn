@@ -17,10 +17,10 @@ class Character():
     #talk to character
     def talk(self):
         if self.conversation is not None:
-            print(f"[{self.name} says]: {self.conversation}")
+            return (f"[{self.name} says]: {self.conversation}")
 
         else:
-            print(f"{self.name} doesn't want to talk to you")
+            return (f"{self.name} doesn't want to talk to you")
 
     #fight character
     def fight(self, combat_item):
