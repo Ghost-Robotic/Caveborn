@@ -1,5 +1,5 @@
 #from src.entities.Player import Player
-from config import Config, PlayerEntity
+from src.config import Config, PlayerEntity
 from src.commands.game_commands import GameCommand
 from src.commands.player_commands import PlayerCommand
 
@@ -7,14 +7,15 @@ Config.initialise()
 
 #loops while player is still alive
 while PlayerEntity.dead == False:
-    print("\n")
-    #GameCommand.clear_terminal()
+    GameCommand.clear_terminal()
     
     GameCommand.update_state()
     GameCommand.display_details()
-
-    command = input("> ").lower().strip()
     
+    print("\x1b[5m")
+    command = input(">\x1b[93m ").lower().strip()
+    print('\x1b[0m', end="")
+        
     match command:
         case "north" | "south" | "east" | "west":
             PlayerCommand.move(command)
@@ -33,3 +34,7 @@ while PlayerEntity.dead == False:
             
         case "trade":
             PlayerCommand.trade()
+        
+        case _:
+            print("Invalid Command")
+            GameCommand.wait_for_input()
