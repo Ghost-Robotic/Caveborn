@@ -24,7 +24,7 @@ class PlayerCommand():
         else: 
             print("Its so lonely in here...")
             
-        GameCommand.wait_for_input()
+        GameCommand.wait_for_enter()
     
     @staticmethod
     def fight():

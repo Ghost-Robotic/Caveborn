@@ -51,6 +51,6 @@ class GameCommand():
             PlayerEntity.dead = True
             
     @staticmethod
-    def wait_for_input():
-        input("\n\033[?25lPress any key to continue")
+    def wait_for_enter():
+        input("\n\033[?25lPress Enter to Continue")
         print('\033[?25h', end="")
