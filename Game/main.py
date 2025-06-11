@@ -13,7 +13,7 @@ while PlayerEntity.dead == False:
     GameCommand.update_state()
     GameCommand.display_details()
     if last_command != None:
-        print("\n> ", last_command)
+        print("\n>\x1b[93m", last_command, "\x1b[0m")
     else:
         print("")
     
@@ -43,5 +43,6 @@ while PlayerEntity.dead == False:
             PlayerCommand.trade()
         
         case _:
+            GameCommand.clear_terminal()
             print("Invalid Command")
             GameCommand.wait_for_enter()
