@@ -1,13 +1,14 @@
 from src.config import Game, PlayerEntity
+from src.assets.bit_maps import Bitmap
 from os import system, name
 from time import sleep
 from sys import stdout
 
 class GameCommand():
     def display_decorator(func):
-        def wrapper():
-            print(f"\x1b[96m| \x1b[92mHealth\x1b[0m: \x1b[1m\x1b[95m{PlayerEntity.health}\x1b[0m \x1b[96m|")
-            print("‾" * 15 ,"\x1b[0m")
+        def wrapper(): 
+            Bitmap.update_map(Game.current_cave, PlayerEntity.health)                     
+            Bitmap.display_bitmap()
             
             print("\x1b[1m", Game.current_cave.get_name(), "\x1b[0m")
             print("----------")

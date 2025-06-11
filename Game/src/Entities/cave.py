@@ -36,6 +36,9 @@ class Cave:
     #link cave methods
     def link_cave(self, cave_to_link, direction):
         self.linked_caves[direction] = cave_to_link
+        
+    def get_linked_caves(self):
+        return self.linked_caves
 
     #get details of the cave
     def describe(self):
