@@ -12,20 +12,18 @@ while PlayerEntity.dead == False:
     
     GameCommand.update_state()
     GameCommand.display_details()
-    if last_command != None:
-        print("\n>\x1b[93m", last_command, "\x1b[0m")
-    else:
-        print("")
+    GameCommand.print_last_command(last_command)
     
-    print("\x1b[5m", end='')
-    command = input(">\x1b[93m ").lower().strip()
-    print('\x1b[0m', end="")
+    command = GameCommand.get_input()
     
     last_command = command
+    
+    GameCommand.clear_terminal()
     
     match command:
         case "north" | "south" | "east" | "west":
             PlayerCommand.move(command)
+            continue
 
         case "talk":
             PlayerCommand.talk()
@@ -43,6 +41,4 @@ while PlayerEntity.dead == False:
             PlayerCommand.trade()
         
         case _:
-            GameCommand.clear_terminal()
-            print("Invalid Command")
-            GameCommand.wait_for_enter()
+            PlayerCommand.invalid()

@@ -7,7 +7,8 @@ from sys import stdout
 class GameCommand():
     def display_decorator(func):
         def wrapper(): 
-            Bitmap.update_map(Game.current_cave, PlayerEntity.health)                     
+            Bitmap.update_info(Game.current_cave, PlayerEntity.health, PlayerEntity.bag) 
+            Bitmap.update_map()                    
             Bitmap.display_bitmap()
             
             print("\x1b[1m", Game.current_cave.get_name(), "\x1b[0m")
@@ -18,13 +19,13 @@ class GameCommand():
     @display_decorator
     @staticmethod
     def display_details():
-        Game.current_cave.describe()
+        print(Game.current_cave.describe())
         
         if Game.cave_inhabitant is not None:
-            Game.cave_inhabitant.describe()
+            print(Game.cave_inhabitant.describe())
             
         if Game.cave_item is not None:
-            Game.cave_item.describe()
+            print(Game.cave_item.describe())
             
     @staticmethod
     def sequential_print(string, speed):
@@ -55,3 +56,16 @@ class GameCommand():
     def wait_for_enter():
         input("\n\033[?25lPress Enter to Continue")
         print('\033[?25h', end="")
+        
+    @staticmethod
+    def get_input():
+        command = input(">\x1b[93m ").lower().strip()
+        print('\x1b[0m', end="")
+        return command
+    
+    @staticmethod
+    def print_last_command(last_command):
+        if last_command is not None:
+            print("\n\x1b[38;5;241m>\x1b[38;2;148;150;65m", last_command, "\x1b[0m")
+        else:
+            print("")        
