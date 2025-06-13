@@ -150,7 +150,17 @@ class Game():
     cave_inhabitant = None
     cave_item = None
     
+    standard_text_colour = None
+    standard_print_speed = None
+    
+    item_text_colour = None
+    character_text_colour = None
+    
     @classmethod
     def initialise(cls):
         """Initialise Game objects"""
         cls.current_cave = CaveEntities.cavern
+        cls.standard_text_colour = ""
+        cls.standard_print_speed = 0.06
+        cls.item_text_colour = "\x1b[38;5;207m"
+        cls.character_text_colour = "\x1b[38;5;81m"

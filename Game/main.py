@@ -9,7 +9,6 @@ last_command = None
 #loops while player is still alive
 while PlayerEntity.dead == False:
     GameCommand.clear_terminal()
-    
     GameCommand.update_state()
     GameCommand.display_details()
     GameCommand.print_last_command(last_command)
