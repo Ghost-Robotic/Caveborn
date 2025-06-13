@@ -42,12 +42,12 @@ class Cave:
 
     #get details of the cave
     def describe(self):
-        print(" " + self.description)
+        return(" " + self.description)
 
-        for direction in self.linked_caves:
-            cave = self.linked_caves[direction]
+        # for direction in self.linked_caves:
+        #     cave = self.linked_caves[direction]
 
-            print(f"The {cave.get_name()} is {direction}")
+        #     print(f"The {cave.get_name()} is {direction}")
 
     #move to a different cave
     def move(self, direction):

@@ -11,13 +11,12 @@ class Character():
 
     #describe character
     def describe(self):
-        print(f"{self.name} is here!")
-        print(self.description)
+        return f"{self.name} is here!\n{self.description}"
 
     #talk to character
     def talk(self):
         if self.conversation is not None:
-            return (f"[{self.name} says]: {self.conversation}")
+            return [f"[{self.name} says]: " , f"{self.conversation}"]
 
         else:
             return (f"{self.name} doesn't want to talk to you")
@@ -62,7 +61,7 @@ class Friend(Character):
         self.feeling = None
 
     def pat(self):
-        print(f"{self.name} pats you back")
+        return [f"{self.name} ", "pats you back"]
         
 #extends Character class, allows players to trade item with character
 class Trader(Friend):

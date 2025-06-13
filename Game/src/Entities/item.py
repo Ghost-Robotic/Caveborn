@@ -27,4 +27,4 @@ class Item:
         
     #describe item
     def describe(self):
-        print(f"You spot a {self.name}- {self.description}")
+        return f"You spot a {self.name}- {self.description}"
