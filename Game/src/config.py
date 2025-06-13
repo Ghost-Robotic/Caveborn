@@ -144,6 +144,7 @@ class PlayerEntity(Player):
         cls.dead = False
         cls.health = 100
         
+        
 class Game():
     """This class store Game wide variable"""
     current_cave = None

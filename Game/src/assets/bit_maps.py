@@ -10,7 +10,6 @@ class Bitmap():
     height = 7
     
     bitmap_direction = []
-    
     bitmap_info = []
     
     @classmethod
@@ -46,6 +45,7 @@ class Bitmap():
         else:
             cls.west = "W"    
             
+            
     @classmethod
     def update_map(cls):
         cls.bitmap_direction = [
@@ -67,6 +67,7 @@ class Bitmap():
             f"| ",
             f"" 
         ]                        
+          
             
     @classmethod 
     def display_bitmap(cls):

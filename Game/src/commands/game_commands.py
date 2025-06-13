@@ -29,6 +29,7 @@ class GameCommand():
         if Game.cave_item is not None:
             print(Game.cave_item.describe())
             
+            
     @staticmethod
     def sequential_print(string, speed, colour):
         for character in string:
@@ -37,6 +38,7 @@ class GameCommand():
             stdout.flush()
             sleep(speed)
         sleep(0.1)
+          
             
     @staticmethod
     def sequential_print_segments(segments, strings, speeds, colours):

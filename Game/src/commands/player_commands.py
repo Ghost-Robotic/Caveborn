@@ -141,6 +141,7 @@ class PlayerCommand():
             
         GameCommand.wait_for_enter()
         
+        
     @GameCommand.display_decorator
     @staticmethod
     def invalid():
