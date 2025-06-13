@@ -5,6 +5,7 @@ class Bitmap():
     west = None
     
     health = None
+    bag = None
     
     height = 7
     
@@ -13,44 +14,54 @@ class Bitmap():
     bitmap_info = []
     
     @classmethod
-    def update_map(cls, current_cave, health):
+    def update_info(cls, current_cave, health, bag):
         cls.health = health
+        
+        if bag == []:
+            cls.bag = "Empty"            
+        else:
+            cls.bag = bag[0]
+            for i in range(len(bag)-1):
+                cls.bag = cls.bag + "\x1b[39m, \x1b[38;5;207m" + bag[i+1]    
+        
         linked_caves = current_cave.get_linked_caves()
         
         if "north" in linked_caves:
-            cls.north = "\x1b[91mN\x1b[0m"       
+            cls.north = "\x1b[38;5;196mN\x1b[0m"       
         else:
             cls.north = "N"
         
         if "east" in linked_caves:
-            cls.east = "\x1b[91mE\x1b[0m"
+            cls.east = "\x1b[38;5;196mE\x1b[0m"
         else:
             cls.east = "E"
         
         if "south" in linked_caves:
-            cls.south = "\x1b[91mS\x1b[0m"
+            cls.south = "\x1b[38;5;196mS\x1b[0m"
         else:
             cls.south = "S"
         
         if "west" in linked_caves:
-            cls.west = "\x1b[91mW\x1b[0m"
+            cls.west = "\x1b[38;5;196mW\x1b[0m"
         else:
-            cls.west = "W"
-
+            cls.west = "W"    
+            
+    @classmethod
+    def update_map(cls):
         cls.bitmap_direction = [
-            f"",
-            f"    {cls.north}    ",     #R1 len:9
-            f"    ʌ    ",           #R2 len:9
-            f"{cls.west} < o > {cls.east}", #R3 len:9
-            f"    v    ",           #R4 len:9
-            f"    {cls.south}    ",      #R5 len:9
-            f""
+            f" ___________",                  #R1 len:11
+            f"|     {cls.north}    ",         #R1 
+            f"|     ʌ    ",                   #R2 
+            f"| {cls.west} < o > {cls.east}", #R3 
+            f"|     v    ",                   #R4 
+            f"|     {cls.south}    ",         #R5 
+            f" ‾‾‾‾‾‾‾‾‾‾‾"                   #R5 
         ]
         
         cls.bitmap_info = [
             f"",
-            f"| \x1b[92mHealth\x1b[0m: \x1b[1m\x1b[95m{cls.health}\x1b[0m",
-            f"| ",
+            f"| \x1b[38;5;46mHealth\x1b[0m: \x1b[1;38;5;201m{cls.health}\x1b[0m",
+            f"| \x1b[38;5;39mBag\x1b[0m: [\x1b[38;5;207m{cls.bag}\x1b[0m]",
             f"| ",
             f"| ",    
             f"| ",
