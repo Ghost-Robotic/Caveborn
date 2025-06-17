@@ -5,21 +5,20 @@ from src.entities.player import Player
 
 class Config():
     """This class initialise all game entities"""
+    
+    standard_text_colour = None
+    standard_print_speed = None
+    
+    item_text_colour = None
+    character_text_colour = None
         
     @classmethod
     def initialise(cls):
         """Initialise game entities"""
-        CaveEntities.initialise()
-        ItemEntities.initialise()
-        CharacterEntities.initialise()
-        
-        Links.initialise_cave_relationships() 
-        Links.initialise_item_locations()
-        Links.initialise_character_locations()
-        
-        PlayerEntity.initialise()    
-        Game.initialise()
-
+        cls.standard_text_colour = ""
+        cls.standard_print_speed = 0.06
+        cls.item_text_colour = "\x1b[38;5;207m"
+        cls.character_text_colour = "\x1b[38;5;81m"
 
 class CaveEntities(Cave):
     """This class contains all the Cave objects"""
@@ -145,23 +144,35 @@ class PlayerEntity(Player):
         cls.health = 100
         
         
-class Game():
-    """This class store Game wide variable"""
-    current_cave = None
-    cave_inhabitant = None
-    cave_item = None
+# class Game():
+#     """This class store Game wide variable"""
+#     current_cave = None
+#     cave_inhabitant = None
+#     cave_item = None
     
-    standard_text_colour = None
-    standard_print_speed = None
+#     run_game = None
+#     win_condition = None
     
-    item_text_colour = None
-    character_text_colour = None
+#     last_command = None
     
-    @classmethod
-    def initialise(cls):
-        """Initialise Game objects"""
-        cls.current_cave = CaveEntities.cavern
-        cls.standard_text_colour = ""
-        cls.standard_print_speed = 0.06
-        cls.item_text_colour = "\x1b[38;5;207m"
-        cls.character_text_colour = "\x1b[38;5;81m"
+#     standard_text_colour = None
+#     standard_print_speed = None
+    
+#     item_text_colour = None
+#     character_text_colour = None
+    
+#     @classmethod
+#     def set_win_condition(cls, win_condition):
+#         cls.win_condition = win_condition
+    
+#     @classmethod
+#     def initialise(cls):
+#         """Initialise Game objects"""
+#         cls.run_game = True
+#         cls.current_cave = CaveEntities.cavern
+#         cls.last_command = None
+        
+#         cls.standard_text_colour = ""
+#         cls.standard_print_speed = 0.06
+#         cls.item_text_colour = "\x1b[38;5;207m"
+#         cls.character_text_colour = "\x1b[38;5;81m"

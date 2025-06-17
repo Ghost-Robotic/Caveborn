@@ -1,42 +1,27 @@
-from src.config import Config, PlayerEntity
-from src.commands.game_commands import GameCommand
-from src.commands.player_commands import PlayerCommand
+from src.game_processes.startup import startup
+from src.game_processes.game_loop import game_loop
+from src.game_processes.menu_loop import menu_loop
 
-Config.initialise()
-last_command = None
+#menu loop
+#create game instance (win_condition)
+#initialise config
+#loop game
+    #game
+    #check win_condition
+#defeat/win message
+#loop
 
-#loops while player is still alive
-while PlayerEntity.dead == False:
-    GameCommand.clear_terminal()
-    GameCommand.update_state()
-    GameCommand.display_details()
-    GameCommand.print_last_command(last_command)
-    
-    command = GameCommand.get_input()
-    
-    last_command = command
-    
-    GameCommand.clear_terminal()
-    
-    match command:
-        case "north" | "south" | "east" | "west":
-            PlayerCommand.move(command)
-            continue
 
-        case "talk":
-            PlayerCommand.talk()
-        
-        case "fight":
-            PlayerCommand.fight()
+def main():
+    
+    game_mode = menu_loop()
+    
+    startup(game_mode)
+    
+    game_loop()
+    
+    #game_over_message()
 
-        case "pat":
-            PlayerCommand.pat()
-            
-        case "take":
-            PlayerCommand.take()
-            
-        case "trade":
-            PlayerCommand.trade()
-        
-        case _:
-            PlayerCommand.invalid()
+
+if __name__ == "__main__":
+    main()

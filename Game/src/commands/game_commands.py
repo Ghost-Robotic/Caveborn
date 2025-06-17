@@ -1,4 +1,6 @@
-from src.config import Game, PlayerEntity
+from src.config import PlayerEntity
+from src.entities.character import Enemy
+from src.game import Game
 from src.assets.player_info_display import PlayerDisplay
 from src.assets.title import Title
 from os import system, name
@@ -68,18 +70,6 @@ class GameCommand():
     @staticmethod
     def clear_terminal():
         system('cls' if name == 'nt' else 'clear')
-        
-        
-    @staticmethod
-    def update_state():
-        """Updates Game class variables"""
-        Game.cave_inhabitant = Game.current_cave.get_character()
-        Game.cave_item = Game.current_cave.get_item()
-        
-        PlayerEntity.health = (PlayerEntity.health if PlayerEntity.health <= 100 else 100)
-        
-        if PlayerEntity.health <= 0:
-            PlayerEntity.dead = True
            
             
     @staticmethod
@@ -94,6 +84,15 @@ class GameCommand():
         
         
     @staticmethod
+    def update_state():
+        """Updates Game class variables"""
+        Game.cave_inhabitant = Game.current_cave.get_character()
+        Game.cave_item = Game.current_cave.get_item()
+        
+        PlayerEntity.health = (PlayerEntity.health if PlayerEntity.health <= 100 else 100)
+        
+        
+    @staticmethod
     def get_input():
         command = input(">\x1b[38;5;226m ").lower().strip()
         print('\x1b[0m', end="")
@@ -105,4 +104,20 @@ class GameCommand():
         if last_command is not None:
             print("\n\x1b[38;5;241m>\x1b[38;2;148;150;65m", last_command, "\x1b[0m")
         else:
-            print("")        
+            print("")  
+            
+    @staticmethod
+    def check_win_condition():
+        match Game.game_mode:
+            
+            case "default":
+                if Enemy.enemies_to_defeat == 0:
+                    return False
+                elif PlayerEntity.health <= 0:
+                    PlayerEntity.dead = True
+                    return False 
+                else:
+                    return True
+                  
+            case _:
+                raise Exception("no game mode set")  
