@@ -29,6 +29,7 @@ class CaveEntities(Cave):
     dungeon = None
     underground_lake = None
     abandoned_mine = None
+    cave = None
     
     @classmethod 
     def initialise(cls):
