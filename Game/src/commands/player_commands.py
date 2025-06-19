@@ -1,4 +1,6 @@
 from src.entities.character import Enemy, Trader
+from src.assets.title import Title
+from src.assets.player_info_display import PlayerDisplay
 from src.config import PlayerEntity, Config
 from src.game import Game
 from .game_commands import GameCommand
@@ -14,6 +16,12 @@ class PlayerCommand():
             direction (str): Direction to move in.
         """
         Game.current_cave = Game.current_cave.move(direction)
+        Title.output()
+        PlayerDisplay.output()
+        print("----------")
+        print("Moving", end = "")
+        GameCommand.sequential_print("...", 0.1, Config.standard_text_colour)        
+        print("----------")
     
     
     @GameCommand.display_decorator

@@ -1,5 +1,5 @@
-from .config import Config, CaveEntities, CharacterEntities, ItemEntities, PlayerEntity, Links
-from .game import Game
+from src.config import Config, CaveEntities, CharacterEntities, ItemEntities, PlayerEntity, Links
+from src.game import Game
 
 def startup(game_mode):
     Config.initialise()

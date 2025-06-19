@@ -1,7 +1,7 @@
-from .config import Config, PlayerEntity
-from .game import Game
-from .commands.game_commands import GameCommand
-from .commands.player_commands import PlayerCommand
+from src.config import Config, PlayerEntity
+from src.game import Game
+from src.commands.game_commands import GameCommand
+from src.commands.player_commands import PlayerCommand
 
 
 def game_loop():
@@ -44,4 +44,5 @@ def game_loop():
                 PlayerCommand.invalid()
                             
                 
-        Game.run_game = GameCommand.check_win_condition()   
+        Game.run_game = GameCommand.check_win_condition()
+    GameCommand.print_game_over()
