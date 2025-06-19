@@ -1,5 +1,6 @@
 from src.config import Game, PlayerEntity
-from src.assets.bit_maps import Bitmap
+from src.assets.player_info_display import PlayerDisplay
+from src.assets.title import Title
 from os import system, name
 from time import sleep
 from sys import stdout
@@ -7,9 +8,10 @@ from sys import stdout
 class GameCommand():
     def display_decorator(func):
         def wrapper(): 
-            Bitmap.update_info(Game.current_cave, PlayerEntity.health, PlayerEntity.bag) 
-            Bitmap.update_map()                    
-            Bitmap.display_bitmap()
+            Title.output()
+            PlayerDisplay.update_info(Game.current_cave, PlayerEntity.health, PlayerEntity.bag) 
+            PlayerDisplay.update_display()                    
+            PlayerDisplay.output()
             
             print("----------")
             print("\x1b[1;38;5;196m", Game.current_cave.get_name(), "\x1b[0m")
@@ -83,9 +85,10 @@ class GameCommand():
     @staticmethod
     def wait_for_enter():
         print("\n")
-        GameCommand.sequential_print("Press ", 0.06, "")
-        GameCommand.sequential_print("Enter ", 0.06, "\x1b[38;5;226m")
-        GameCommand.sequential_print("to Continue", 0.06, "")
+        sleep(0.06)
+        GameCommand.sequential_print("Press ", 0.04, "")
+        GameCommand.sequential_print("Enter ", 0.04, "\x1b[38;5;226m")
+        GameCommand.sequential_print("to Continue", 0.04, "")
         input("\n\033[?25l")
         print('\033[?25h', end="")
         

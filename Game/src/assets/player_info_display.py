@@ -1,4 +1,4 @@
-class Bitmap():
+class PlayerDisplay():
     north = None
     east = None
     south = None
@@ -9,8 +9,8 @@ class Bitmap():
     
     height = 7
     
-    bitmap_direction = []
-    bitmap_info = []
+    player_compass = []
+    player_info = []
     
     @classmethod
     def update_info(cls, current_cave, health, bag):
@@ -47,29 +47,29 @@ class Bitmap():
             
             
     @classmethod
-    def update_map(cls):
-        cls.bitmap_direction = [
-            f" ___________",                  #R1 len:11
-            f"|     {cls.north}    ",         #R1 
-            f"|     ʌ    ",                   #R2 
-            f"| {cls.west} < o > {cls.east}", #R3 
-            f"|     v    ",                   #R4 
-            f"|     {cls.south}    ",         #R5 
-            f" ‾‾‾‾‾‾‾‾‾‾‾"                   #R5 
+    def update_display(cls):
+        cls.player_compass = [
+            f" ╔═══════════╗",                   #R1 len:12
+            f" ║     {cls.north}     ║",         #R1 
+            f" ║     ʌ     ║",                   #R2 
+            f" ║ {cls.west} < o > {cls.east} ║", #R3 
+            f" ║     v     ║",                   #R4 
+            f" ║     {cls.south}     ║",         #R5 
+            f" ╚═══════════╝"                    #R5 
         ]
         
-        cls.bitmap_info = [
+        cls.player_info = [
             f"",
-            f"| \x1b[38;5;46mHealth\x1b[0m: \x1b[1;38;5;201m{cls.health}\x1b[0m",
-            f"| \x1b[38;5;39mBag\x1b[0m: [\x1b[38;5;207m{cls.bag}\x1b[0m]",
-            f"| ",
-            f"| ",    
-            f"| ",
+            f" \x1b[38;5;46mHealth\x1b[0m: \x1b[1;38;5;201m{cls.health}\x1b[0m",
+            f" \x1b[38;5;39mBag\x1b[0m: [\x1b[38;5;207m{cls.bag}\x1b[0m]",
+            f" ",
+            f" ",    
+            f" ",
             f"" 
         ]                        
           
             
     @classmethod 
-    def display_bitmap(cls):
+    def output(cls):
         for line in range(cls.height):
-            print(cls.bitmap_direction[line] , cls.bitmap_info[line])
+            print(cls.player_compass[line] , cls.player_info[line])
