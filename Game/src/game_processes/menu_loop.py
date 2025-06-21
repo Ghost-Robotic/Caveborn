@@ -50,11 +50,12 @@ def menu_loop():
                 game_mode = "default"
                 
             case "enter the caves":
-                try:
+                if game_mode is not None:
                     end_sequence()
                     return game_mode
-                except:
+                else:
                     print("No game mode selected")
+                    GameCommand.wait_for_enter()
             
             case _:
                 print('\nSelect a game mode by typing in its name or type "\x1b[38;5;226mEnter the caves\x1b[0m" to start the game')

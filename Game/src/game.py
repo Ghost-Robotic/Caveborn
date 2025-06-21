@@ -21,3 +21,12 @@ class Game():
         cls.run_game = True
         cls.current_cave = CaveEntities.cavern
         cls.last_command = None
+        
+    @classmethod
+    def update_state(cls):
+        """
+        Updates Game variables.
+        """
+        cls.cave_inhabitant = cls.current_cave.get_character()
+        cls.cave_item = cls.current_cave.get_item()
+        

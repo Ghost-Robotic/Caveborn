@@ -134,7 +134,7 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
           
         
 class PlayerEntity(Player):
-    """This class contains all the information about the Player"""
+    """This class initializes Player"""
     
     @classmethod
     def initialise(cls):

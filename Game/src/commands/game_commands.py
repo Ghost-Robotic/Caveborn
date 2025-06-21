@@ -199,10 +199,10 @@ class GameCommand():
         match Game.game_mode:
             case "default":
                 if PlayerEntity.dead == True:
-                      GameCommand.sequential_print("YOU DIED", 0.1, "\x1b[38;5;196m")
-                      sleep(0.2)
-                      print("")
-                      GameCommand.sequential_print("Better Luck Next Time", Config.standard_print_speed, Config.standard_text_colour)
+                    GameCommand.sequential_print("YOU DIED", 0.1, "\x1b[38;5;196m")
+                    sleep(0.2)
+                    print("")
+                    GameCommand.sequential_print("Better Luck Next Time", Config.standard_print_speed, Config.standard_text_colour)
                 else:
                     GameCommand.sequential_print("CONGRATULATIONS!", 0.1, "\x1b[38;5;203m")
                     sleep(0.2)
