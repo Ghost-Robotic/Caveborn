@@ -1,29 +1,30 @@
-from src.config import Config, PlayerEntity
+from src.entities.player import Player
 from src.game import Game
-from src.commands.game_commands import GameCommand
+from src.commands.commands import Command
 from src.commands.player_commands import PlayerCommand
 
 
 def game_loop():
     while Game.run_game == True:
-        GameCommand.clear_terminal()
+        Command.clear_terminal()
         
-        GameCommand.update_state()   
+        Game.update_state()   
         
-        GameCommand.display_details()
+        Player.update_state()
         
-        GameCommand.print_last_command(Game.last_command)
+        Game.display_details()
         
-        command = GameCommand.get_input()
+        Game.print_last_command()
+        
+        command = Command.get_input()
         
         Game.last_command = command
         
-        GameCommand.clear_terminal()
+        Command.clear_terminal()
         
         match command:
             case "north" | "south" | "east" | "west":
                 PlayerCommand.move(command)
-                continue
 
             case "talk":
                 PlayerCommand.talk()
@@ -39,10 +40,12 @@ def game_loop():
                 
             case "trade":
                 PlayerCommand.trade()
+                
+            case "exit" | "quit":
+                Game.game_mode = "exit"
             
             case _:
                 PlayerCommand.invalid()
                             
-                
-        Game.run_game = GameCommand.check_win_condition()
-    GameCommand.print_game_over()
+        Game.run_game = Game.check_win_condition()
+    Game.print_game_over()

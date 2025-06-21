@@ -1,4 +1,4 @@
-from src.commands.game_commands import GameCommand
+from src.commands.commands import Command
 from src.config import Config
 from src.assets.title import Title
 
@@ -10,23 +10,23 @@ def title_display():
     
 
 def start_sequence():
-    GameCommand.clear_terminal()
+    Command.clear_terminal()
     print("\033[?25l")
     Title.cascade_output()
-    GameCommand.sequential_print("Welcome to caveborn, a text based game where you can", 0.03, "")
+    Command.sequential_print("Welcome to caveborn, a text based game where you can", 0.03, "")
     print("")
-    GameCommand.sequential_print("navigate the networks of deadly caves, fight monsters", 0.03, "")
+    Command.sequential_print("navigate the networks of deadly caves, fight monsters", 0.03, "")
     print("")
-    GameCommand.sequential_print("and find keys to escape to the surface.", 0.03, "")
+    Command.sequential_print("and find keys to escape to the surface.", 0.03, "")
     print("\033[?25h")
-    GameCommand.pause(0.5)
+    Command.pause(0.5)
 
 def end_sequence():
     for i in range(3):
-        GameCommand.clear_terminal()
+        Command.clear_terminal()
         Title.output()
         print("\nEntering the caves", end = "")
-        GameCommand.sequential_print("...", 0.2, "") 
+        Command.sequential_print("...", 0.2, "") 
 
 
 def menu_loop():
@@ -35,15 +35,17 @@ def menu_loop():
         
     game_mode = None    
     while True:
-        GameCommand.clear_terminal()
+        Command.clear_terminal()
         title_display()
-        print('Select a game mode from the list below or type "\x1b[38;5;226mEnter the caves\x1b[0m" to start the game')
+        print('Select a game mode from the list below or type "\x1b[38;5;226mEnter the caves\x1b[0m" to start the game.')
+        print("Type exit any time to quit the game.")
         print(" (\x1b[38;5;226m1\x1b[0m) default")
+        print("")
         
         if game_mode is not None:
-            print(f"\nSelected game mode: \x1b[38;5;226m{game_mode}\x1b[0m")
+            print(f"Selected game mode: \x1b[38;5;226m{game_mode}\x1b[0m")
         
-        command = GameCommand.get_input()
+        command = Command.get_input()
         
         match command:
             case "1" | "default":
@@ -55,8 +57,11 @@ def menu_loop():
                     return game_mode
                 else:
                     print("No game mode selected")
-                    GameCommand.wait_for_enter()
+                    Command.wait_for_enter()
+                    
+            case "exit" | "quit":
+                return "exit"
             
             case _:
                 print('\nSelect a game mode by typing in its name or type "\x1b[38;5;226mEnter the caves\x1b[0m" to start the game')
-                GameCommand.wait_for_enter()   
+                Command.wait_for_enter()   

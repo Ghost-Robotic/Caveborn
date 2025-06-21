@@ -1,4 +1,5 @@
-from src.config import Config, CaveEntities, CharacterEntities, ItemEntities, PlayerEntity, Links
+from src.config import Config, CaveEntities, CharacterEntities, ItemEntities, Links
+from src.entities.player import Player
 from src.game import Game
 
 def startup(game_mode):
@@ -12,7 +13,7 @@ def startup(game_mode):
     Links.initialise_item_locations()
     Links.initialise_character_locations()
     
-    PlayerEntity.initialise()  
+    Player.initialise()  
      
     Game.initialise()
     

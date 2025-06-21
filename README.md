@@ -12,3 +12,4 @@ Caveborn is a text based game where you explore caves, trade items and fight ene
 * __trade__: if the current inhabitant of the cave is a trader you can give it an item in your bag in exchange for a different item
 * __talk__: talk with the current inhabitant of the cave
 * __pat__: pat the current inhabitant of the cave
+* __exit__: closes the game

@@ -131,17 +131,6 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
         cls.dungeon.set_character(cls.harry) 
         cls.grotto.set_character(cls.josephine)
         cls.abandoned_mine.set_character(cls.josh)
-          
-        
-class PlayerEntity(Player):
-    """This class initializes Player"""
-    
-    @classmethod
-    def initialise(cls):
-        """Initialise Player object"""
-        cls.bag = []
-        cls.dead = False
-        cls.health = 100
         
         
 # class Game():
