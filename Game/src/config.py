@@ -24,31 +24,113 @@ class Config():
 class CaveEntities(Cave):
     """This class contains all the Cave objects"""
     
+    # zone 1
+    solace = None
     cavern = None
-    grotto = None
     dungeon = None
-    underground_lake = None
-    abandoned_mine = None
-    cave = None
+
+    # zone 2
+    grotto = None
+    evergreenGrove = None
+    lushCave = None
+    overgrownTemple = None
+    mushroomMellows = None
+
+    # zone 3
+    tundraTunnels = None
+    frozenLake = None
+    glacierGeodes = None
+    polarCove = None
+    articPit = None
+    crystalCrypt = None
+    
+    # zone 4
+    lavaLagoon = None
+    emberRift = None
+    magmaMines = None
+    hellfireHollows = None
+    basaltBurrows = None
+    georgesRoom = None
+    ashenVault = None
+    stalactiteShaft = None
+    theChasamsEnd = None
+    
     
     @classmethod 
     def initialise(cls):
         """Initialise Cave objects"""
+        # zone 1
+        cls.solace = Cave("Solace")
+        cls.solace.set_description("")
+
         cls.cavern = Cave("Cavern")
         cls.cavern.set_description("A damp and dirty cave.")
 
-        cls.grotto = Cave("Grotto")
-        cls.grotto.set_description("A small cave with ancient graffiti")
-
         cls.dungeon = Cave("Dungeon")
-        cls.dungeon.set_description("A large cave with a rack")
+        cls.dungeon.set_description("A large cave with a rack.")
 
-        cls.underground_lake = Cave("Underground Lake")
-        cls.underground_lake.set_description("A massive cave with a mysterious lake in the centre")
+        # zone 2
+        cls.grotto = Cave("Grotto")
+        cls.grotto.set_description("A small cave with ancient graffiti.")
 
-        cls.abandoned_mine = Cave("Abandoned Mine")
-        cls.abandoned_mine.set_description("An old mine covered in dust and cobwebs")    
-        
+        cls.evergreenGrove = Cave("Evergreen Grove")
+        cls.evergreenGrove.set_description("Verdant tunnels wrapped in moss and roots.")
+
+        cls.lushCave = Cave("Lush Cave")
+        cls.lushCave.set_description("Exotic plants and waterfalls thrive underground.")
+
+        cls.overgrownTemple = Cave("Overgrown Temple")
+        cls.overgrownTemple.set_description("Ancient ruins overtaken by vines.")
+
+        cls.mushroomMellows = Cave("Mushroom Mellows")
+        cls.mushroomMellows.set_description("Towering mushrooms glow in the mist.")
+
+        # zone 3
+        cls.tundraTunnels = Cave("Tundra Tunnels")
+        cls.tundraTunnels.set_description("Frozen paths lined with creeping frost.")
+
+        cls.frozenLake = Cave("Frozen Lake")
+        cls.frozenLake.set_description("A vast icy expanse reflecting faint light.")
+
+        cls.glacierGeodes = Cave("Glacier Geodes")
+        cls.glacierGeodes.set_description("Shimmering ice crystals embedded in rock.")
+
+        cls.polarCove = Cave("Polar Cove")
+        cls.polarCove.set_description("A cold, windswept cavern of stone.")
+
+        cls.arcticPit = Cave("Arctic Pit")
+        cls.arcticPit.set_description("A sheer drop into frozen depths.")
+
+        cls.crystalCrypt = Cave("Crystal Crypt")
+        cls.crystalCrypt.set_description("Jagged crystals refract fractured light.")
+
+        # zone 4
+        cls.lavaLagoon = Cave("Lava Lagoon")
+        cls.lavaLagoon.set_description("Molten rivers churn, steam rising.")
+
+        cls.emberRift = Cave("Ember Rift")
+        cls.emberRift.set_description("Blackened rock split by glowing embers.")
+
+        cls.magmaMines = Cave("Magma Mines")
+        cls.magmaMines.set_description("Tunnels wind dangerously near lava veins.")
+
+        cls.hellfireHollows = Cave("Hellfire Hollows")
+        cls.hellfireHollows.set_description("A scorched cavern of fire and embers.")
+
+        cls.basaltBurrows = Cave("Basalt Burrows")
+        cls.basaltBurrows.set_description("Volcanic tunnels carved by magma.")
+
+        cls.georgesRoom = Cave("George's Room")
+        cls.georgesRoom.set_description("George is here.")
+
+        cls.ashenVault = Cave("Ashen Vault")
+        cls.ashenVault.set_description("Soot-stained walls whisper of past flames.")
+
+        cls.stalactiteShaft = Cave("Stalactite Shaft")
+        cls.stalactiteShaft.set_description("A towering vertical cave lined with stone teeth.")
+
+        cls.chasmsEnd = Cave("The Chasm's End")
+        cls.chasmsEnd.set_description("Light breaks; the final fight is here.")
         
 class ItemEntities(Item):
     """""This class contains all Item objects:"""""
@@ -108,31 +190,107 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
     @classmethod
     def initialise_cave_relationships(cls):
         """Initialise the links between caves"""
-        cls.cavern.link_cave(cls.dungeon, "south")
-        cls.dungeon.link_cave(cls.cavern, "north")
+        # solace links
+        cls.solace.link_cave(cls.grotto, "north")
+        cls.solace.link_cave(cls.cavern, "east")
+        cls.solace.link_cave(cls.tundraTunnels, "south")
+        cls.solace.link_cave(cls.lavaLagoon, "west")
 
-        cls.grotto.link_cave(cls.dungeon, "east")
-        cls.dungeon.link_cave(cls.grotto, "west")
+        # cavern links
+        cls.cavern.link_cave(cls.dungeon, "north")
+        cls.cavern.link_cave(cls.solace, "west")
 
-        cls.underground_lake.link_cave(cls.grotto, "east")
-        cls.grotto.link_cave(cls.underground_lake, "west")
+        # dungeon links
+        cls.dungeon.link_cave(cls.cavern, "south")
 
-        cls.abandoned_mine.link_cave(cls.dungeon, "west")
-        cls.dungeon.link_cave(cls.abandoned_mine, "east")  
+        # grotto links
+        cls.grotto.link_cave(cls.evergreenGrove, "east")
+        cls.grotto.link_cave(cls.solace, "south")
+
+        # evergreen grove links
+        cls.evergreenGrove.link_cave(cls.grotto, "west")
+        cls.evergreenGrove.link_cave(cls.lushCave, "north")
+
+        # lush cave links
+        cls.lushCave.link_cave(cls.overgrownTemple, "east")
+        cls.lushCave.link_cave(cls.mushroomMellows, "west")
+
+        # overgrown temple links
+        cls.overgrownTemple.link_cave(cls.lushCave, "west")
+
+        # mushroom mellows links
+        cls.mushroomMellows.link_cave(cls.lushCave, "east")
+
+        # tundra tunnels links
+        cls.tundraTunnels.link_cave(cls.solace, "north")
+        cls.tundraTunnels.link_cave(cls.frozenLake, "east")
+        cls.tundraTunnels.link_cave(cls.polarCove, "west")
+
+        # frozen lake links
+        cls.frozenLake.link_cave(cls.glacierGeodes, "north")
+        cls.frozenLake.link_cave(cls.tundraTunnels, "west")
+
+        # glacier geodes links
+        cls.glacierGeodes.link_cave(cls.frozenLake, "south")
+
+        # polar cove links
+        cls.polarCove.link_cave(cls.tundraTunnels, "east")
+        cls.polarCove.link_cave(cls.arcticPit, "south")
+
+        # arctic pit links
+        cls.arcticPit.link_cave(cls.polarCove, "north")
+        cls.arcticPit.link_cave(cls.crystalCrypt, "east")
+
+        # crystal crypt links
+        cls.crystalCrypt.link_cave(cls.arcticPit, "west")
+
+        # lava lagoon links
+        cls.lavaLagoon.link_cave(cls.emberRift, "north")
+        cls.lavaLagoon.link_cave(cls.solace, "east")
+        cls.lavaLagoon.link_cave(cls.hellfireHollows, "west")
+
+        # hellfire hollows links
+        cls.hellfireHollows.link_cave(cls.basaltBurrows, "north")
+        cls.hellfireHollows.link_cave(cls.lavaLagoon, "east")
+
+        # basalt burrows links
+        cls.basaltBurrows.link_cave(cls.georgesRoom, "north")
+        cls.basaltBurrows.link_cave(cls.ashenVault, "east")
+        cls.basaltBurrows.link_cave(cls.hellfireHollows, "south")
+
+        # george’s room links
+        cls.georgesRoom.link_cave(cls.basaltBurrows, "south")
+
+        # ashen vault links
+        cls.ashenVault.link_cave(cls.stalactiteShaft, "north")
+        cls.ashenVault.link_cave(cls.basaltBurrows, "west")
+
+        # stalactite shaft links
+        cls.stalactiteShaft.link_cave(cls.emberRift, "east")
+        cls.stalactiteShaft.link_cave(cls.chasmsEnd, "west")
+
+        # ember rift links
+        cls.emberRift.link_cave(cls.magmaMines, "east")
+        cls.emberRift.link_cave(cls.stalactiteShaft, "west")
+
+        # magma mines links
+        cls.magmaMines.link_cave(cls.emberRift, "west")
+
+        # the chasm’s end links
+        cls.chasmsEnd.link_cave(cls.stalactiteShaft, "east")
+
         
     @classmethod
     def initialise_item_locations(cls):
         """Initialise location of items in the caves"""
-        cls.grotto.set_item(cls.vegemite)
         cls.dungeon.set_item(cls.torch)        
-        cls.underground_lake.set_item(cls.sunken_treasure)        
+     
     
     @classmethod
     def initialise_character_locations(cls):
         """Initialise location of characters in the caves"""
         cls.dungeon.set_character(cls.harry) 
-        cls.grotto.set_character(cls.josephine)
-        cls.abandoned_mine.set_character(cls.josh)
+
           
         
 class PlayerEntity(Player):
@@ -161,7 +319,7 @@ class Game():
     @classmethod
     def initialise(cls):
         """Initialise Game objects"""
-        cls.current_cave = CaveEntities.cavern
+        cls.current_cave = CaveEntities.solace
         cls.standard_text_colour = ""
         cls.standard_print_speed = 0.06
         cls.item_text_colour = "\x1b[38;5;207m"
