@@ -1,9 +1,13 @@
 class Item:
+    item_list = []
+    describe_options = ["You spot a", "Behind a boulder you spot a", "Under some dirt you see a", "Buried by rocks, you catch a glimpse of a", "in the centre of the room sits a"]
     #constructor method
     def __init__(self, name):
         self.name = name
         self.description = None
         self.rarity = None
+        self.base_damage = 15
+        self.item_list.append(self)
         
     #getter methods
     def get_name(self):
@@ -12,9 +16,6 @@ class Item:
     def get_description(self):
         return self.description
     
-    def get_rarity(self):
-        return self.rarity
-    
     #setter methods
     def set_name(self, name):
         self.name = name
@@ -22,9 +23,28 @@ class Item:
     def set_description(self, description):
         self.description = description
         
-    def set_rarity(self, rarity):
-        self.rarity = rarity
+    def set_base_damage(self, damage):
+        self.damage = damage
+        
+    def select_damage(self, num):
+        match num:
+            case 0: #weak attack
+                return ["weak attack" , self.base_damage - 10]
+            
+            case 1: #strong attack
+                return ["strong attack" , self.base_damage]
+            
+            case 2: #critical hit
+                return ["critical hit" , self.base_damage + 10]
         
     #describe item
-    def describe(self):
-        return f"You spot a {self.name}- {self.description}"
+    @classmethod
+    def describe(cls, num):
+        return cls.describe_options[num]
+    
+    @classmethod
+    def get_item(cls, name):
+        for item in cls.item_list:
+            if name == item.name:
+                return item
+            

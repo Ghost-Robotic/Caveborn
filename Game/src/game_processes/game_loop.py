@@ -20,7 +20,7 @@ def game_loop():
         
         Game.last_command = command
         
-        Command.clear_terminal()
+        #Command.clear_terminal()
         
         match command:
             case "north" | "south" | "east" | "west":

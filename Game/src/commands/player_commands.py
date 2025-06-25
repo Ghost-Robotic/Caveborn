@@ -3,6 +3,7 @@ from src.assets.title import Title
 from src.assets.player_info_display import PlayerDisplay
 from src.config import Config
 from src.entities.player import Player
+from src.entities.item import Item
 from src.game import Game
 from .commands import Command
 
@@ -18,14 +19,14 @@ class PlayerCommand():
         """
         next_cave = Game.current_cave.move(direction)
         if next_cave is None:
-            Title.output()
-            PlayerDisplay.output()
+            #Title.output()
+            #PlayerDisplay.output()
             print("\nYou walk into a wall \nThere is nothing there!")
             Command.wait_for_enter()
         else:
             Game.current_cave = next_cave     
-            Title.output()
-            PlayerDisplay.output()
+            #Title.output()
+            #PlayerDisplay.output()
             print("\nMoving", end = "")
             Command.sequential_print("...", 0.1, Config.standard_text_colour)        
     
@@ -53,31 +54,64 @@ class PlayerCommand():
         """Attempt to fight with current cave inhabitant."""
         if Game.cave_inhabitant is not None and isinstance(Game.cave_inhabitant, Enemy):
             #Fight with the inhabitant if there is one
-            print("What will you fight with")
-            fight_with = Command.get_input()
+            player_turn = True
+            retreat = False
+            while Game.cave_inhabitant.health > 0 and Player.health > 0 and not retreat:
+                Game.display_fight()
+                if player_turn:
+                    #Player turn to attack
+                    print("What will you fight with")
+                    fight_with = Command.get_input()
 
-            if fight_with in Player.bag:
-                if Game.cave_inhabitant.fight(combat_item= fight_with) == True:
-                    #win message
-                    print("Bravo, hero you won the fight!")
-                    Game.current_cave.set_character(None)
-                                    
+                    if fight_with in Player.bag:
+                        item = Item.get_item(fight_with)
+                        attack, damage = item.select_damage(Command.random_range(0,2))
+                        
+                        Game.cave_inhabitant.damage(damage)
+                        
+                        Command.sequential_print_segments(segments= 6, 
+                                                          strings= ["Using your", f" {fight_with}", f" you perform a {attack} on", f" {Game.cave_inhabitant.name}", " for", f" {damage} health"],
+                                                          speeds= [Config.standard_print_speed],
+                                                          colours= ["", Config.item_text_colour, "", Config.character_text_colour, "", Config.health_text_colour]
+                                                          )
+                        player_turn = False
+                        
+                    elif fight_with in ["exit", "retreat", "run away", "quit"]:      
+                        retreat = True  
+                        Command.sequential_print("You turn around and run away, you little wimp", Config.standard_print_speed, "")
+                        
+                    else:
+                        Command.sequential_print_segments(segments= 2,
+                                                            strings= ["You don't have a ", f"{fight_with}"], 
+                                                            speeds= [Config.standard_print_speed], 
+                                                            colours= [Config.standard_text_colour, Config.item_text_colour])   
+                                                                
                 else:
-                    #loss message
-                    print("Scurry home, you lost the fight.")
-                    Player.damage(100)
+                    #Enemy turn to attack
+                    try:
+                        attack = Command.random_dict_key(Game.cave_inhabitant.attacks)
+                        damage = Game.cave_inhabitant.attacks.get(attack)
+                    except:
+                        attack = "a slap"
+                        damage = 15
                     
-            else:
-                Command.sequential_print_segments(segments= 2,
-                                                      strings= ["You don't have a ", f"{fight_with}"], 
-                                                      speeds= [Config.standard_print_speed], 
-                                                      colours= [Config.standard_text_colour, Config.item_text_colour])
+                    Player.damage(damage)
+                    player_turn = True
+                    Command.sequential_print_segments(segments=3,
+                                                      strings= [f"{Game.cave_inhabitant.name}", f" performs {attack}, damaging you for", f" {damage} health"],
+                                                      speeds= [Config.standard_print_speed],
+                                                      colours= [Config.character_text_colour, "", Config.health_text_colour]
+                                                      )
+                Command.wait_for_enter()
+                    
+            if Game.cave_inhabitant.health <= 0:
+                Game.current_cave.set_character(None)
+                print("Bravo, you defeated the enemy")
                 Command.wait_for_enter()
 
         else:
             Command.sequential_print("There is no one here to fight with", Config.standard_print_speed, Config.standard_text_colour)
             Command.wait_for_enter()
-    
     
     @Game.display_decorator
     @staticmethod

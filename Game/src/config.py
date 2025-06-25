@@ -11,6 +11,7 @@ class Config():
     
     item_text_colour = None
     character_text_colour = None
+    health_text_colour = None
         
     @classmethod
     def initialise(cls):
@@ -19,6 +20,7 @@ class Config():
         cls.standard_print_speed = 0.06
         cls.item_text_colour = "\x1b[38;5;207m"
         cls.character_text_colour = "\x1b[38;5;81m"
+        cls.health_text_colour = "\x1b[1;38;5;201m"
 
 class CaveEntities(Cave):
     """This class contains all the Cave objects"""
@@ -89,6 +91,10 @@ class CharacterEntities(Character):
         cls.harry = Enemy("Harry", "A smelly Wumpus")
         cls.harry.set_conversation("Hangry...Hanggrry")
         cls.harry.set_weakness("vegemite")
+        cls.harry.set_attack("super punch", 50)
+        cls.harry.set_attack("body slam", 10)
+        cls.harry.set_attack("rock fall", 15)
+        cls.harry.set_health(75)
 
         cls.josephine = Friend("Josephine", "A friendly bat")
         cls.josephine.set_conversation("Gidday")        

@@ -17,6 +17,7 @@ class Player():
         Updates player variables
         """
         cls.health = (cls.health if cls.health <= 100 else 100)
+        
     
     @classmethod
     def damage(cls, damage):

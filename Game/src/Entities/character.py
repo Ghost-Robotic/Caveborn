@@ -1,4 +1,5 @@
 class Character():
+    describe_options = ["is here!", "appears from the shadows...", "steps out from behind a boulder", "taps you on the shoulder", "appears in a corner"]
     #constructor methods
     def __init__(self, char_name, char_description):
         self.name = char_name
@@ -10,8 +11,9 @@ class Character():
         self.conversation = conversation
 
     #describe character
-    def describe(self):
-        return f"{self.name} is here!\n{self.description}"
+    @classmethod
+    def describe(cls, num):
+        return cls.describe_options[num]
 
     #talk to character
     def talk(self):
@@ -32,13 +34,27 @@ class Enemy(Character):
     def __init__(self, char_name, char_description):
         super().__init__(char_name, char_description)
         self.weakness = None
+        self.health = 25
+        self.attacks = {}
         Enemy.enemies_to_defeat = Enemy.enemies_to_defeat + 1
 
     def get_weakness(self):
         return self.weakness
     
+    def get_health(self):
+        return self.health
+    
     def set_weakness(self, weakness):
         self.weakness = weakness
+        
+    def set_health(self, health):
+        self.health = health
+        
+    def set_attack(self, attack_name, damage):
+        self.attacks.update({attack_name : damage})
+        
+    def damage(self, damage):
+        self.health -= damage
 
     def fight(self, combat_item):
         if combat_item == self.weakness:

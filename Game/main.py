@@ -5,7 +5,7 @@ from src.game_processes.menu_loop import menu_loop
 def main():
     
     game_mode = menu_loop()
-    
+    #game_mode = "default"
     if game_mode is not "exit":
         startup(game_mode)
         

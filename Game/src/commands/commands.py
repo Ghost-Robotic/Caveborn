@@ -1,6 +1,7 @@
 from os import system, name
 from time import sleep
 from sys import stdout
+from random import randint, choice
 
 class Command():         
             
@@ -30,12 +31,12 @@ class Command():
         
         strings, speeds and colours must be given in list and the length of those lists must match the given segments integer.
         
-        The position of each speed and colour in their respective list will correspond to the position of each item in the strings list.
+        The position of each speed and colour in their respective list will correspond to the position of each item in the strings list unless.
 
         Args:
             segments (int): Number of string segments to be printed
             strings (list [str]): String to be printed list
-            speeds (list [float]): Amount of time to pause before printing next character
+            speeds (list [float]): Amount of time to pause before printing next character, if only one speed is given all segments will print at the same speed 
             colours (list [str | escape code]): Colour and formatting you want text to have
 
         Raises:
@@ -106,3 +107,18 @@ class Command():
         command = str(input(">\x1b[38;5;226m ")).lower().strip()
         print('\x1b[0m', end="")
         return command
+    
+    @staticmethod
+    def random_dict_key(dictionary):
+        return choice(list(dictionary.keys()))
+    
+    @staticmethod
+    def random_range(a, b):
+        return randint(a, b)
+    
+    @staticmethod
+    def is_even(num):
+        if num % 2 == 0:
+            return True
+        else:
+            return False

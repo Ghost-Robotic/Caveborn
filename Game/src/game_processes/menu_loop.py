@@ -51,7 +51,7 @@ def menu_loop():
             case "1" | "default":
                 game_mode = "default"
                 
-            case "enter the caves":
+            case "enter the caves" | "start" | "begin":
                 if game_mode is not None:
                     end_sequence()
                     return game_mode

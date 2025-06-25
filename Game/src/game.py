@@ -5,6 +5,8 @@ from src.entities.player import Player
 from src.entities.character import Enemy
 from src.assets.title import Title
 from src.assets.player_info_display import PlayerDisplay
+from src.assets.cave_info_display import CaveDisplay, CombatDisplay
+
 
 class Game():
     """This class store Game wide variable"""
@@ -19,6 +21,7 @@ class Game():
     
     def display_decorator(func):
         def wrapper(): 
+            Command.clear_terminal()
             Title.output()
             PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
             PlayerDisplay.update_display()                    
@@ -28,7 +31,8 @@ class Game():
             print("\x1b[1;38;5;196m", Game.current_cave.get_name(), "\x1b[0m")
             print("----------")
             func()
-        return wrapper    
+        return wrapper          
+        
     
     @classmethod
     def set_game_mode(cls, game_mode):
@@ -63,11 +67,35 @@ class Game():
         
         print(cls.current_cave.describe())
         
-        if cls.cave_inhabitant is not None:
-            print(cls.cave_inhabitant.describe())
-            
-        if cls.cave_item is not None:
-            print(cls.cave_item.describe())
+        
+        if cls.cave_inhabitant is not None and cls.cave_item is None:
+            CaveDisplay.update_character_info(cls.cave_inhabitant.name, cls.cave_inhabitant.description)
+            CaveDisplay.update_display()
+            CaveDisplay.display_character()
+        elif cls.cave_item is not None and cls.cave_inhabitant is None:
+            CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
+            CaveDisplay.update_display()
+            CaveDisplay.display_item()
+        elif cls.cave_item is not None and cls.cave_inhabitant  is not None:
+            CaveDisplay.update_character_info(cls.cave_inhabitant.name, cls.cave_inhabitant.description)
+            CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
+            CaveDisplay.update_display()
+            CaveDisplay.display()
+        
+    @classmethod
+    def display_fight(cls):
+        Command.clear_terminal()
+        Title.output()
+        PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
+        PlayerDisplay.update_display()                    
+        PlayerDisplay.output()
+        
+        print("----------")
+        print("\x1b[1;38;5;196m", Game.current_cave.get_name(), "\x1b[0m")
+        print("----------")
+        CombatDisplay.update_character_info(cls.cave_inhabitant.name, cls.cave_inhabitant.description, cls.cave_inhabitant.health)
+        CombatDisplay.update_display()
+        CombatDisplay.display_character()
         
     @classmethod
     def print_last_command(cls):
@@ -112,8 +140,8 @@ class Game():
     
     @classmethod
     def print_game_over(cls):
-        Command.clear_terminal()
-        Title.output()
+        #Command.clear_terminal()
+        #Title.output()
         match cls.game_mode:
             case "default":
                 if Player.dead == True:
