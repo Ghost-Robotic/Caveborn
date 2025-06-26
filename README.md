@@ -23,4 +23,5 @@ This area of the display shows import player information such as your health and
 * __talk__: talk with the current inhabitant of the cave
 * __pat__: pat the current inhabitant of the cave
 * __retreat__: allows you to escape from a fight
+* __about <character/item name>__: displays a description of the item/character
 * __exit__: closes the game
