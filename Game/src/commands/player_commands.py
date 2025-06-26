@@ -20,14 +20,10 @@ class PlayerCommand():
         """
         next_cave = Game.current_cave.move(direction)
         if next_cave is None:
-            #Title.output()
-            #PlayerDisplay.output()
             print("\nYou walk into a wall \nThere is nothing there!")
             Command.wait_for_enter()
         else:
             Game.current_cave = next_cave     
-            #Title.output()
-            #PlayerDisplay.output()
             print("\nMoving", end = "")
             Command.sequential_print("...", 0.1, Config.standard_text_colour)        
     
