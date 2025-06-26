@@ -99,20 +99,27 @@ class PlayerCommand():
                                 item_selected = item_selected + " " + command_split[i+2]
                             
                             item = Item.get_item(item_selected)
-                            if isinstance(item, HealingItem):
-                                heal_amount = item.get_heals_for()
-                                Player.heal(heal_amount)  
-                                Command.sequential_print_segments(segments=4,
-                                                                strings= ["Using your ", f"{item_selected}", f" you heal for", f" {heal_amount} health"],
-                                                                speeds= [Config.standard_print_speed],
-                                                                colours= ["", Config.item_text_colour, "", Config.health_text_colour]
-                                                                )
-                            
+                            if item_selected in Player.bag:
+                                if isinstance(item, HealingItem):
+                                    heal_amount = item.get_heals_for()
+                                    Player.heal(heal_amount)  
+                                    Command.sequential_print_segments(segments=4,
+                                                                    strings= ["Using your ", f"{item_selected}", f" you heal for", f" {heal_amount} health"],
+                                                                    speeds= [Config.standard_print_speed],
+                                                                    colours= ["", Config.item_text_colour, "", Config.health_text_colour]
+                                                                    )
+                                
+                                else:
+                                    Command.sequential_print_segments(segments= 2,
+                                                                        strings= ["You can't heal with a ", f"{item_selected}"], 
+                                                                        speeds= [Config.standard_print_speed], 
+                                                                        colours= [Config.standard_text_colour, Config.item_text_colour]) 
+
                             else:
                                 Command.sequential_print_segments(segments= 2,
-                                                                    strings= ["You can't heal with a ", f"{item_selected}"], 
+                                                                    strings= ["You don't have a ", f"{item_selected}"], 
                                                                     speeds= [Config.standard_print_speed], 
-                                                                    colours= [Config.standard_text_colour, Config.item_text_colour]) 
+                                                                    colours= [Config.standard_text_colour, Config.item_text_colour])  
                         except:
                             print("Ensure you type the item name after\x1b[38;5;226m heal\x1b[0m e.g.\x1b[38;5;226m attack healing potion\x1b[0m")
                             
