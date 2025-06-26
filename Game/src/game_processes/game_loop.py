@@ -28,10 +28,10 @@ def game_loop():
             case "north" | "south" | "east" | "west":
                 PlayerCommand.move(command)
 
-            case "talk":
+            case "talk" | "grab":
                 PlayerCommand.talk()
             
-            case "fight":
+            case "fight" | "attack":
                 PlayerCommand.fight()
 
             case "pat":
@@ -44,12 +44,11 @@ def game_loop():
                 PlayerCommand.trade()
                 
             case "about" | "info" | "information" | "details" | "stats":
-                #try:
+                try:
                     print(command_split)
                     PlayerCommand.about(command_split[1])
-                    print("clolled")
-                #except:   
-                   # PlayerCommand.invalid()
+                except:   
+                    PlayerCommand.invalid()
                     
             case "exit" | "quit":
                 Game.game_mode = "exit"

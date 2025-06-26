@@ -57,4 +57,15 @@ class Item:
                 return item
             
         return None
-            
+
+
+class HealingItem(Item):
+    def __init__(self, name):
+        super().__init__(name)
+        self.heals_for = None
+        
+    def set_heals_for(self, heals_for):
+        self.heals_for = heals_for
+        
+    def get_heals_for(self):
+        return self.heals_for

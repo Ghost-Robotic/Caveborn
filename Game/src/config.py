@@ -1,6 +1,6 @@
 from src.entities.cave import Cave
 from src.entities.character import Character, Enemy, Friend, Trader
-from src.entities.item import Item
+from src.entities.item import HealingItem, Item
 from src.entities.player import Player
 
 class Config():
@@ -60,8 +60,9 @@ class ItemEntities(Item):
     @classmethod
     def initialise(cls):
         """Initialise Item objects"""
-        cls.vegemite = Item("vegemite")
+        cls.vegemite = HealingItem("vegemite")
         cls.vegemite.set_description("A Wumpuses worst nightmare")
+        cls.vegemite.set_heals_for(50)
 
         cls.torch = Item("torch")
         cls.torch.set_description("A light for the end of the tunnel")
