@@ -29,13 +29,13 @@ class Item:
     def select_damage(self, num):
         match num:
             case 0: #weak attack
-                return ["weak attack" , self.base_damage - 10]
+                return ["weak attack" , self.base_damage - self.base_damage*0.1]
             
             case 1: #strong attack
                 return ["strong attack" , self.base_damage]
             
             case 2: #critical hit
-                return ["critical hit" , self.base_damage + 10]
+                return ["critical hit" , self.base_damage + self.base_damage*0.1]
         
     #describe item
     @classmethod
