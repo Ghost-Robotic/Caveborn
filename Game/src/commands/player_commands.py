@@ -1,4 +1,5 @@
-from src.entities.character import Enemy, Trader
+from src.assets.cave_info_display import CaveDisplay, CombatDisplay, DescriptionDisplay
+from src.entities.character import Character, Enemy, Trader
 from src.assets.title import Title
 from src.assets.player_info_display import PlayerDisplay
 from src.config import Config
@@ -185,6 +186,31 @@ class PlayerCommand():
             Command.sequential_print("There is no one here to trade with", Config.standard_print_speed, Config.standard_text_colour)
             
         Command.wait_for_enter()
+        
+        
+    @Game.display_decorator
+    @staticmethod
+    def about(entity):
+        item = Item.get_item(entity)
+        if item is not None:
+            DescriptionDisplay.update_item_info(item.name, item.description)
+            DescriptionDisplay.update_item_display()
+            DescriptionDisplay.display_item()
+            Command.wait_for_enter()
+        else:
+            character = Character.get_character(entity)
+            if character is not None:
+                if isinstance(character, Enemy):
+                    CombatDisplay.update_character_info(character)
+                    CombatDisplay.update_display()
+                    CombatDisplay.display_character()
+                else:
+                    DescriptionDisplay.update_character_info(character)
+                    DescriptionDisplay.update_character_display()
+                    DescriptionDisplay.display_character()
+                Command.wait_for_enter()
+            else:
+                raise Exception("entity not found")
         
         
     @Game.display_decorator

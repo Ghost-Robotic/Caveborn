@@ -3,6 +3,7 @@ from .config import Config
 from src.commands.commands import Command
 from src.entities.player import Player
 from src.entities.character import Enemy
+from src.entities.item import Item
 from src.assets.title import Title
 from src.assets.player_info_display import PlayerDisplay
 from src.assets.cave_info_display import CaveDisplay, CombatDisplay
@@ -20,7 +21,7 @@ class Game():
     last_command = None
     
     def display_decorator(func):
-        def wrapper(): 
+        def wrapper(*args): 
             Command.clear_terminal()
             Title.output()
             PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
@@ -30,7 +31,7 @@ class Game():
             print("----------")
             print("\x1b[1;38;5;196m", Game.current_cave.get_name(), "\x1b[0m")
             print("----------")
-            func()
+            func(*args)
         return wrapper          
         
     
@@ -69,7 +70,7 @@ class Game():
         
         
         if cls.cave_inhabitant is not None and cls.cave_item is None:
-            CaveDisplay.update_character_info(cls.cave_inhabitant.name, cls.cave_inhabitant.description)
+            CaveDisplay.update_character_info(cls.cave_inhabitant)
             CaveDisplay.update_display()
             CaveDisplay.display_character()
         elif cls.cave_item is not None and cls.cave_inhabitant is None:
@@ -77,7 +78,7 @@ class Game():
             CaveDisplay.update_display()
             CaveDisplay.display_item()
         elif cls.cave_item is not None and cls.cave_inhabitant  is not None:
-            CaveDisplay.update_character_info(cls.cave_inhabitant.name, cls.cave_inhabitant.description)
+            CaveDisplay.update_character_info(cls.cave_inhabitant)
             CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
             CaveDisplay.update_display()
             CaveDisplay.display()
@@ -93,9 +94,12 @@ class Game():
         print("----------")
         print("\x1b[1;38;5;196m", Game.current_cave.get_name(), "\x1b[0m")
         print("----------")
-        CombatDisplay.update_character_info(cls.cave_inhabitant.name, cls.cave_inhabitant.description, cls.cave_inhabitant.health)
+        CombatDisplay.update_character_info(cls.cave_inhabitant)
         CombatDisplay.update_display()
         CombatDisplay.display_character()
+        
+    # @classmethod
+    # def display_item_description(cls):
         
     @classmethod
     def print_last_command(cls):
@@ -158,4 +162,3 @@ class Game():
             case "exit":
                 print("Game closed")
         Command.pause(2)
-        

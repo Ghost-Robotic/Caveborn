@@ -20,9 +20,11 @@ def game_loop():
         
         Game.last_command = command
         
+        command_split = command.split()
+        
         #Command.clear_terminal()
         
-        match command:
+        match command_split[0]:
             case "north" | "south" | "east" | "west":
                 PlayerCommand.move(command)
 
@@ -41,6 +43,14 @@ def game_loop():
             case "trade":
                 PlayerCommand.trade()
                 
+            case "about" | "info" | "information" | "details" | "stats":
+                #try:
+                    print(command_split)
+                    PlayerCommand.about(command_split[1])
+                    print("clolled")
+                #except:   
+                   # PlayerCommand.invalid()
+                    
             case "exit" | "quit":
                 Game.game_mode = "exit"
             

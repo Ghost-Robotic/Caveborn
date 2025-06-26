@@ -1,10 +1,12 @@
 class Character():
+    character_list = []
     describe_options = ["is here!", "appears from the shadows...", "steps out from behind a boulder", "taps you on the shoulder", "appears in a corner"]
     #constructor methods
     def __init__(self, char_name, char_description):
         self.name = char_name
         self.description = char_description
         self.conversation = None
+        self.character_list.append(self)
 
     #set character conversation
     def set_conversation(self, conversation):
@@ -27,6 +29,22 @@ class Character():
     def fight(self, combat_item):
         print(f"{self.name} doesn't want to fight with you")
         return True
+    
+    @classmethod
+    def get_character(cls, name):
+        """If the name matches an existing Character it will return that Character.
+
+        Args:
+            name (str): name of the character to be retrieved
+
+        Returns:
+            class instance: returns selected character object
+        """
+        for character in cls.character_list:
+            if name == character.name.lower():
+
+                return character
+        return None
     
 #extends Character class, allows players to fight character
 class Enemy(Character):

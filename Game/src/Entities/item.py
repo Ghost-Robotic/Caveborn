@@ -44,7 +44,17 @@ class Item:
     
     @classmethod
     def get_item(cls, name):
+        """If the name matches an existing Item it will return that Item
+
+        Args:
+            name (str): name of the item to be retrieved
+
+        Returns:
+            class instance: returns selected item object
+        """
         for item in cls.item_list:
             if name == item.name:
                 return item
+            
+        return None
             
