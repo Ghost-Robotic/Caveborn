@@ -22,7 +22,7 @@ class Game():
     
     def display_decorator(func):
         def wrapper(*args): 
-            Command.clear_terminal()
+            #Command.clear_terminal()
             Title.output()
             PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
             PlayerDisplay.update_display()                    
@@ -109,7 +109,7 @@ class Game():
         Args:
             last_command (str): Last action the the user has inputted e.g. move.
         """
-        if cls.last_command is not None:
+        if cls.last_command not in [None , ""]:
             print("\n\x1b[38;5;241m>\x1b[38;2;148;150;65m", cls.last_command, "\x1b[0m")
         else:
             print("")  

@@ -61,70 +61,73 @@ class PlayerCommand():
                     print("Select an action-->\x1b[38;5;226m attack/heal <item-name>\x1b[0m")
                     command = Command.get_input()
                     command_split = command.split()
-
-                    if command_split[0] == "attack":
-                        try: 
-                            item_selected = command_split[1]
-                            if item_selected in Player.bag:
-                                item = Item.get_item(item_selected)
-                                attack, damage = item.select_damage(Command.random_range(0,2))
-                                
-                                Game.cave_inhabitant.damage(damage)
-                                
-                                Command.sequential_print_segments(segments= 6, 
-                                                                strings= ["Using your", f" {item_selected}", f" you perform a {attack} on", f" {Game.cave_inhabitant.name}", " for", f" {damage} health"],
-                                                                speeds= [Config.standard_print_speed],
-                                                                colours= ["", Config.item_text_colour, "", Config.character_text_colour, "", Config.health_text_colour]
-                                                                )
-                            
-                            else:
-                                Command.sequential_print_segments(segments= 2,
-                                                                    strings= ["You don't have a ", f"{item_selected}"], 
-                                                                    speeds= [Config.standard_print_speed], 
-                                                                    colours= [Config.standard_text_colour, Config.item_text_colour])                         
-                            
-                            player_turn = False
-                        except:
-                            print("Ensure you type the item name after\x1b[38;5;226m attack\x1b[0m e.g.\x1b[38;5;226m attack sword\x1b[0m")
-                        
-                        
-                    elif command_split[0] == "heal":
-                        try:
-                            item_selected = command_split[1]
-                            for i in range(len(command_split)-2):
-                                item_selected = item_selected + " " + command_split[i+2]
-                            
-                            item = Item.get_item(item_selected)
-                            if item_selected in Player.bag:
-                                if isinstance(item, HealingItem):
-                                    heal_amount = item.get_heals_for()
-                                    Player.heal(heal_amount)  
-                                    Command.sequential_print_segments(segments=4,
-                                                                    strings= ["Using your ", f"{item_selected}", f" you heal for", f" {heal_amount} health"],
+                    
+                    if command is not "":
+                        if command_split[0] == "attack":
+                            try: 
+                                item_selected = command_split[1]
+                                if item_selected in Player.bag:
+                                    item = Item.get_item(item_selected)
+                                    attack, damage = item.select_damage(Command.random_range(0,2))
+                                    
+                                    Game.cave_inhabitant.damage(damage)
+                                    
+                                    Command.sequential_print_segments(segments= 6, 
+                                                                    strings= ["Using your", f" {item_selected}", f" you perform a {attack} on", f" {Game.cave_inhabitant.name}", " for", f" {damage} health"],
                                                                     speeds= [Config.standard_print_speed],
-                                                                    colours= ["", Config.item_text_colour, "", Config.health_text_colour]
+                                                                    colours= ["", Config.item_text_colour, "", Config.character_text_colour, "", Config.health_text_colour]
                                                                     )
                                 
                                 else:
                                     Command.sequential_print_segments(segments= 2,
-                                                                        strings= ["You can't heal with a ", f"{item_selected}"], 
+                                                                        strings= ["You don't have a ", f"{item_selected}"], 
                                                                         speeds= [Config.standard_print_speed], 
-                                                                        colours= [Config.standard_text_colour, Config.item_text_colour]) 
+                                                                        colours= [Config.standard_text_colour, Config.item_text_colour])                         
+                                
+                                player_turn = False
+                            except:
+                                print("Ensure you type the item name after\x1b[38;5;226m attack\x1b[0m e.g.\x1b[38;5;226m attack sword\x1b[0m")
+                            
+                            
+                        elif command_split[0] == "heal":
+                            try:
+                                item_selected = command_split[1]
+                                for i in range(len(command_split)-2):
+                                    item_selected = item_selected + " " + command_split[i+2]
+                                
+                                item = Item.get_item(item_selected)
+                                if item_selected in Player.bag:
+                                    if isinstance(item, HealingItem):
+                                        heal_amount = item.get_heals_for()
+                                        Player.heal(heal_amount)  
+                                        Command.sequential_print_segments(segments=4,
+                                                                        strings= ["Using your ", f"{item_selected}", f" you heal for", f" {heal_amount} health"],
+                                                                        speeds= [Config.standard_print_speed],
+                                                                        colours= ["", Config.item_text_colour, "", Config.health_text_colour]
+                                                                        )
+                                    
+                                    else:
+                                        Command.sequential_print_segments(segments= 2,
+                                                                            strings= ["You can't heal with a ", f"{item_selected}"], 
+                                                                            speeds= [Config.standard_print_speed], 
+                                                                            colours= [Config.standard_text_colour, Config.item_text_colour]) 
 
-                            else:
-                                Command.sequential_print_segments(segments= 2,
-                                                                    strings= ["You don't have a ", f"{item_selected}"], 
-                                                                    speeds= [Config.standard_print_speed], 
-                                                                    colours= [Config.standard_text_colour, Config.item_text_colour])  
-                        except:
-                            print("Ensure you type the item name after\x1b[38;5;226m heal\x1b[0m e.g.\x1b[38;5;226m attack healing potion\x1b[0m")
+                                else:
+                                    Command.sequential_print_segments(segments= 2,
+                                                                        strings= ["You don't have a ", f"{item_selected}"], 
+                                                                        speeds= [Config.standard_print_speed], 
+                                                                        colours= [Config.standard_text_colour, Config.item_text_colour])  
+                            except:
+                                print("Ensure you type the item name after\x1b[38;5;226m heal\x1b[0m e.g.\x1b[38;5;226m attack healing potion\x1b[0m")
+                                
+                                
+                        elif command_split[0] in ["exit", "retreat", "run away", "quit"]:      
+                            retreat = True  
+                            Command.sequential_print("You turn around and run away, you little wimp", Config.standard_print_speed, "")
                             
-                            
-                    elif command_split[0] in ["exit", "retreat", "run away", "quit"]:      
-                        retreat = True  
-                        Command.sequential_print("You turn around and run away, you little wimp", Config.standard_print_speed, "")
-                        
-  
+    
+                        else:
+                            print("Invalid Command")
                     else:
                         print("Invalid Command")
                                                                 
@@ -148,6 +151,7 @@ class PlayerCommand():
                     
             if Game.cave_inhabitant.health <= 0:
                 Game.current_cave.set_character(None)
+                Enemy.enemies_to_defeat -= 1
                 print("Bravo, you defeated the enemy")
                 Command.wait_for_enter()
 

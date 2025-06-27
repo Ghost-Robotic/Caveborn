@@ -66,6 +66,7 @@ class ItemEntities(Item):
 
         cls.torch = Item("torch")
         cls.torch.set_description("A light for the end of the tunnel")
+        cls.torch.set_base_damage(22)
 
         cls.sunken_treasure = Item("sunken treasure")
         cls.sunken_treasure.set_description("A waterlogged chest filled with gold coins")
@@ -92,10 +93,10 @@ class CharacterEntities(Character):
         cls.harry = Enemy("Harry", "A smelly Wumpus")
         cls.harry.set_conversation("Hangry...Hanggrry")
         cls.harry.set_weakness("vegemite")
-        cls.harry.set_attack("super punch", 50)
+        cls.harry.set_attack("super punch", 20)
         cls.harry.set_attack("body slam", 10)
         cls.harry.set_attack("rock fall", 15)
-        cls.harry.set_health(75)
+        cls.harry.set_health(40)
 
         cls.josephine = Friend("Josephine", "A friendly bat")
         cls.josephine.set_conversation("Gidday")        

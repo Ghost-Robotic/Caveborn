@@ -23,38 +23,38 @@ def game_loop():
         command_split = command.split()
         
         #Command.clear_terminal()
-        
-        match command_split[0]:
-            case "north" | "south" | "east" | "west":
-                PlayerCommand.move(command)
+        if command is not "":
+            match command_split[0]:
+                case "north" | "south" | "east" | "west":
+                    PlayerCommand.move(command)
 
-            case "talk" | "grab":
-                PlayerCommand.talk()
-            
-            case "fight" | "attack":
-                PlayerCommand.fight()
+                case "talk" | "grab":
+                    PlayerCommand.talk()
+                
+                case "fight" | "attack":
+                    PlayerCommand.fight()
 
-            case "pat":
-                PlayerCommand.pat()
-                
-            case "take":
-                PlayerCommand.take()
-                
-            case "trade":
-                PlayerCommand.trade()
-                
-            case "about" | "info" | "information" | "details" | "stats":
-                try:
-                    print(command_split)
-                    PlayerCommand.about(command_split[1])
-                except:   
-                    PlayerCommand.invalid()
+                case "pat":
+                    PlayerCommand.pat()
                     
-            case "exit" | "quit":
-                Game.game_mode = "exit"
-            
-            case _:
-                PlayerCommand.invalid()
+                case "take":
+                    PlayerCommand.take()
+                    
+                case "trade":
+                    PlayerCommand.trade()
+                    
+                case "about" | "info" | "information" | "details" | "stats" | "inspect":
+                    try:
+                        print(command_split)
+                        PlayerCommand.about(command_split[1])
+                    except:   
+                        PlayerCommand.invalid()
+                        
+                case "exit" | "quit":
+                    Game.game_mode = "exit"
+                
+                case _:
+                    PlayerCommand.invalid()
                             
         Game.run_game = Game.check_win_condition()
     Game.print_game_over()
