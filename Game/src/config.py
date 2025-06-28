@@ -53,7 +53,7 @@ class CaveEntities(Cave):
     georgesRoom = None
     ashenVault = None
     stalactiteShaft = None
-    theChasamsEnd = None
+    chasmsEnd = None
     
     
     @classmethod 
@@ -158,25 +158,92 @@ class ItemEntities(Item):
 class CharacterEntities(Character):
     """This class contains all Character objects"""
     
-    harry = None 
     """_Enemy_"""
-    
-    josephine = None
-    """_Friend_"""
-    
-    josh = None
+    caveRats = None
+    graffitiGoblin = None
+    mossMan = None
+    giantVenusFlytrap = None
+    templeRaider = None
+    shroomWalker = None
+    iceWraith = None
+    crystalCrawler = None
+    frostGiant = None
+    yeti = None
+    moltenMulloway = None
+    salamander = None
+    cinderBug = None
+    george = None
+    emberMaw = None
+    flameImp = None
+    pyroAlchemist = None
+    runedSkeletonKing = None
+
     """Trader"""
-    
+    josh = None
+
     @classmethod
     def initialise(cls):
         """Initialise Character objects"""
+    # Enemies
         cls.harry = Enemy("Harry", "A smelly Wumpus")
         cls.harry.set_conversation("Hangry...Hanggrry")
         cls.harry.set_weakness("vegemite")
 
-        cls.josephine = Friend("Josephine", "A friendly bat")
-        cls.josephine.set_conversation("Gidday")        
+        cls.caveRats = Enemy("Cave Rats", "A small group of rats swiftly scurry around you.")
+        cls.caveRats.set_conversation("*squeak, squeak!!*")
 
+        cls.graffitiGoblin = Enemy("Graffiti Goblin", "A lean, mean and green goblin.")
+        cls.graffitiGoblin.set_conversation("Hey, just let me express myself, yo. Or else.")
+
+        cls.mossMan = Enemy("Moss Man", "A beast made from moss and mud, the keeper of the Grove.")
+        cls.mossMan.set_conversation("Who dares to disturb me?")
+
+        cls.giantVenusFlytrap = Enemy("Giant Venus Flytrap", "A towering carnivorous plant that snaps at anything warm-blooded.")
+        cls.giantVenusFlytrap.set_conversation("*snaps shut with a deep squelch*")
+
+        cls.templeRaider = Enemy("Temple Raider", "A greedy bandit looting the temple.")
+        cls.templeRaider.set_conversation("Hey, this is my temple only!")
+
+        cls.shroomWalker = Enemy("Shroom Walker", "A lumbering mushroom creature with glowing spores and sluggish steps.")
+        cls.shroomWalker.set_conversation("*pitter, patter*")
+
+        cls.iceWraith = Enemy("Ice Wraith", "A ghostly figure made of wind and frost, gliding silently through the cold.")
+        cls.iceWraith.set_conversation("Your warmth... it will not last.")
+
+        cls.crystalCrawler = Enemy("Crystal Crawler", "A nimble beetle-like creature, shimmering brightly.")
+        cls.crystalCrawler.set_conversation("*chitters, crystal legs tapping*")
+
+        cls.frostGiant = Enemy("Frost Giant", "A towering brute of ice and stone with a deep, rumbling growl.")
+        cls.frostGiant.set_conversation("Tiny thing. Easy to crush.")
+
+        cls.yeti = Enemy("Yeti", "A hulking, snow-covered beast with glowing eyes and a chilling roar.")
+        cls.yeti.set_conversation("RRRAAGH!")
+
+        cls.moltenMulloway = Enemy("Molten Mulloway", "A large fish leaps from the lava and flops angrily on the floor ahead.")
+        cls.moltenMulloway.set_conversation("Blub blub blub")
+
+        cls.salamander = Enemy("Salamander", "A fiery lizard that slinks between flames and stone.")
+        cls.salamander.set_conversation("You burn nicely...")
+
+        cls.cinderBug = Enemy("Cinder Bug", "A small insect glowing with embers, ready to explode when threatened.")
+        cls.cinderBug.set_conversation("*hisses softly*")
+
+        cls.george = Enemy("George", "A friendly fellow content with his life.")
+        cls.george.set_conversation("Hi, I’m George.")
+
+        cls.emberMaw = Enemy("Ember Maw", "A massive, lava-jawed beast that lurks below, waiting to lunge.")
+        cls.emberMaw.set_conversation("Your bones will roast in my gut.")
+
+        cls.flameImp = Enemy("Flame Imp", "A mischievous creature born of smoke and sparks.")
+        cls.flameImp.set_conversation("Catch me if you can—hothead!")
+
+        cls.pyroAlchemist = Enemy("Pyro Alchemist", "A rogue scientist who bathes in flame and laughter, tossing volatile potions.")
+        cls.pyroAlchemist.set_conversation("Science is best when it explodes!")
+
+        cls.runedSkeletonKing = Enemy("Runed Skeleton King", "An ancient skeletal monarch, etched with glowing runes of binding and fire.")
+        cls.runedSkeletonKing.set_conversation("You trespass in death’s last kingdom.")
+
+    # Traders
         cls.josh = Trader("Josh", "An undead miner looking for gold")
         cls.josh.set_conversation("GOLLLD!")
         cls.josh.set_trade(
@@ -289,10 +356,43 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
     @classmethod
     def initialise_character_locations(cls):
         """Initialise location of characters in the caves"""
-        cls.dungeon.set_character(cls.harry) 
+        cls.cavern.set_character(cls.caveRats)
 
-          
-        
+        cls.grotto.set_character(cls.graffitiGoblin)
+
+        cls.evergreenGrove.set_character(cls.mossMan)
+
+        cls.lushCave.set_character(cls.giantVenusFlytrap)
+
+        cls.overgrownTemple.set_character(cls.templeRaider)
+
+        cls.mushroomMellows.set_character(cls.shroomWalker)
+
+        cls.tundraTunnels.set_character(cls.iceWraith)
+
+        cls.glacierGeodes.set_character(cls.crystalCrawler)
+
+        cls.polarCove.set_character(cls.frostGiant)
+
+        cls.crystalCrypt.set_character(cls.yeti)
+
+        cls.lavaLagoon.set_character(cls.moltenMulloway)
+
+        cls.hellfireHollows.set_character(cls.salamander)
+
+        cls.basaltBurrows.set_character(cls.cinderBug)
+
+        cls.georgesRoom.set_character(cls.george)
+
+        cls.stalactiteShaft.set_character(cls.emberMaw)
+
+        cls.emberRift.set_character(cls.flameImp)
+
+        cls.magmaMines.set_character(cls.pyroAlchemist)
+
+        cls.chasmsEnd.set_character(cls.runedSkeletonKing)
+ 
+ 
 class PlayerEntity(Player):
     """This class contains all the information about the Player"""
     
