@@ -34,7 +34,7 @@ class CaveDisplay():
         cls.item_description = description
         
     @classmethod
-    def update_display(cls):
+    def update_character_display(cls):
         spacing_line_1 = len(cls.character_description) - (len(cls.character_name)-15)
         spacing_line_2 = 0
         spacing_line_edge = max(len(cls.character_description), len(cls.character_name)-15)
@@ -50,6 +50,8 @@ class CaveDisplay():
             f"╚───" + spacing_line_edge * "─" + "╝  "
         ]
         
+    @classmethod
+    def update_item_display(cls):
         spacing_line_1_2 = len(cls.item_description) - (len(cls.item_name)-16)
         spacing_line_2_2 = 0
         spacing_line_edge_2 = max(len(cls.item_description), len(cls.item_name)-16)

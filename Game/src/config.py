@@ -25,82 +25,335 @@ class Config():
 class CaveEntities(Cave):
     """This class contains all the Cave objects"""
     
+    # zone 1
+    solace = None
     cavern = None
-    grotto = None
     dungeon = None
-    underground_lake = None
-    abandoned_mine = None
+
+    # zone 2
+    grotto = None
+    evergreenGrove = None
+    lushCave = None
+    overgrownTemple = None
+    mushroomMellows = None
+
+    # zone 3
+    tundraTunnels = None
+    frozenLake = None
+    glacierGeodes = None
+    polarCove = None
+    arcticPit = None
+    crystalCrypt = None
+    
+    # zone 4
+    lavaLagoon = None
+    emberRift = None
+    magmaMines = None
+    hellfireHollows = None
+    basaltBurrows = None
+    georgesRoom = None
+    ashenVault = None
+    stalactiteShaft = None
+    chasmsEnd = None
+    
     
     @classmethod 
     def initialise(cls):
         """Initialise Cave objects"""
+        # zone 1
+        cls.solace = Cave("Solace")
+        cls.solace.set_description("")
+
         cls.cavern = Cave("Cavern")
         cls.cavern.set_description("A damp and dirty cave.")
 
-        cls.grotto = Cave("Grotto")
-        cls.grotto.set_description("A small cave with ancient graffiti")
-
         cls.dungeon = Cave("Dungeon")
-        cls.dungeon.set_description("A large cave with a rack")
+        cls.dungeon.set_description("A large cave with a rack.")
 
-        cls.underground_lake = Cave("Underground Lake")
-        cls.underground_lake.set_description("A massive cave with a mysterious lake in the centre")
+        # zone 2
+        cls.grotto = Cave("Grotto")
+        cls.grotto.set_description("A small cave with ancient graffiti.")
 
-        cls.abandoned_mine = Cave("Abandoned Mine")
-        cls.abandoned_mine.set_description("An old mine covered in dust and cobwebs")    
-        
+        cls.evergreenGrove = Cave("Evergreen Grove")
+        cls.evergreenGrove.set_description("Verdant tunnels wrapped in moss and roots.")
+
+        cls.lushCave = Cave("Lush Cave")
+        cls.lushCave.set_description("Exotic plants and waterfalls thrive underground.")
+
+        cls.overgrownTemple = Cave("Overgrown Temple")
+        cls.overgrownTemple.set_description("Ancient ruins overtaken by vines.")
+
+        cls.mushroomMellows = Cave("Mushroom Mellows")
+        cls.mushroomMellows.set_description("Towering mushrooms glow in the mist.")
+
+        # zone 3
+        cls.tundraTunnels = Cave("Tundra Tunnels")
+        cls.tundraTunnels.set_description("Frozen paths lined with creeping frost.")
+
+        cls.frozenLake = Cave("Frozen Lake")
+        cls.frozenLake.set_description("A vast icy expanse reflecting faint light.")
+
+        cls.glacierGeodes = Cave("Glacier Geodes")
+        cls.glacierGeodes.set_description("Shimmering ice crystals embedded in rock.")
+
+        cls.polarCove = Cave("Polar Cove")
+        cls.polarCove.set_description("A cold, windswept cavern of stone.")
+
+        cls.arcticPit = Cave("Arctic Pit")
+        cls.arcticPit.set_description("A sheer drop into frozen depths.")
+
+        cls.crystalCrypt = Cave("Crystal Crypt")
+        cls.crystalCrypt.set_description("Jagged crystals refract fractured light.")
+
+        # zone 4
+        cls.lavaLagoon = Cave("Lava Lagoon")
+        cls.lavaLagoon.set_description("Molten rivers churn, steam rising.")
+
+        cls.emberRift = Cave("Ember Rift")
+        cls.emberRift.set_description("Blackened rock split by glowing embers.")
+
+        cls.magmaMines = Cave("Magma Mines")
+        cls.magmaMines.set_description("Tunnels wind dangerously near lava veins.")
+
+        cls.hellfireHollows = Cave("Hellfire Hollows")
+        cls.hellfireHollows.set_description("A scorched cavern of fire and embers.")
+
+        cls.basaltBurrows = Cave("Basalt Burrows")
+        cls.basaltBurrows.set_description("Volcanic tunnels carved by magma.")
+
+        cls.georgesRoom = Cave("George's Room")
+        cls.georgesRoom.set_description("George is here.")
+
+        cls.ashenVault = Cave("Ashen Vault")
+        cls.ashenVault.set_description("Soot-stained walls whisper of past flames.")
+
+        cls.stalactiteShaft = Cave("Stalactite Shaft")
+        cls.stalactiteShaft.set_description("A towering vertical cave lined with stone teeth.")
+
+        cls.chasmsEnd = Cave("The Chasm's End")
+        cls.chasmsEnd.set_description("Light breaks; the final fight is here.")
         
 class ItemEntities(Item):
     """""This class contains all Item objects:"""""
-    vegemite = None
+    # Items
     torch = None
-    sunken_treasure = None
     pickaxe = None
+    rock = None
+    iridescentInferno = None
+    shabbyShiv = None
+    handGrenade = None
+    obsidianBlade = None
+    blazeRod = None
+
+    # Healing Items
+    weakHealPotion = None
+    avgHealPotion = None
+    strongHealPotion = None
+    healingSpores = None
     
     @classmethod
     def initialise(cls):
         """Initialise Item objects"""
-        cls.vegemite = HealingItem("vegemite")
-        cls.vegemite.set_description("A Wumpuses worst nightmare")
-        cls.vegemite.set_heals_for(50)
+    # Items
+        cls.rock = Item("Rock")
+        cls.rock.set_description("It’s a rock! Deals 11 base damage.")
+        cls.rock.set_base_damage(11)
 
-        cls.torch = Item("torch")
+        cls.torch = Item("Torch")
         cls.torch.set_description("A light for the end of the tunnel")
         cls.torch.set_base_damage(22)
 
-        cls.sunken_treasure = Item("sunken treasure")
-        cls.sunken_treasure.set_description("A waterlogged chest filled with gold coins")
+        cls.pickaxe = Item("Pickaxe")
+        cls.pickaxe.set_description("A sturdy iron pickaxe.")
+        cls.pickaxe.set_base_damage(25)
 
-        cls.pickaxe = Item("pickaxe")
-        cls.pickaxe.set_description("A sturdy iron pickaxe")
+        cls.iridescentInferno = Item("Iridescent Inferno")
+        cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 37 base damage.")
+        cls.iridescentInferno.set_base_damage(37)
+
+        cls.shabbyShiv = Item("Shabby shiv")
+        cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 14 base damage.")
+        cls.shabbyShiv.set_base_damage(14)
+
+        cls.handGrenade = Item("Hand grenade")
+        cls.handGrenade.set_description("How did this get down here? Deals 40 base damage.")
+        cls.handGrenade.set_base_damage(40)
+
+        cls.obsidianBlade = Item("Obsidian blade")
+        cls.obsidianBlade.set_description("A blade delicately crafted from obsidian. Deals 20 base damage.")
+        cls.obsidianBlade.set_base_damage(20)
+
+        cls.blazeRod = Item("Blaze rod")
+        cls.blazeRod.set_description("The energy source of an ancient city, still active. Deals 24 base damage.")
+        cls.blazeRod.set_base_damage(24)
+
+    # Healing Items
+        cls.weakHealPotion = HealingItem("Weak healing potion")
+        cls.weakHealPotion.set_description("Heals 7 health.")
+        cls.weakHealPotion.set_heals_for(7)
+
+        cls.avgHealPotion = HealingItem("Average healing potion")
+        cls.avgHealPotion.set_description("Heals 13 health.")
+        cls.avgHealPotion.set_heals_for(13)
+
+        cls.strongHealPotion = HealingItem("Strong healing potion")
+        cls.strongHealPotion.set_description("Heals 20 health.")
+        cls.strongHealPotion.set_heals_for(20)
+
+        cls.healingSpores = HealingItem("Weak healing potion")
+        cls.healingSpores.set_description("A green sparkly powder puffs out. Heals 9 health.")
+        cls.healingSpores.set_heals_for(9)
 
 
 class CharacterEntities(Character):
     """This class contains all Character objects"""
     
-    harry = None 
-    """_Enemy_"""
-    
-    josephine = None
-    """_Friend_"""
-    
-    josh = None
+    #Enemy
+    caveRats = None
+    graffitiGoblin = None
+    mossMan = None
+    giantVenusFlytrap = None
+    templeRaider = None
+    shroomWalker = None
+    iceWraith = None
+    crystalCrawler = None
+    frostGiant = None
+    yeti = None
+    moltenMulloway = None
+    salamander = None
+    cinderBug = None
+    george = None
+    emberMaw = None
+    flameImp = None
+    pyroAlchemist = None
+    runedSkeletonKing = None
+
     """Trader"""
-    
+    josh = None
+
     @classmethod
     def initialise(cls):
         """Initialise Character objects"""
-        cls.harry = Enemy("Harry", "A smelly Wumpus")
-        cls.harry.set_conversation("Hangry...Hanggrry")
-        cls.harry.set_weakness("vegemite")
-        cls.harry.set_attack("super punch", 20)
-        cls.harry.set_attack("body slam", 10)
-        cls.harry.set_attack("rock fall", 15)
-        cls.harry.set_health(40)
+    # Enemies
+        cls.caveRats = Enemy("Cave Rats", "A small group of rats swiftly scurry around you.")
+        cls.caveRats.set_conversation("*squeak, squeak!!*")
+        cls.caveRats.set_health(37)
+        cls.caveRats.set_attack("ratapult", 10)
+        cls.caveRats.set_attack("crown of claws", 6)
+        cls.caveRats.set_attack("toe tickle", 3)
 
-        cls.josephine = Friend("Josephine", "A friendly bat")
-        cls.josephine.set_conversation("Gidday")        
+        cls.graffitiGoblin = Enemy("Graffiti Goblin", "A lean, mean and green goblin.")
+        cls.graffitiGoblin.set_conversation("Hey, just let me express myself, yo. Or else.")
+        cls.graffitiGoblin.set_health(25)
+        cls.graffitiGoblin.set_attack("paint spray", 4)
+        cls.graffitiGoblin.set_attack("can throw", 2)
 
+        cls.mossMan = Enemy("Moss Man", "A beast made from moss and mud, the keeper of the Grove.")
+        cls.mossMan.set_conversation("Who dares to disturb me?")
+        cls.mossMan.set_health(75)
+        cls.mossMan.set_attack("heavy swipe", 9)
+        cls.mossMan.set_attack("leg sweep", 7)
+        cls.mossMan.set_attack("shove", 5)
+
+        cls.giantVenusFlytrap = Enemy("Giant Venus Flytrap", "A towering carnivorous plant that snaps at anything warm-blooded.")
+        cls.giantVenusFlytrap.set_conversation("*snaps shut with a deep squelch*")
+        cls.giantVenusFlytrap.set_health(60)
+        cls.giantVenusFlytrap.set_attack("bite", 6)
+        cls.giantVenusFlytrap.set_attack("slap", 3)
+
+        cls.templeRaider = Enemy("Temple Raider", "A greedy bandit looting the temple.")
+        cls.templeRaider.set_conversation("Hey, this is my temple only!")
+        cls.templeRaider.set_health(50)
+        cls.templeRaider.set_attack("slash", 8)
+        cls.templeRaider.set_attack("kick", 5)
+
+        cls.shroomWalker = Enemy("Shroom Walker", "A lumbering mushroom creature with glowing spores and sluggish steps.")
+        cls.shroomWalker.set_conversation("*pitter, patter*")
+        cls.shroomWalker.set_health(55)
+        cls.shroomWalker.set_attack("spore cloud", 6)
+        cls.shroomWalker.set_attack("stomp", 4)
+
+        cls.iceWraith = Enemy("Ice Wraith", "A ghostly figure made of wind and frost, gliding silently through the cold.")
+        cls.iceWraith.set_conversation("Your warmth... it will not last.")
+        cls.iceWraith.set_health(60)
+        cls.iceWraith.set_attack("frost pierce", 10)
+        cls.iceWraith.set_attack("chilling touch", 7)
+        cls.iceWraith.set_attack("wither wind", 4)
+
+        cls.crystalCrawler = Enemy("Crystal Crawler", "A nimble beetle-like creature, shimmering brightly.")
+        cls.crystalCrawler.set_conversation("*chitters, crystal legs tapping*")
+        cls.crystalCrawler.set_health(25)
+        cls.crystalCrawler.set_attack("bite", 10)
+        cls.crystalCrawler.set_attack("scratch", 5)
+
+        cls.frostGiant = Enemy("Frost Giant", "A towering brute of ice and stone with a deep, rumbling growl.")
+        cls.frostGiant.set_conversation("Tiny thing. Easy to crush.")
+        cls.frostGiant.set_health(115)
+        cls.frostGiant.set_attack("ice fist", 14)
+        cls.frostGiant.set_attack("snow quake", 11)
+        cls.frostGiant.set_attack("roar", 6)
+
+        cls.yeti = Enemy("Yeti", "A hulking, snow-covered beast with glowing eyes and a chilling roar.")
+        cls.yeti.set_conversation("RRRAAGH!")
+        cls.yeti.set_health(101)
+        cls.yeti.set_attack("fur slam", 12)
+        cls.yeti.set_attack("shoulder bash", 8)
+        cls.yeti.set_attack("snow toss", 5)
+
+        cls.moltenMulloway = Enemy("Molten Mulloway", "A large fish leaps from the lava and flops angrily on the floor ahead.")
+        cls.moltenMulloway.set_conversation("Blub blub blub.")
+        cls.moltenMulloway.set_health(30)
+        cls.moltenMulloway.set_attack("bite", 8)
+        cls.moltenMulloway.set_attack("tail slap", 4)
+
+        cls.salamander = Enemy("Salamander", "A fiery lizard that slinks between flames and stone.")
+        cls.salamander.set_conversation("You burn nicely...")
+        cls.salamander.set_health(50)
+        cls.salamander.set_attack("flame lick", 9)
+        cls.salamander.set_attack("tail lash", 6)
+        cls.salamander.set_attack("ember spit", 4)
+
+        cls.cinderBug = Enemy("Cinder Bug", "A small insect glowing with embers, ready to explode when threatened.")
+        cls.cinderBug.set_conversation("*hisses softly*")
+        cls.cinderBug.set_health(20)
+        cls.cinderBug.set_attack("ignite", 20)
+        cls.cinderBug.set_attack("ember dash", 2)
+
+        cls.george = Enemy("George", "A friendly fellow content with his life.")
+        cls.george.set_conversation("Hi, I’m George.")
+        cls.george.set_health(100)
+        cls.george.set_attack("the Jaws of George", 15)
+        cls.george.set_attack("friendly tap", 2)
+        cls.george.set_attack("hesitant hit", 3)
+
+        cls.emberMaw = Enemy("Ember Maw", "A massive, lava-jawed beast that lurks below, waiting to lunge.")
+        cls.emberMaw.set_conversation("Your bones will roast in my gut.")
+        cls.emberMaw.set_health(80)
+        cls.emberMaw.set_attack("lava chomp", 16)
+        cls.emberMaw.set_attack("magma roar", 11)
+        cls.emberMaw.set_attack("tail crack", 8)
+
+        cls.flameImp = Enemy("Flame Imp", "A mischievous creature born of smoke and sparks.")
+        cls.flameImp.set_conversation("Catch me if you can—hothead!")
+        cls.flameImp.set_health(35)
+        cls.flameImp.set_attack("fire poke", 6)
+        cls.flameImp.set_attack("devious lick", 5)
+
+        cls.pyroAlchemist = Enemy("Pyro Alchemist", "A rogue scientist who bathes in flame and laughter, tossing volatile potions.")
+        cls.pyroAlchemist.set_conversation("Science is best when it explodes!")
+        cls.pyroAlchemist.set_health(65)
+        cls.pyroAlchemist.set_attack("vicious vial", 10)
+        cls.pyroAlchemist.set_attack("acid splash", 7)
+        cls.pyroAlchemist.set_attack("boom flask", 9)
+
+        cls.runedSkeletonKing = Enemy("Runed Skeleton King", "An ancient skeletal monarch, etched with glowing runes of binding and fire.")
+        cls.runedSkeletonKing.set_conversation("You trespass in death’s last kingdom.")
+        cls.runedSkeletonKing.set_health(350)
+        cls.runedSkeletonKing.set_attack("arrow of reckoning", 15)
+        cls.runedSkeletonKing.set_attack("bone barrage", 10)
+        cls.runedSkeletonKing.set_attack("skeletal smash", 6)
+
+    # Traders
         cls.josh = Trader("Josh", "An undead miner looking for gold")
         cls.josh.set_conversation("GOLLLD!")
         cls.josh.set_trade(
@@ -114,31 +367,151 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
     @classmethod
     def initialise_cave_relationships(cls):
         """Initialise the links between caves"""
-        cls.cavern.link_cave(cls.dungeon, "south")
-        cls.dungeon.link_cave(cls.cavern, "north")
+        # solace links
+        cls.solace.link_cave(cls.grotto, "north")
+        cls.solace.link_cave(cls.cavern, "east")
+        cls.solace.link_cave(cls.tundraTunnels, "south")
+        cls.solace.link_cave(cls.lavaLagoon, "west")
 
-        cls.grotto.link_cave(cls.dungeon, "east")
-        cls.dungeon.link_cave(cls.grotto, "west")
+        # cavern links
+        cls.cavern.link_cave(cls.dungeon, "north")
+        cls.cavern.link_cave(cls.solace, "west")
 
-        cls.underground_lake.link_cave(cls.grotto, "east")
-        cls.grotto.link_cave(cls.underground_lake, "west")
+        # dungeon links
+        cls.dungeon.link_cave(cls.cavern, "south")
 
-        cls.abandoned_mine.link_cave(cls.dungeon, "west")
-        cls.dungeon.link_cave(cls.abandoned_mine, "east")  
+        # grotto links
+        cls.grotto.link_cave(cls.evergreenGrove, "east")
+        cls.grotto.link_cave(cls.solace, "south")
+
+        # evergreen grove links
+        cls.evergreenGrove.link_cave(cls.grotto, "west")
+        cls.evergreenGrove.link_cave(cls.lushCave, "north")
+
+        # lush cave links
+        cls.lushCave.link_cave(cls.overgrownTemple, "east")
+        cls.lushCave.link_cave(cls.mushroomMellows, "west")
+
+        # overgrown temple links
+        cls.overgrownTemple.link_cave(cls.lushCave, "west")
+
+        # mushroom mellows links
+        cls.mushroomMellows.link_cave(cls.lushCave, "east")
+
+        # tundra tunnels links
+        cls.tundraTunnels.link_cave(cls.solace, "north")
+        cls.tundraTunnels.link_cave(cls.frozenLake, "east")
+        cls.tundraTunnels.link_cave(cls.polarCove, "west")
+
+        # frozen lake links
+        cls.frozenLake.link_cave(cls.glacierGeodes, "north")
+        cls.frozenLake.link_cave(cls.tundraTunnels, "west")
+
+        # glacier geodes links
+        cls.glacierGeodes.link_cave(cls.frozenLake, "south")
+
+        # polar cove links
+        cls.polarCove.link_cave(cls.tundraTunnels, "east")
+        cls.polarCove.link_cave(cls.arcticPit, "south")
+
+        # arctic pit links
+        cls.arcticPit.link_cave(cls.polarCove, "north")
+        cls.arcticPit.link_cave(cls.crystalCrypt, "east")
+
+        # crystal crypt links
+        cls.crystalCrypt.link_cave(cls.arcticPit, "west")
+
+        # lava lagoon links
+        cls.lavaLagoon.link_cave(cls.emberRift, "north")
+        cls.lavaLagoon.link_cave(cls.solace, "east")
+        cls.lavaLagoon.link_cave(cls.hellfireHollows, "west")
+
+        # hellfire hollows links
+        cls.hellfireHollows.link_cave(cls.basaltBurrows, "north")
+        cls.hellfireHollows.link_cave(cls.lavaLagoon, "east")
+
+        # basalt burrows links
+        cls.basaltBurrows.link_cave(cls.georgesRoom, "north")
+        cls.basaltBurrows.link_cave(cls.ashenVault, "east")
+        cls.basaltBurrows.link_cave(cls.hellfireHollows, "south")
+
+        # george’s room links
+        cls.georgesRoom.link_cave(cls.basaltBurrows, "south")
+
+        # ashen vault links
+        cls.ashenVault.link_cave(cls.stalactiteShaft, "north")
+        cls.ashenVault.link_cave(cls.basaltBurrows, "west")
+
+        # stalactite shaft links
+        cls.stalactiteShaft.link_cave(cls.emberRift, "east")
+        cls.stalactiteShaft.link_cave(cls.chasmsEnd, "west")
+
+        # ember rift links
+        cls.emberRift.link_cave(cls.magmaMines, "east")
+        cls.emberRift.link_cave(cls.stalactiteShaft, "west")
+
+        # magma mines links
+        cls.magmaMines.link_cave(cls.emberRift, "west")
+
+        # the chasm’s end links
+        cls.chasmsEnd.link_cave(cls.stalactiteShaft, "east")
+
         
     @classmethod
     def initialise_item_locations(cls):
         """Initialise location of items in the caves"""
-        cls.grotto.set_item(cls.vegemite)
         cls.dungeon.set_item(cls.torch)        
-        cls.underground_lake.set_item(cls.sunken_treasure)        
+     
     
     @classmethod
     def initialise_character_locations(cls):
         """Initialise location of characters in the caves"""
-        cls.dungeon.set_character(cls.harry) 
-        cls.grotto.set_character(cls.josephine)
-        cls.abandoned_mine.set_character(cls.josh)
+        cls.cavern.set_character(cls.caveRats)
+
+        cls.grotto.set_character(cls.graffitiGoblin)
+
+        cls.evergreenGrove.set_character(cls.mossMan)
+
+        cls.lushCave.set_character(cls.giantVenusFlytrap)
+
+        cls.overgrownTemple.set_character(cls.templeRaider)
+
+        cls.mushroomMellows.set_character(cls.shroomWalker)
+
+        cls.tundraTunnels.set_character(cls.iceWraith)
+
+        cls.glacierGeodes.set_character(cls.crystalCrawler)
+
+        cls.polarCove.set_character(cls.frostGiant)
+
+        cls.crystalCrypt.set_character(cls.yeti)
+
+        cls.lavaLagoon.set_character(cls.moltenMulloway)
+
+        cls.hellfireHollows.set_character(cls.salamander)
+
+        cls.basaltBurrows.set_character(cls.cinderBug)
+
+        cls.georgesRoom.set_character(cls.george)
+
+        cls.stalactiteShaft.set_character(cls.emberMaw)
+
+        cls.emberRift.set_character(cls.flameImp)
+
+        cls.magmaMines.set_character(cls.pyroAlchemist)
+
+        cls.chasmsEnd.set_character(cls.runedSkeletonKing)
+ 
+ 
+# class PlayerEntity(Player):
+#     """This class contains all the information about the Player"""
+    
+#     @classmethod
+#     def initialise(cls):
+#         """Initialise Player object"""
+#         cls.bag = []
+#         cls.dead = False
+#         cls.health = 100
         
         
 # class Game():
@@ -146,11 +519,6 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
 #     current_cave = None
 #     cave_inhabitant = None
 #     cave_item = None
-    
-#     run_game = None
-#     win_condition = None
-    
-#     last_command = None
     
 #     standard_text_colour = None
 #     standard_print_speed = None
@@ -166,7 +534,7 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
 #     def initialise(cls):
 #         """Initialise Game objects"""
 #         cls.run_game = True
-#         cls.current_cave = CaveEntities.cavern
+#         cls.current_cave = CaveEntities.solace
 #         cls.last_command = None
         
 #         cls.standard_text_colour = ""

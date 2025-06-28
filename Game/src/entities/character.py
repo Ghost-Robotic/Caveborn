@@ -81,7 +81,7 @@ class Enemy(Character):
             return True
 
         else:
-            print(f"{self.name} swallows you, little wimp")
+            print(f"{self.name} swallows you, little wimp.")
             return False
         
     def steal(self):

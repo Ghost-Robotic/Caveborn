@@ -53,7 +53,7 @@ class Item:
             class instance: returns selected item object
         """
         for item in cls.item_list:
-            if name == item.name:
+            if name == (item.name).lower():
                 return item
             
         return None
