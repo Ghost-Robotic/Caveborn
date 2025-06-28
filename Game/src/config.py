@@ -145,7 +145,7 @@ class ItemEntities(Item):
     @classmethod
     def initialise(cls):
         """Initialise Item objects"""
-        cls.rock = Item("Rock")
+        cls.rock = Item("rock")
         cls.rock.set_description("Its just a very hard rock. Deals 15 base-damage")
         cls.rock.set_base_damage(15)
         
