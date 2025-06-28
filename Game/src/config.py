@@ -161,7 +161,7 @@ class ItemEntities(Item):
 class CharacterEntities(Character):
     """This class contains all Character objects"""
     
-    """_Enemy_"""
+    #Enemy
     caveRats = None
     graffitiGoblin = None
     mossMan = None

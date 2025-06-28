@@ -43,7 +43,7 @@ class Game():
     def initialise(cls):
         """Initialise Game objects"""
         cls.run_game = True
-        cls.current_cave = CaveEntities.cavern
+        cls.current_cave = CaveEntities.solace
         cls.last_command = None
         
     @classmethod
@@ -71,16 +71,17 @@ class Game():
         
         if cls.cave_inhabitant is not None and cls.cave_item is None:
             CaveDisplay.update_character_info(cls.cave_inhabitant)
-            CaveDisplay.update_display()
+            CaveDisplay.update_character_display()
             CaveDisplay.display_character()
         elif cls.cave_item is not None and cls.cave_inhabitant is None:
             CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
-            CaveDisplay.update_display()
+            CaveDisplay.update_item_display()
             CaveDisplay.display_item()
         elif cls.cave_item is not None and cls.cave_inhabitant  is not None:
             CaveDisplay.update_character_info(cls.cave_inhabitant)
             CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
-            CaveDisplay.update_display()
+            CaveDisplay.update_character_display()
+            CaveDisplay.update_item_display()
             CaveDisplay.display()
         
     @classmethod
