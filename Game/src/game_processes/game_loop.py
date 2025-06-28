@@ -45,7 +45,6 @@ def game_loop():
                     
                 case "about" | "info" | "information" | "details" | "stats" | "inspect":
                     try:
-                        print(command_split)
                         PlayerCommand.about(command_split[1])
                     except:   
                         PlayerCommand.invalid()
