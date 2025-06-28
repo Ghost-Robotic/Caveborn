@@ -40,7 +40,7 @@ class Item:
         match num:
             case 0: #weak attack
                 self.use_item()
-                return ["weak attack" , self.base_damage - self.base_damage*0.1]
+                return ["weak attack" , self.base_damage - self.base_damage*0.3] # -30%
             
             case 1: #strong attack
                 self.use_item()
@@ -48,7 +48,7 @@ class Item:
             
             case 2: #critical hit
                 self.use_item()
-                return ["critical hit" , self.base_damage + self.base_damage*0.1]
+                return ["critical hit" , self.base_damage + self.base_damage*0.3] # +30%
         
     #describe item
     @classmethod
