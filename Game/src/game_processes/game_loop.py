@@ -7,7 +7,6 @@ from src.commands.player_commands import PlayerCommand
 def game_loop():
     while Game.run_game == True:
         Command.clear_terminal()
-        
         Game.update_state()   
         
         Player.update_state()

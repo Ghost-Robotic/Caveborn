@@ -66,8 +66,9 @@ class PlayerCommand():
                         if command_split[0] == "attack":
                             try: 
                                 item_selected = command_split[1]
-                                if item_selected in Player.bag:
-                                    item = Item.get_item(item_selected)
+                                item = Item.get_item(item_selected)
+                                if item in Player.bag:
+                                    
                                     attack, damage = item.select_damage(Command.random_range(0,2))
                                     
                                     Game.cave_inhabitant.damage(damage)
@@ -96,7 +97,7 @@ class PlayerCommand():
                                     item_selected = item_selected + " " + command_split[i+2]
                                 
                                 item = Item.get_item(item_selected)
-                                if item_selected in Player.bag:
+                                if item in Player.bag:
                                     if isinstance(item, HealingItem):
                                         heal_amount = item.get_heals_for()
                                         Player.heal(heal_amount)  
@@ -188,7 +189,7 @@ class PlayerCommand():
                                                   strings= ["You put the ", f"{Game.cave_item.get_name()} ", "in your bag"], 
                                                   speeds= [Config.standard_print_speed], 
                                                   colours= [Config.standard_text_colour, Config.item_text_colour, Config.standard_text_colour])
-            Player.bag.append(Game.cave_item.get_name())
+            Player.bag.append(Game.cave_item)
             Game.current_cave.set_item(None)
             
             
@@ -241,7 +242,7 @@ class PlayerCommand():
         Command.wait_for_enter()
         item = Item.get_item(entity)
         if item is not None:
-            DescriptionDisplay.update_item_info(item.name, item.description)
+            DescriptionDisplay.update_item_info(item)
             DescriptionDisplay.update_item_display()
             DescriptionDisplay.display_item()
             Command.wait_for_enter()
