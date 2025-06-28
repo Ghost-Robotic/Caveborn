@@ -55,5 +55,4 @@ class Cave:
             return self.linked_caves[direction]
         
         else:
-            print("You can't go that way")
-            return self
+            return None

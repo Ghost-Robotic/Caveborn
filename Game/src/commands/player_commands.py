@@ -1,6 +1,12 @@
-from src.entities.character import Enemy, Trader
-from src.config import Game, PlayerEntity
-from .game_commands import GameCommand
+from src.assets.cave_info_display import CaveDisplay, CombatDisplay, DescriptionDisplay
+from src.entities.character import Character, Enemy, Trader
+from src.assets.title import Title
+from src.assets.player_info_display import PlayerDisplay
+from src.config import Config
+from src.entities.player import Player
+from src.entities.item import Item, HealingItem
+from src.game import Game
+from .commands import Command
 
 class PlayerCommand():
     
@@ -12,138 +18,248 @@ class PlayerCommand():
         Args:
             direction (str): Direction to move in.
         """
-        Game.current_cave = Game.current_cave.move(direction)
+        next_cave = Game.current_cave.move(direction)
+        if next_cave is None:
+            print("\nYou walk into a wall \nThere is nothing there!")
+            Command.wait_for_enter()
+        else:
+            Game.current_cave = next_cave     
+            print("\nMoving", end = "")
+            Command.sequential_print("...", 0.1, Config.standard_text_colour)        
     
     
-    @GameCommand.display_decorator
+    @Game.display_decorator
     @staticmethod
     def talk():
         """Talk with current cave inhabitant."""   
-        #GameCommand.clear_terminal()     
+        #Command.clear_terminal()     
         if Game.cave_inhabitant is not None:
-            GameCommand.sequential_print_segments(segments = 2, 
+            Command.sequential_print_segments(segments = 2, 
                                                   strings = [Game.cave_inhabitant.talk()[0], Game.cave_inhabitant.talk()[1]], 
                                                   speeds = [0.075, 0.15], 
-                                                  colours = [Game.character_text_colour, "\x1b[38;5;208m"])
+                                                  colours = [Config.character_text_colour, "\x1b[38;5;208m"])
 
         else: 
-            GameCommand.sequential_print("Its so lonely in here...", Game.standard_print_speed, Game.standard_text_colour)
+            Command.sequential_print("Its so lonely in here...", Config.standard_print_speed, Config.standard_text_colour)
             
-        GameCommand.wait_for_enter()
+        Command.wait_for_enter()
     
     
-    @GameCommand.display_decorator
+    @Game.display_decorator
     @staticmethod
     def fight():
         """Attempt to fight with current cave inhabitant."""
         if Game.cave_inhabitant is not None and isinstance(Game.cave_inhabitant, Enemy):
             #Fight with the inhabitant if there is one
-            print("What will you fight with")
-            fight_with = GameCommand.get_input()
-
-            if fight_with in PlayerEntity.bag:
-                if Game.cave_inhabitant.fight(combat_item= fight_with) == True:
-                    #win message
-                    print("Bravo, hero you won the fight!")
-                    Game.current_cave.set_character(None)
+            player_turn = True
+            retreat = False
+            while Game.cave_inhabitant.health > 0 and Player.health > 0 and not retreat:
+                Player.update_state()
+                Game.display_fight()
+                if player_turn:
+                    #Player turn to attack
+                    print("Select an action-->\x1b[38;5;226m attack/heal <item-name>\x1b[0m")
+                    command = Command.get_input()
+                    command_split = command.split()
                     
-                    if Enemy.enemies_to_defeat == 0:
-                        print("Congratulations, you have survived another adventure!")  
-                        PlayerEntity.dead = True                  
+                    if command is not "":
+                        if command_split[0] == "attack":
+                            try: 
+                                item_selected = command_split[1]
+                                if item_selected in Player.bag:
+                                    item = Item.get_item(item_selected)
+                                    attack, damage = item.select_damage(Command.random_range(0,2))
+                                    
+                                    Game.cave_inhabitant.damage(damage)
+                                    
+                                    Command.sequential_print_segments(segments= 6, 
+                                                                    strings= ["Using your", f" {item_selected}", f" you perform a {attack} on", f" {Game.cave_inhabitant.name}", " for", f" {damage} health"],
+                                                                    speeds= [Config.standard_print_speed],
+                                                                    colours= ["", Config.item_text_colour, "", Config.character_text_colour, "", Config.health_text_colour]
+                                                                    )
+                                
+                                else:
+                                    Command.sequential_print_segments(segments= 2,
+                                                                        strings= ["You don't have a ", f"{item_selected}"], 
+                                                                        speeds= [Config.standard_print_speed], 
+                                                                        colours= [Config.standard_text_colour, Config.item_text_colour])                         
+                                
+                                player_turn = False
+                            except:
+                                print("Ensure you type the item name after\x1b[38;5;226m attack\x1b[0m e.g.\x1b[38;5;226m attack sword\x1b[0m")
+                            
+                            
+                        elif command_split[0] == "heal":
+                            try:
+                                item_selected = command_split[1]
+                                for i in range(len(command_split)-2):
+                                    item_selected = item_selected + " " + command_split[i+2]
+                                
+                                item = Item.get_item(item_selected)
+                                if item_selected in Player.bag:
+                                    if isinstance(item, HealingItem):
+                                        heal_amount = item.get_heals_for()
+                                        Player.heal(heal_amount)  
+                                        Command.sequential_print_segments(segments=4,
+                                                                        strings= ["Using your ", f"{item_selected}", f" you heal for", f" {heal_amount} health"],
+                                                                        speeds= [Config.standard_print_speed],
+                                                                        colours= ["", Config.item_text_colour, "", Config.health_text_colour]
+                                                                        )
+                                    
+                                    else:
+                                        Command.sequential_print_segments(segments= 2,
+                                                                            strings= ["You can't heal with a ", f"{item_selected}"], 
+                                                                            speeds= [Config.standard_print_speed], 
+                                                                            colours= [Config.standard_text_colour, Config.item_text_colour]) 
 
+                                else:
+                                    Command.sequential_print_segments(segments= 2,
+                                                                        strings= ["You don't have a ", f"{item_selected}"], 
+                                                                        speeds= [Config.standard_print_speed], 
+                                                                        colours= [Config.standard_text_colour, Config.item_text_colour])  
+                            except:
+                                print("Ensure you type the item name after\x1b[38;5;226m heal\x1b[0m e.g.\x1b[38;5;226m attack healing potion\x1b[0m")
+                                
+                                
+                        elif command_split[0] in ["exit", "retreat", "run away", "quit"]:      
+                            retreat = True  
+                            Command.sequential_print("You turn around and run away, you little wimp", Config.standard_print_speed, "")
+                            
+    
+                        else:
+                            print("Invalid Command")
+                    else:
+                        print("Invalid Command")
+                                                                
                 else:
-                    #loss message
-                    print("Scurry home, you lost the fight.")
-                    print("That's the end of the game")
-                    PlayerEntity.dead = True
+                    #Enemy turn to attack
+                    try:
+                        attack = Command.random_dict_key(Game.cave_inhabitant.attacks)
+                        damage = Game.cave_inhabitant.attacks.get(attack)
+                    except:
+                        attack = "a slap"
+                        damage = 15
                     
-            else:
-                GameCommand.sequential_print_segments(segments= 2,
-                                                      strings= ["You don't have a ", f"{fight_with}"], 
-                                                      speeds= [Game.standard_print_speed], 
-                                                      colours= [Game.standard_text_colour, Game.item_text_colour])
-                GameCommand.wait_for_enter()
+                    Player.damage(damage)
+                    player_turn = True
+                    Command.sequential_print_segments(segments=3,
+                                                      strings= [f"{Game.cave_inhabitant.name}", f" performs {attack}, damaging you for", f" {damage} health"],
+                                                      speeds= [Config.standard_print_speed],
+                                                      colours= [Config.character_text_colour, "", Config.health_text_colour]
+                                                      )
+                Command.wait_for_enter()
+                    
+            if Game.cave_inhabitant.health <= 0:
+                Game.current_cave.set_character(None)
+                Enemy.enemies_to_defeat -= 1
+                print("Bravo, you defeated the enemy")
+                Command.wait_for_enter()
 
         else:
-            GameCommand.sequential_print("There is no one here to fight with", Game.standard_print_speed, Game.standard_text_colour)
-            GameCommand.wait_for_enter()
+            Command.sequential_print("There is no one here to fight with", Config.standard_print_speed, Config.standard_text_colour)
+            Command.wait_for_enter()
     
-    
-    @GameCommand.display_decorator
+    @Game.display_decorator
     @staticmethod
     def pat():
         """Attempt to pat current cave inhabitant."""
         if Game.cave_inhabitant is not None:
             if isinstance(Game.cave_inhabitant, Enemy):
-                GameCommand.sequential_print("I wouldn't do that if I were you...", Game.standard_print_speed, Game.standard_text_colour)
+                Command.sequential_print("I wouldn't do that if I were you...", Config.standard_print_speed, Config.standard_text_colour)
 
             else:
-                GameCommand.sequential_print_segments(segments= 2,
+                Command.sequential_print_segments(segments= 2,
                                                       strings= Game.cave_inhabitant.pat(), 
-                                                      speeds= [Game.standard_print_speed], 
-                                                      colours= [Game.character_text_colour, Game.standard_text_colour])
+                                                      speeds= [Config.standard_print_speed], 
+                                                      colours= [Config.character_text_colour, Config.standard_text_colour])
 
         else:
-            GameCommand.sequential_print(f"There is no one here to pat :(", Game.standard_print_speed, Game.standard_text_colour)
+            Command.sequential_print(f"There is no one here to pat :(", Config.standard_print_speed, Config.standard_text_colour)
             
-        GameCommand.wait_for_enter()
+        Command.wait_for_enter()
     
     
-    @GameCommand.display_decorator
+    @Game.display_decorator
     @staticmethod
     def take():
         """Take the item in the current cave."""
         if Game.cave_item is not None:
-            GameCommand.sequential_print_segments(segments= 3,
+            Command.sequential_print_segments(segments= 3,
                                                   strings= ["You put the ", f"{Game.cave_item.get_name()} ", "in your bag"], 
-                                                  speeds= [Game.standard_print_speed], 
-                                                  colours= [Game.standard_text_colour, Game.item_text_colour, Game.standard_text_colour])
-            PlayerEntity.bag.append(Game.cave_item.get_name())
+                                                  speeds= [Config.standard_print_speed], 
+                                                  colours= [Config.standard_text_colour, Config.item_text_colour, Config.standard_text_colour])
+            Player.bag.append(Game.cave_item.get_name())
             Game.current_cave.set_item(None)
             
-        else:
-            GameCommand.sequential_print("The floor is empty...", Game.standard_print_speed, Game.standard_text_colour)
             
-        GameCommand.wait_for_enter()
+        else:
+            Command.sequential_print("The floor is empty...", Config.standard_print_speed, Config.standard_text_colour)
+            
+        Command.wait_for_enter()
     
     
-    @GameCommand.display_decorator
+    @Game.display_decorator
     @staticmethod
     def trade():
         """Trade with current inhabitant if they are a Trader."""
         if Game.cave_inhabitant is not None and isinstance(Game.cave_inhabitant, Trader):
                 print("What do you have to trade")
-                PlayerEntity_trades = GameCommand.get_input()
+                player_trades = Command.get_input()
                 
-                if PlayerEntity_trades not in PlayerEntity.bag: 
-                    GameCommand.sequential_print_segments(segments= 2, 
-                                                          strings= ["You don't have a ", f"{PlayerEntity_trades}"], 
-                                                          speeds= [Game.standard_print_speed], 
-                                                          colours = [Game.standard_text_colour, Game.item_text_colour]) 
-                    GameCommand.wait_for_enter()
+                if player_trades not in Player.bag: 
+                    Command.sequential_print_segments(segments= 2, 
+                                                          strings= ["You don't have a ", f"{player_trades}"], 
+                                                          speeds= [Config.standard_print_speed], 
+                                                          colours = [Config.standard_text_colour, Config.item_text_colour]) 
+                    Command.wait_for_enter()
                     return
 
-                if PlayerEntity_trades == Game.cave_inhabitant.get_item_wants():
-                    GameCommand.sequential_print_segments(segments= 4 , 
-                                                          strings = ["You trade a ",f"{PlayerEntity_trades} ","for a ",f"{Game.cave_inhabitant.get_item_trades()}"],
-                                                          speeds = [Game.standard_print_speed],
-                                                          colours = [Game.standard_text_colour, Game.item_text_colour, Game.standard_text_colour, Game.item_text_colour])
-                    PlayerEntity.bag.remove(PlayerEntity_trades)
-                    PlayerEntity.bag.append(Game.cave_inhabitant.get_item_trades())
+                if player_trades == Game.cave_inhabitant.get_item_wants():
+                    Command.sequential_print_segments(segments= 4 , 
+                                                          strings = ["You trade a ",f"{player_trades} ","for a ",f"{Game.cave_inhabitant.get_item_trades()}"],
+                                                          speeds = [Config.standard_print_speed],
+                                                          colours = [Config.standard_text_colour, Config.item_text_colour, Config.standard_text_colour, Config.item_text_colour])
+                    Player.bag.remove(player_trades)
+                    Player.bag.append(Game.cave_inhabitant.get_item_trades())
                     
                 else:
-                    GameCommand.sequential_print_segments(segments= 3,
-                                                          strings= [f"{Game.cave_inhabitant.name} ", "doesn't want a ", f"{PlayerEntity_trades}"],
-                                                          speeds= [Game.standard_print_speed],
-                                                          colours= [Game.character_text_colour, Game.standard_text_colour, Game.item_text_colour])
+                    Command.sequential_print_segments(segments= 3,
+                                                          strings= [f"{Game.cave_inhabitant.name} ", "doesn't want a ", f"{player_trades}"],
+                                                          speeds= [Config.standard_print_speed],
+                                                          colours= [Config.character_text_colour, Config.standard_text_colour, Config.item_text_colour])
         else:
-            GameCommand.sequential_print("There is no one here to trade with", Game.standard_print_speed, Game.standard_text_colour)
+            Command.sequential_print("There is no one here to trade with", Config.standard_print_speed, Config.standard_text_colour)
             
-        GameCommand.wait_for_enter()
+        Command.wait_for_enter()
         
         
-    @GameCommand.display_decorator
+    @Game.display_decorator
+    @staticmethod
+    def about(entity):
+        item = Item.get_item(entity)
+        if item is not None:
+            DescriptionDisplay.update_item_info(item.name, item.description)
+            DescriptionDisplay.update_item_display()
+            DescriptionDisplay.display_item()
+            Command.wait_for_enter()
+        else:
+            character = Character.get_character(entity)
+            if character is not None:
+                if isinstance(character, Enemy):
+                    CombatDisplay.update_character_info(character)
+                    CombatDisplay.update_display()
+                    CombatDisplay.display_character()
+                else:
+                    DescriptionDisplay.update_character_info(character)
+                    DescriptionDisplay.update_character_display()
+                    DescriptionDisplay.display_character()
+                Command.wait_for_enter()
+            else:
+                raise Exception("entity not found")
+        
+        
+    @Game.display_decorator
     @staticmethod
     def invalid():
         print("Invalid Command")
-        GameCommand.wait_for_enter()
+        Command.wait_for_enter()

@@ -1,17 +1,21 @@
 class Character():
+    character_list = []
+    describe_options = ["is here!", "appears from the shadows...", "steps out from behind a boulder", "taps you on the shoulder", "appears in a corner"]
     #constructor methods
     def __init__(self, char_name, char_description):
         self.name = char_name
         self.description = char_description
         self.conversation = None
+        self.character_list.append(self)
 
     #set character conversation
     def set_conversation(self, conversation):
         self.conversation = conversation
 
     #describe character
-    def describe(self):
-        return f"{self.name} is here!\n{self.description}"
+    @classmethod
+    def describe(cls, num):
+        return cls.describe_options[num]
 
     #talk to character
     def talk(self):
@@ -26,19 +30,49 @@ class Character():
         print(f"{self.name} doesn't want to fight with you")
         return True
     
+    @classmethod
+    def get_character(cls, name):
+        """If the name matches an existing Character it will return that Character.
+
+        Args:
+            name (str): name of the character to be retrieved
+
+        Returns:
+            class instance: returns selected character object
+        """
+        for character in cls.character_list:
+            if name == character.name.lower():
+
+                return character
+        return None
+    
 #extends Character class, allows players to fight character
 class Enemy(Character):
     enemies_to_defeat = 0
     def __init__(self, char_name, char_description):
         super().__init__(char_name, char_description)
         self.weakness = None
+        self.health = 25
+        self.attacks = {}
         Enemy.enemies_to_defeat = Enemy.enemies_to_defeat + 1
 
     def get_weakness(self):
         return self.weakness
     
+    def get_health(self):
+        return self.health
+    
     def set_weakness(self, weakness):
         self.weakness = weakness
+        
+    def set_health(self, health):
+        self.health = health
+        
+    def set_attack(self, attack_name, damage):
+        self.attacks.update({attack_name : damage})
+        
+    def damage(self, damage):
+        self.health -= damage
 
     def fight(self, combat_item):
         if combat_item == self.weakness:
