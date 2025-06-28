@@ -6,7 +6,8 @@ Caveborn is a text based game where you explore caves, trade items and fight ene
 ## How to play
 
 ### The Compass
-![Image showing what the compass looks like in-game.](assets\example_compass.PNG)  
+<img src="assets\example_compass.PNG" alt="Image showing what the compass looks like in-game.">
+
 The cardinal directions with red text indicates the directions the player is able to move.  
 (e.g. In the image above; North, East and West are the directions the player is able to move)
 
