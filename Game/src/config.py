@@ -140,9 +140,16 @@ class ItemEntities(Item):
     sunken_treasure = None
     pickaxe = None
     
+    rock = None
+    
     @classmethod
     def initialise(cls):
         """Initialise Item objects"""
+        cls.rock = Item("Rock")
+        cls.rock.set_description("Its just a very hard rock. Deals 15 base-damage")
+        cls.rock.set_base_damage(15)
+        
+        
         cls.vegemite = HealingItem("vegemite")
         cls.vegemite.set_description("A Wumpuses worst nightmare")
         cls.vegemite.set_heals_for(50)
@@ -161,7 +168,7 @@ class ItemEntities(Item):
 class CharacterEntities(Character):
     """This class contains all Character objects"""
     
-    """_Enemy_"""
+    #Enemy
     caveRats = None
     graffitiGoblin = None
     mossMan = None
