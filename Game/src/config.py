@@ -42,7 +42,7 @@ class CaveEntities(Cave):
     frozenLake = None
     glacierGeodes = None
     polarCove = None
-    articPit = None
+    arcticPit = None
     crystalCrypt = None
     
     # zone 4
@@ -198,57 +198,121 @@ class CharacterEntities(Character):
 
         cls.caveRats = Enemy("Cave Rats", "A small group of rats swiftly scurry around you.")
         cls.caveRats.set_conversation("*squeak, squeak!!*")
+        cls.caveRats.set_health(37)
+        cls.caveRats.set_attack("ratapult", 10)
+        cls.caveRats.set_attack("crown of claws", 6)
+        cls.caveRats.set_attack("toe tickle", 3)
 
         cls.graffitiGoblin = Enemy("Graffiti Goblin", "A lean, mean and green goblin.")
         cls.graffitiGoblin.set_conversation("Hey, just let me express myself, yo. Or else.")
+        cls.graffitiGoblin.set_health(25)
+        cls.graffitiGoblin.set_attack("paint spray", 4)
+        cls.graffitiGoblin.set_attack("can throw", 2)
 
         cls.mossMan = Enemy("Moss Man", "A beast made from moss and mud, the keeper of the Grove.")
         cls.mossMan.set_conversation("Who dares to disturb me?")
+        cls.mossMan.set_health(75)
+        cls.mossMan.set_attack("heavy swipe", 9)
+        cls.mossMan.set_attack("leg sweep", 7)
+        cls.mossMan.set_attack("shove", 5)
 
         cls.giantVenusFlytrap = Enemy("Giant Venus Flytrap", "A towering carnivorous plant that snaps at anything warm-blooded.")
         cls.giantVenusFlytrap.set_conversation("*snaps shut with a deep squelch*")
+        cls.giantVenusFlytrap.set_health(60)
+        cls.giantVenusFlytrap.set_attack("bite", 6)
+        cls.giantVenusFlytrap.set_attack("slap", 3)
 
         cls.templeRaider = Enemy("Temple Raider", "A greedy bandit looting the temple.")
         cls.templeRaider.set_conversation("Hey, this is my temple only!")
+        cls.templeRaider.set_health(50)
+        cls.templeRaider.set_attack("slash", 8)
+        cls.templeRaider.set_attack("kick", 5)
 
         cls.shroomWalker = Enemy("Shroom Walker", "A lumbering mushroom creature with glowing spores and sluggish steps.")
         cls.shroomWalker.set_conversation("*pitter, patter*")
+        cls.shroomWalker.set_health(55)
+        cls.shroomWalker.set_attack("spore cloud", 6)
+        cls.shroomWalker.set_attack("stomp", 4)
 
         cls.iceWraith = Enemy("Ice Wraith", "A ghostly figure made of wind and frost, gliding silently through the cold.")
         cls.iceWraith.set_conversation("Your warmth... it will not last.")
+        cls.iceWraith.set_health(60)
+        cls.iceWraith.set_attack("frost pierce", 10)
+        cls.iceWraith.set_attack("chilling touch", 7)
+        cls.iceWraith.set_attack("wither wind", 4)
 
         cls.crystalCrawler = Enemy("Crystal Crawler", "A nimble beetle-like creature, shimmering brightly.")
         cls.crystalCrawler.set_conversation("*chitters, crystal legs tapping*")
+        cls.crystalCrawler.set_health(25)
+        cls.crystalCrawler.set_attack("bite", 10)
+        cls.crystalCrawler.set_attack("scratch", 5)
 
         cls.frostGiant = Enemy("Frost Giant", "A towering brute of ice and stone with a deep, rumbling growl.")
         cls.frostGiant.set_conversation("Tiny thing. Easy to crush.")
+        cls.frostGiant.set_health(115)
+        cls.frostGiant.set_attack("ice fist", 14)
+        cls.frostGiant.set_attack("snow quake", 11)
+        cls.frostGiant.set_attack("roar", 6)
 
         cls.yeti = Enemy("Yeti", "A hulking, snow-covered beast with glowing eyes and a chilling roar.")
         cls.yeti.set_conversation("RRRAAGH!")
+        cls.yeti.set_health(101)
+        cls.yeti.set_attack("fur slam", 12)
+        cls.yeti.set_attack("shoulder bash", 8)
+        cls.yeti.set_attack("snow toss", 5)
 
         cls.moltenMulloway = Enemy("Molten Mulloway", "A large fish leaps from the lava and flops angrily on the floor ahead.")
-        cls.moltenMulloway.set_conversation("Blub blub blub")
+        cls.moltenMulloway.set_conversation("Blub blub blub.")
+        cls.moltenMulloway.set_health(30)
+        cls.moltenMulloway.set_attack("bite", 8)
+        cls.moltenMulloway.set_attack("tail slap", 4)
 
         cls.salamander = Enemy("Salamander", "A fiery lizard that slinks between flames and stone.")
         cls.salamander.set_conversation("You burn nicely...")
+        cls.salamander.set_health(50)
+        cls.salamander.set_attack("flame lick", 9)
+        cls.salamander.set_attack("tail lash", 6)
+        cls.salamander.set_attack("ember spit", 4)
 
         cls.cinderBug = Enemy("Cinder Bug", "A small insect glowing with embers, ready to explode when threatened.")
         cls.cinderBug.set_conversation("*hisses softly*")
+        cls.cinderBug.set_health(20)
+        cls.cinderBug.set_attack("ignite", 20)
+        cls.cinderBug.set_attack("ember dash", 2)
 
         cls.george = Enemy("George", "A friendly fellow content with his life.")
         cls.george.set_conversation("Hi, I’m George.")
+        cls.george.set_health(100)
+        cls.george.set_attack("the Jaws of George", 15)
+        cls.george.set_attack("friendly tap", 2)
+        cls.george.set_attack("hesitant hit", 3)
 
         cls.emberMaw = Enemy("Ember Maw", "A massive, lava-jawed beast that lurks below, waiting to lunge.")
         cls.emberMaw.set_conversation("Your bones will roast in my gut.")
+        cls.emberMaw.set_health(80)
+        cls.emberMaw.set_attack("lava chomp", 16)
+        cls.emberMaw.set_attack("magma roar", 11)
+        cls.emberMaw.set_attack("tail crack", 8)
 
         cls.flameImp = Enemy("Flame Imp", "A mischievous creature born of smoke and sparks.")
         cls.flameImp.set_conversation("Catch me if you can—hothead!")
+        cls.flameImp.set_health(35)
+        cls.flameImp.set_attack("fire poke", 6)
+        cls.flameImp.set_attack("devious lick", 5)
 
         cls.pyroAlchemist = Enemy("Pyro Alchemist", "A rogue scientist who bathes in flame and laughter, tossing volatile potions.")
         cls.pyroAlchemist.set_conversation("Science is best when it explodes!")
+        cls.pyroAlchemist.set_health(65)
+        cls.pyroAlchemist.set_attack("vicious vial", 10)
+        cls.pyroAlchemist.set_attack("acid splash", 7)
+        cls.pyroAlchemist.set_attack("boom flask", 9)
 
         cls.runedSkeletonKing = Enemy("Runed Skeleton King", "An ancient skeletal monarch, etched with glowing runes of binding and fire.")
         cls.runedSkeletonKing.set_conversation("You trespass in death’s last kingdom.")
+        cls.runedSkeletonKing.set_health(350)
+        cls.runedSkeletonKing.set_attack("arrow of reckoning", 15)
+        cls.runedSkeletonKing.set_attack("bone barrage", 10)
+        cls.runedSkeletonKing.set_attack("skeletal smash", 6)
 
     # Traders
         cls.josh = Trader("Josh", "An undead miner looking for gold")
