@@ -17,6 +17,9 @@ class Player():
         Updates player variables
         """
         cls.health = (cls.health if cls.health <= 100 else 100)
+        for item in cls.bag:
+            if item.durability == 0:
+                cls.bag.remove(item)
         
     
     @classmethod

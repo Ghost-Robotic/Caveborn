@@ -19,9 +19,18 @@ class PlayerDisplay():
         if bag == []:
             cls.bag = "Empty"            
         else:
-            cls.bag = bag[0]
+            if bag[0].durability is None:
+                durability = "∞"
+            else:
+                durability = str(bag[0].durability)
+            cls.bag = bag[0].name + " " + durability
+            
             for i in range(len(bag)-1):
-                cls.bag = cls.bag + "\x1b[39m, \x1b[38;5;207m" + bag[i+1]    
+                if bag[i+1].durability is None:
+                    durability = "∞"
+                else:
+                    durability = str(bag[i+1].durability)
+                cls.bag = cls.bag + "\x1b[39m, \x1b[38;5;207m" + bag[i+1].name + " " + durability
         
         linked_caves = current_cave.get_linked_caves()
         

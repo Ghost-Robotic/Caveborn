@@ -63,6 +63,7 @@ class ItemEntities(Item):
         cls.vegemite = HealingItem("vegemite")
         cls.vegemite.set_description("A Wumpuses worst nightmare")
         cls.vegemite.set_heals_for(50)
+        cls.vegemite.set_durability(10)
 
         cls.torch = Item("torch")
         cls.torch.set_description("A light for the end of the tunnel")

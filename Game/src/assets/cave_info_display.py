@@ -9,6 +9,7 @@ class CaveDisplay():
     
     item_name = None
     item_description = None
+    item_durability = None
     
     character_display = []
     character_display= []    
@@ -29,9 +30,9 @@ class CaveDisplay():
         cls.character_description = character.description
         
     @classmethod
-    def update_item_info(cls, name, description):
-        cls.item_name = Item.describe(Command.random_range(0, len(Item.describe_options)-1)) + " \x1b[38;5;207m"+name+"\x1b[0m" 
-        cls.item_description = description
+    def update_item_info(cls, item):
+        cls.item_name = Item.describe(Command.random_range(0, len(Item.describe_options)-1)) + " \x1b[38;5;207m"+item.name+"\x1b[0m" 
+        cls.item_description = item.description
         
     @classmethod
     def update_display(cls):
@@ -124,9 +125,13 @@ class DescriptionDisplay(CaveDisplay):
         cls.character_description = character.description
         
     @classmethod
-    def update_item_info(cls, name, description):
-        cls.item_name = "\x1b[38;5;207m"+name+"\x1b[0m" 
-        cls.item_description = description    
+    def update_item_info(cls, item):
+        cls.item_durability = str(item.durability)
+        if cls.item_durability is None:
+            cls.item_durability = "∞"
+                    
+        cls.item_name = "\x1b[38;5;207m"+item.name+"\x1b[0m" 
+        cls.item_description = item.description    
         
     @classmethod
     def update_character_display(cls):
@@ -147,17 +152,17 @@ class DescriptionDisplay(CaveDisplay):
         
     @classmethod
     def update_item_display(cls):
-        spacing_line_1_2 = len(cls.item_description) - (len(cls.item_name)-16)
+        spacing_line_1_2 = len(cls.item_description) - (len(cls.item_name) + len(cls.item_durability) -2)
         spacing_line_2_2 = 0
-        spacing_line_edge_2 = max(len(cls.item_description), len(cls.item_name)-16)
+        spacing_line_edge_2 = max(len(cls.item_description), len(cls.item_name) + len(cls.item_durability)-2)
         if spacing_line_1_2 < 0:
             spacing_line_2_2 = abs(spacing_line_1_2)
             spacing_line_1_2 = 0        
-        
+
         cls.item_display = [
             f"",
             f"╔───" + spacing_line_edge_2 * "─" + "╗",
-            f"│ {cls.item_name}" + (spacing_line_1_2 * " ") +  " │",
+            f"│ {cls.item_name}" + f"  \x1b[38;5;39mDurability:\x1b[0m {cls.item_durability}" + (spacing_line_1_2 * " ") +  " │",
             f"│  {cls.item_description}" +  (spacing_line_2_2 * " ") + " │",
             f"╚───" + spacing_line_edge_2 * "─" + "╝"
         ]

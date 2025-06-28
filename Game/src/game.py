@@ -22,7 +22,7 @@ class Game():
     
     def display_decorator(func):
         def wrapper(*args): 
-            #Command.clear_terminal()
+            Command.clear_terminal()
             Title.output()
             PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
             PlayerDisplay.update_display()                    
@@ -74,12 +74,12 @@ class Game():
             CaveDisplay.update_display()
             CaveDisplay.display_character()
         elif cls.cave_item is not None and cls.cave_inhabitant is None:
-            CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
+            CaveDisplay.update_item_info(cls.cave_item)
             CaveDisplay.update_display()
             CaveDisplay.display_item()
         elif cls.cave_item is not None and cls.cave_inhabitant  is not None:
             CaveDisplay.update_character_info(cls.cave_inhabitant)
-            CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
+            CaveDisplay.update_item_info(cls.cave_item)
             CaveDisplay.update_display()
             CaveDisplay.display()
         
