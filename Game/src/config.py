@@ -135,34 +135,74 @@ class CaveEntities(Cave):
         
 class ItemEntities(Item):
     """""This class contains all Item objects:"""""
-    vegemite = None
+    # Items
     torch = None
-    sunken_treasure = None
     pickaxe = None
-    
     rock = None
+    iridescentInferno = None
+    shabbyShiv = None
+    handGrenade = None
+    obsidianBlade = None
+    blazeRod = None
+
+    # Healing Items
+    weakHealPotion = None
+    avgHealPotion = None
+    strongHealPotion = None
+    healingSpores = None
     
     @classmethod
     def initialise(cls):
         """Initialise Item objects"""
-        cls.rock = Item("rock")
-        cls.rock.set_description("Its just a very hard rock. Deals 15 base-damage")
-        cls.rock.set_base_damage(15)
-        
-        
-        cls.vegemite = HealingItem("vegemite")
-        cls.vegemite.set_description("A Wumpuses worst nightmare")
-        cls.vegemite.set_heals_for(50)
+    # Items
+        cls.rock = Item("Rock")
+        cls.rock.set_description("It’s a rock! Deals 11 base damage.")
+        cls.rock.set_base_damage(11)
 
-        cls.torch = Item("torch")
+        cls.torch = Item("Torch")
         cls.torch.set_description("A light for the end of the tunnel")
         cls.torch.set_base_damage(22)
 
-        cls.sunken_treasure = Item("sunken treasure")
-        cls.sunken_treasure.set_description("A waterlogged chest filled with gold coins")
+        cls.pickaxe = Item("Pickaxe")
+        cls.pickaxe.set_description("A sturdy iron pickaxe.")
+        cls.pickaxe.set_base_damage(25)
 
-        cls.pickaxe = Item("pickaxe")
-        cls.pickaxe.set_description("A sturdy iron pickaxe")
+        cls.iridescentInferno = Item("Iridescent Inferno")
+        cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 37 base damage.")
+        cls.iridescentInferno.set_base_damage(37)
+
+        cls.shabbyShiv = Item("Shabby shiv")
+        cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 14 base damage.")
+        cls.shabbyShiv.set_base_damage(14)
+
+        cls.handGrenade = Item("Hand grenade")
+        cls.handGrenade.set_description("How did this get down here? Deals 40 base damage.")
+        cls.handGrenade.set_base_damage(40)
+
+        cls.obsidianBlade = Item("Obsidian blade")
+        cls.obsidianBlade.set_description("A blade delicately crafted from obsidian. Deals 20 base damage.")
+        cls.obsidianBlade.set_base_damage(20)
+
+        cls.blazeRod = Item("Blaze rod")
+        cls.blazeRod.set_description("The energy source of an ancient city, still active. Deals 24 base damage.")
+        cls.blazeRod.set_base_damage(24)
+
+    # Healing Items
+        cls.weakHealPotion = HealingItem("Weak healing potion")
+        cls.weakHealPotion.set_description("Heals 7 health.")
+        cls.weakHealPotion.set_heals_for(7)
+
+        cls.avgHealPotion = HealingItem("Average healing potion")
+        cls.avgHealPotion.set_description("Heals 13 health.")
+        cls.avgHealPotion.set_heals_for(13)
+
+        cls.strongHealPotion = HealingItem("Strong healing potion")
+        cls.strongHealPotion.set_description("Heals 20 health.")
+        cls.strongHealPotion.set_heals_for(20)
+
+        cls.healingSpores = HealingItem("Weak healing potion")
+        cls.healingSpores.set_description("A green sparkly powder puffs out. Heals 9 health.")
+        cls.healingSpores.set_heals_for(9)
 
 
 class CharacterEntities(Character):
@@ -195,14 +235,6 @@ class CharacterEntities(Character):
     def initialise(cls):
         """Initialise Character objects"""
     # Enemies
-        cls.harry = Enemy("Harry", "A smelly Wumpus")
-        cls.harry.set_conversation("Hangry...Hanggrry")
-        cls.harry.set_weakness("vegemite")
-        cls.harry.set_attack("super punch", 20)
-        cls.harry.set_attack("body slam", 10)
-        cls.harry.set_attack("rock fall", 15)
-        cls.harry.set_health(40)
-
         cls.caveRats = Enemy("Cave Rats", "A small group of rats swiftly scurry around you.")
         cls.caveRats.set_conversation("*squeak, squeak!!*")
         cls.caveRats.set_health(37)
