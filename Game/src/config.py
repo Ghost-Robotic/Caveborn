@@ -139,16 +139,16 @@ class ItemEntities(Item):
     torch = None
     pickaxe = None
     rock = None
+    rubyGem = None
     iridescentInferno = None
     shabbyShiv = None
     handGrenade = None
-    obsidianBlade = None
-    blazeRod = None
+    iceSickle = None
 
     # Healing Items
-    weakHealPotion = None
-    avgHealPotion = None
-    strongHealPotion = None
+    mysticalStick = None
+    healingPotion = None
+    blazeRod = None
     healingSpores = None
     
     @classmethod
@@ -156,53 +156,57 @@ class ItemEntities(Item):
         """Initialise Item objects"""
     # Items
         cls.rock = Item("Rock")
-        cls.rock.set_description("It’s a rock! Deals 11 base damage.")
-        cls.rock.set_base_damage(11)
-
-        cls.torch = Item("Torch")
-        cls.torch.set_description("A light for the end of the tunnel")
-        cls.torch.set_base_damage(22)
+        cls.rock.set_description("It’s a rock! Deals 15 base damage.")
 
         cls.pickaxe = Item("Pickaxe")
-        cls.pickaxe.set_description("A sturdy iron pickaxe.")
+        cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 25 damage.")
         cls.pickaxe.set_base_damage(25)
 
+        cls.rubyGem = Item("Ruby Gem")
+        cls.rubyGem.set_description("A pinkish-red-to-blood-red-coloured gemstone. Deals 16 base damage.")
+        cls.rubyGem.set_base_damage(16)
+
         cls.iridescentInferno = Item("Iridescent Inferno")
-        cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 37 base damage.")
-        cls.iridescentInferno.set_base_damage(37)
+        cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 40 base damage.")
+        cls.iridescentInferno.set_base_damage(40)
 
-        cls.shabbyShiv = Item("Shabby shiv")
-        cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 14 base damage.")
-        cls.shabbyShiv.set_base_damage(14)
+        cls.shabbyShiv = Item("Shabby Shiv")
+        cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 20 base damage.")
+        cls.shabbyShiv.set_base_damage(20)
+        cls.shabbyShiv.set_durability(20)
 
-        cls.handGrenade = Item("Hand grenade")
-        cls.handGrenade.set_description("How did this get down here? Deals 40 base damage.")
-        cls.handGrenade.set_base_damage(40)
+        cls.handGrenade = Item("Hand Grenade")
+        cls.handGrenade.set_description("How did this get down here? Deals 50 base damage.")
+        cls.handGrenade.set_base_damage(50)
+        cls.handGrenade.set_durability(1)
 
-        cls.obsidianBlade = Item("Obsidian blade")
-        cls.obsidianBlade.set_description("A blade delicately crafted from obsidian. Deals 20 base damage.")
-        cls.obsidianBlade.set_base_damage(20)
+        cls.iceSickle = Item("Ice Sickle")
+        cls.iceSickle.set_description("A sickle made from ice. Deals 30 base damage.")
+        cls.iceSickle.set_base_damage(30)
 
-        cls.blazeRod = Item("Blaze rod")
-        cls.blazeRod.set_description("The energy source of an ancient city, still active. Deals 24 base damage.")
-        cls.blazeRod.set_base_damage(24)
+        cls.torch = Item("Torch")
+        cls.torch.set_description("A light for the end of the tunnel.")
 
     # Healing Items
-        cls.weakHealPotion = HealingItem("Weak healing potion")
-        cls.weakHealPotion.set_description("Heals 7 health.")
-        cls.weakHealPotion.set_heals_for(7)
+        cls.mysticalStick = HealingItem("Mystical Stick")
+        cls.mysticalStick.set_description("A stick with a subtle green glow. Heals 4 health.")
+        cls.mysticalStick.set_heals_for(4)
+        cls.mysticalStick.set_durability(10)
 
-        cls.avgHealPotion = HealingItem("Average healing potion")
-        cls.avgHealPotion.set_description("Heals 13 health.")
-        cls.avgHealPotion.set_heals_for(13)
+        cls.healingPotion = HealingItem("Healing Potion")
+        cls.healingPotion.set_description("A glass vial with green liquid. Heals 16 health.")
+        cls.healingPotion.set_heals_for(16)
+        cls.healingPotion.set_durability(1)
 
-        cls.strongHealPotion = HealingItem("Strong healing potion")
-        cls.strongHealPotion.set_description("Heals 20 health.")
-        cls.strongHealPotion.set_heals_for(20)
+        cls.healingSpores = HealingItem("Healing Spores")
+        cls.healingSpores.set_description("Mysterious healing mushroom. Heals 10 health.")
+        cls.healingSpores.set_heals_for(10)
+        cls.healingSpores.set_durability(5)
 
-        cls.healingSpores = HealingItem("Weak healing potion")
-        cls.healingSpores.set_description("A green sparkly powder puffs out. Heals 9 health.")
-        cls.healingSpores.set_heals_for(9)
+        cls.blazeRod = HealingItem("Blaze Rod")
+        cls.blazeRod.set_description("The energy source of an ancient city, still active. Heals 7 health.")
+        cls.blazeRod.set_heals_for(7)
+        cls.blazeRod.set_durability(15)
 
 
 class CharacterEntities(Character):
@@ -225,7 +229,6 @@ class CharacterEntities(Character):
     george = None
     emberMaw = None
     flameImp = None
-    pyroAlchemist = None
     runedSkeletonKing = None
 
     """Trader"""
