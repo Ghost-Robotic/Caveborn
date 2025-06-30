@@ -17,6 +17,6 @@ def startup(game_mode):
      
     Game.initialise()
     
-    Player.bag.append(ItemEntities.rock.name)
+    Player.bag.append(ItemEntities.rock)
     
     Game.set_game_mode(game_mode)

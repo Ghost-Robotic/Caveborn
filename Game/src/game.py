@@ -23,7 +23,6 @@ class Game():
     def display_decorator(func):
         def wrapper(*args): 
             Command.clear_terminal()
-            Command.clear_terminal()
             Title.output()
             PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
             PlayerDisplay.update_display()                    
