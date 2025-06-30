@@ -207,7 +207,9 @@ class PlayerCommand():
                 print("What do you have to trade")
                 player_trades = Command.get_input()
                 
-                if player_trades not in Player.bag: 
+                item = Item.get_item(player_trades)
+                
+                if item not in Player.bag: 
                     Command.sequential_print_segments(segments= 2, 
                                                           strings= ["You don't have a ", f"{player_trades}"], 
                                                           speeds= [Config.standard_print_speed], 
@@ -220,8 +222,8 @@ class PlayerCommand():
                                                           strings = ["You trade a ",f"{player_trades} ","for a ",f"{Game.cave_inhabitant.get_item_trades()}"],
                                                           speeds = [Config.standard_print_speed],
                                                           colours = [Config.standard_text_colour, Config.item_text_colour, Config.standard_text_colour, Config.item_text_colour])
-                    Player.bag.remove(player_trades)
-                    Player.bag.append(Game.cave_inhabitant.get_item_trades())
+                    Player.bag.remove(item)
+                    Player.bag.append(Item.get_item(Game.cave_inhabitant.get_item_trades()))
                     
                 else:
                     Command.sequential_print_segments(segments= 3,
