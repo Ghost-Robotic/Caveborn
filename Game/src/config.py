@@ -331,7 +331,7 @@ class CharacterEntities(Character):
 
         cls.runedSkeletonKing = Enemy("Runed Skeleton King", "An ancient skeletal monarch, etched with glowing runes of binding and fire.")
         cls.runedSkeletonKing.set_conversation("You trespass in death’s last kingdom.")
-        cls.runedSkeletonKing.set_health(350)
+        cls.runedSkeletonKing.set_health(150)
         cls.runedSkeletonKing.set_attack("arrow of reckoning", 15)
         cls.runedSkeletonKing.set_attack("bone barrage", 10)
         cls.runedSkeletonKing.set_attack("skeletal smash", 6)
