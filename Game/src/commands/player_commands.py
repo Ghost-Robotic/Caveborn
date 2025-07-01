@@ -217,7 +217,7 @@ class PlayerCommand():
                     Command.wait_for_enter()
                     return
 
-                if player_trades == Game.cave_inhabitant.get_item_wants():
+                if player_trades == str(Game.cave_inhabitant.get_item_wants()).lower():
                     Command.sequential_print_segments(segments= 4 , 
                                                           strings = ["You trade a ",f"{player_trades} ","for a ",f"{Game.cave_inhabitant.get_item_trades()}"],
                                                           speeds = [Config.standard_print_speed],
