@@ -239,9 +239,6 @@ class PlayerCommand():
     @Game.display_decorator
     @staticmethod
     def about(entity):
-        print(entity)
-        print(Player.bag)
-        Command.wait_for_enter()
         item = Item.get_item(entity)
         if item is not None:
             DescriptionDisplay.update_item_info(item)
