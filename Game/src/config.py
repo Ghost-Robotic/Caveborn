@@ -62,7 +62,7 @@ class CaveEntities(Cave):
         """Initialise Cave objects"""
         # zone 1
         cls.solace = Cave("Solace")
-        cls.solace.set_description("")
+        cls.solace.set_description("A quiet, dim refuge before the journey began.")
 
         cls.cavern = Cave("Cavern")
         cls.cavern.set_description("A damp and dirty cave.")
@@ -340,36 +340,36 @@ class CharacterEntities(Character):
         cls.lonelyMage = Trader("Lonely Mage", "A weird friendless seller.")
         cls.lonelyMage.set_conversation("Hey, didn’t see you there. Wanna buy my stuff?")
         cls.lonelyMage.set_trade(
-            item_trades="Mystical Stick",
-            item_wants= "Rock"
+            item_trades="mystical stick",
+            item_wants= "rock"
         )
 
         cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm.")
         cls.snowman.set_conversation("…")
         cls.snowman.set_trade(
-            item_trades="Coal",
-            item_wants="Mystical Stick"
+            item_trades="coal",
+            item_wants="mystical stick"
         )
 
         cls.nickSaint = Trader("Nick Saint", "A shady figure in festive rags and a glowing red nose.")
         cls.nickSaint.set_conversation("Oh, oh, oh, It’s so dark in here. Hi there, wanna look under my coat?")
         cls.nickSaint.set_trade(
-            item_trades="Healing Potion",
-            item_wants="Torch"
+            item_trades="healing potion",
+            item_wants="torch"
         )
 
         cls.coalMiner = Trader("Coal Miner", "Soot-streaked with glowing goggles and an aching back.")
         cls.coalMiner.set_conversation("Got a gem? I’ve got the tools if you’ve got the shine.")
         cls.coalMiner.set_trade(
-            item_trades="Pickaxe",
-            item_wants="Coal"
+            item_trades="pickaxe",
+            item_wants="coal"
         )
 
         cls.pyroAlchemist = Trader("Pyro Alchemist", "Wild eyes, singed robes, and a smoldering grin.")
         cls.pyroAlchemist.set_conversation("Fire isn't dangerous—until you make it into a sword. Want a sample?")
         cls.pyroAlchemist.set_trade(
-            item_trades="Iridescent Inferno",
-            item_wants="Blaze Rod"
+            item_trades="iridescent inferno",
+            item_wants="blaze Rod"
 )
 
         
