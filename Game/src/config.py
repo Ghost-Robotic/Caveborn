@@ -156,14 +156,15 @@ class ItemEntities(Item):
         """Initialise Item objects"""
     # Items
         cls.rock = Item("Rock")
-        cls.rock.set_description("It’s a rock! Deals 15 base damage.")
+        cls.rock.set_description("It’s a rock! Deals 20 base damage.")
+        cls.rock.set_base_damage(20)
 
         cls.pickaxe = Item("Pickaxe")
-        cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 25 damage.")
-        cls.pickaxe.set_base_damage(25)
+        cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 33 damage.")
+        cls.pickaxe.set_base_damage(33)
 
-        cls.rubyGem = Item("Ruby Gem")
-        cls.rubyGem.set_description("A pinkish-red-to-blood-red-coloured gemstone. Deals 16 base damage.")
+        cls.rubyGem = Item("Coal")
+        cls.rubyGem.set_description("It’s coal…look I don’t know what else you want me to say. Deals 16 base damage. Deals 16 base damage.")
         cls.rubyGem.set_base_damage(16)
 
         cls.iridescentInferno = Item("Iridescent Inferno")
@@ -171,8 +172,8 @@ class ItemEntities(Item):
         cls.iridescentInferno.set_base_damage(40)
 
         cls.shabbyShiv = Item("Shabby Shiv")
-        cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 20 base damage.")
-        cls.shabbyShiv.set_base_damage(20)
+        cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 25 base damage.")
+        cls.shabbyShiv.set_base_damage(25)
         cls.shabbyShiv.set_durability(20)
 
         cls.handGrenade = Item("Hand Grenade")
@@ -185,7 +186,7 @@ class ItemEntities(Item):
         cls.iceSickle.set_base_damage(30)
 
         cls.torch = Item("Torch")
-        cls.torch.set_description("A light for the end of the tunnel.")
+        cls.torch.set_description("A light for the end of the tunnel. Deals 15 base damage.")
 
     # Healing Items
         cls.mysticalStick = HealingItem("Mystical Stick")
@@ -212,19 +213,16 @@ class ItemEntities(Item):
 class CharacterEntities(Character):
     """This class contains all Character objects"""
     
-    #Enemy
+    """Enemy"""
     caveRats = None
     graffitiGoblin = None
-    mossMan = None
     giantVenusFlytrap = None
     templeRaider = None
     shroomWalker = None
     iceWraith = None
     crystalCrawler = None
     frostGiant = None
-    yeti = None
     moltenMulloway = None
-    salamander = None
     cinderBug = None
     george = None
     emberMaw = None
@@ -232,7 +230,16 @@ class CharacterEntities(Character):
     runedSkeletonKing = None
 
     """Trader"""
-    josh = None
+    lonelyMage = None
+    snowman = None
+    nickSaint = None
+    coalMiner = None
+    pyroAlchemist = None
+
+    """Friends"""
+    mossMan = None
+    yeti = None
+    salamander = None
 
     @classmethod
     def initialise(cls):
@@ -250,13 +257,6 @@ class CharacterEntities(Character):
         cls.graffitiGoblin.set_health(25)
         cls.graffitiGoblin.set_attack("paint spray", 4)
         cls.graffitiGoblin.set_attack("can throw", 2)
-
-        cls.mossMan = Enemy("Moss Man", "A beast made from moss and mud, the keeper of the Grove.")
-        cls.mossMan.set_conversation("Who dares to disturb me?")
-        cls.mossMan.set_health(75)
-        cls.mossMan.set_attack("heavy swipe", 9)
-        cls.mossMan.set_attack("leg sweep", 7)
-        cls.mossMan.set_attack("shove", 5)
 
         cls.giantVenusFlytrap = Enemy("Giant Venus Flytrap", "A towering carnivorous plant that snaps at anything warm-blooded.")
         cls.giantVenusFlytrap.set_conversation("*snaps shut with a deep squelch*")
@@ -296,25 +296,12 @@ class CharacterEntities(Character):
         cls.frostGiant.set_attack("snow quake", 11)
         cls.frostGiant.set_attack("roar", 6)
 
-        cls.yeti = Enemy("Yeti", "A hulking, snow-covered beast with glowing eyes and a chilling roar.")
-        cls.yeti.set_conversation("RRRAAGH!")
-        cls.yeti.set_health(101)
-        cls.yeti.set_attack("fur slam", 12)
-        cls.yeti.set_attack("shoulder bash", 8)
-        cls.yeti.set_attack("snow toss", 5)
-
         cls.moltenMulloway = Enemy("Molten Mulloway", "A large fish leaps from the lava and flops angrily on the floor ahead.")
         cls.moltenMulloway.set_conversation("Blub blub blub.")
         cls.moltenMulloway.set_health(30)
         cls.moltenMulloway.set_attack("bite", 8)
         cls.moltenMulloway.set_attack("tail slap", 4)
 
-        cls.salamander = Enemy("Salamander", "A fiery lizard that slinks between flames and stone.")
-        cls.salamander.set_conversation("You burn nicely...")
-        cls.salamander.set_health(50)
-        cls.salamander.set_attack("flame lick", 9)
-        cls.salamander.set_attack("tail lash", 6)
-        cls.salamander.set_attack("ember spit", 4)
 
         cls.cinderBug = Enemy("Cinder Bug", "A small insect glowing with embers, ready to explode when threatened.")
         cls.cinderBug.set_conversation("*hisses softly*")
@@ -342,13 +329,6 @@ class CharacterEntities(Character):
         cls.flameImp.set_attack("fire poke", 6)
         cls.flameImp.set_attack("devious lick", 5)
 
-        cls.pyroAlchemist = Enemy("Pyro Alchemist", "A rogue scientist who bathes in flame and laughter, tossing volatile potions.")
-        cls.pyroAlchemist.set_conversation("Science is best when it explodes!")
-        cls.pyroAlchemist.set_health(65)
-        cls.pyroAlchemist.set_attack("vicious vial", 10)
-        cls.pyroAlchemist.set_attack("acid splash", 7)
-        cls.pyroAlchemist.set_attack("boom flask", 9)
-
         cls.runedSkeletonKing = Enemy("Runed Skeleton King", "An ancient skeletal monarch, etched with glowing runes of binding and fire.")
         cls.runedSkeletonKing.set_conversation("You trespass in death’s last kingdom.")
         cls.runedSkeletonKing.set_health(350)
@@ -357,11 +337,41 @@ class CharacterEntities(Character):
         cls.runedSkeletonKing.set_attack("skeletal smash", 6)
 
     # Traders
-        cls.josh = Trader("Josh", "An undead miner looking for gold")
-        cls.josh.set_conversation("GOLLLD!")
-        cls.josh.set_trade(
-            item_trades= "pickaxe", 
-            item_wants = "sunken treasure") 
+        cls.lonelyMage = Trader("Lonely Mage", "A weird friendless seller.")
+        cls.lonelyMage.set_conversation("Hey, didn’t see you there. Wanna buy my stuff?")
+        cls.lonelyMage.set_trade(
+            item_trades="Mystical Stick",
+            item_wants="Rock"
+        )
+
+        cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm.")
+        cls.snowman.set_conversation("…")
+        cls.snowman.set_trade(
+            item_trades="Coal",
+            item_wants="Mystical Stick"
+        )
+
+        cls.nickSaint = Trader("Nick Saint", "A shady figure in festive rags and a glowing red nose.")
+        cls.nickSaint.set_conversation("Oh, oh, oh, It’s so dark in here. Hi there, wanna look under my coat?")
+        cls.nickSaint.set_trade(
+            item_trades="Healing Potion",
+            item_wants="Torch"
+        )
+
+        cls.coalMiner = Trader("Coal Miner", "Soot-streaked with glowing goggles and an aching back.")
+        cls.coalMiner.set_conversation("Got a gem? I’ve got the tools if you’ve got the shine.")
+        cls.coalMiner.set_trade(
+            item_trades="Pickaxe",
+            item_wants="Coal"
+        )
+
+        cls.pyroAlchemist = Trader("Pyro Alchemist", "Wild eyes, singed robes, and a smoldering grin.")
+        cls.pyroAlchemist.set_conversation("Fire isn't dangerous—until you make it into a sword. Want a sample?")
+        cls.pyroAlchemist.set_trade(
+            item_trades="Iridescent Inferno",
+            item_wants="Blaze Rod"
+)
+
         
         
 class Links(CaveEntities, ItemEntities, CharacterEntities):
@@ -463,6 +473,11 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
     @classmethod
     def initialise_item_locations(cls):
         """Initialise location of items in the caves"""
+        cls.grotto.set_item(cls.mysticalStick)
+        cls.overgrownTemple.set_item(cls.shabbyShiv)
+        cls.mushroomMellows.set_item(cls.healingSpores)
+        cls.glacierGeodes.set_item(cls.iceSickle)
+        cls.lavaLagoon.set_item(cls.blazeRod)
         cls.dungeon.set_item(cls.torch)        
      
     
