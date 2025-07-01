@@ -19,7 +19,7 @@ def game_loop():
         
         Game.last_command = command
         
-        command_split = command.split()
+        command_split = command.split(" ", 1)
         
         #Command.clear_terminal()
         if command is not "":
