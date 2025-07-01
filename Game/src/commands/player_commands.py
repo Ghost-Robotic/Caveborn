@@ -60,7 +60,7 @@ class PlayerCommand():
                     #Player turn to attack
                     print("Select an action-->\x1b[38;5;226m attack/heal <item-name>\x1b[0m")
                     command = Command.get_input()
-                    command_split = command.split()
+                    command_split = command.split(" ", 1)
                     
                     if command is not "":
                         if command_split[0] == "attack":
