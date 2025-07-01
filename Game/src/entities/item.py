@@ -25,7 +25,7 @@ class Item:
         self.description = description
         
     def set_base_damage(self, damage):
-        self.damage = damage
+        self.base_damage = damage
         
     def set_durability(self, durability):
         self.durability = durability

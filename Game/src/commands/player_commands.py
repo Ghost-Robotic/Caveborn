@@ -192,7 +192,6 @@ class PlayerCommand():
             Player.bag.append(Game.cave_item)
             Game.current_cave.set_item(None)
             
-            
         else:
             Command.sequential_print("The floor is empty...", Config.standard_print_speed, Config.standard_text_colour)
             
