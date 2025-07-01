@@ -74,11 +74,10 @@ class Item:
             class instance: returns selected item object
         """
         for item in cls.item_list:
-            if name == item.name:
+            if name == str(item.name).lower():
                 return item
             
         return None
-
 
 class HealingItem(Item):
     def __init__(self, name):
