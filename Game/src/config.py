@@ -404,6 +404,7 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
         # lush cave links
         cls.lushCave.link_cave(cls.overgrownTemple, "east")
         cls.lushCave.link_cave(cls.mushroomMellows, "west")
+        cls.lushCave.link_cave(cls.evergreenGrove, "south")
 
         # overgrown temple links
         cls.overgrownTemple.link_cave(cls.lushCave, "west")
