@@ -146,6 +146,7 @@ class ItemEntities(Item):
     iceSickle = None
 
     # Healing Items
+    berries = None
     mysticalStick = None
     healingPotion = None
     blazeRod = None
@@ -189,6 +190,11 @@ class ItemEntities(Item):
         cls.torch.set_description("A light for the end of the tunnel. Deals 15 base damage.")
 
     # Healing Items
+        cls.berries = HealingItem("Berries")
+        cls.berries.set_description("Your only source of food, heals 3 health.")
+        cls.berries.set_heals_for(3)
+        cls.berries.set_durability(6)
+    
         cls.mysticalStick = HealingItem("Mystical Stick")
         cls.mysticalStick.set_description("A stick with a subtle green glow. Heals 4 health.")
         cls.mysticalStick.set_heals_for(4)
