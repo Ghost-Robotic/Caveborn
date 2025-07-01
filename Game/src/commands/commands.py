@@ -93,7 +93,7 @@ class Command():
         Command.sequential_print("Enter ", 0.02, "\x1b[38;5;226m")
         Command.sequential_print("to Continue", 0.02, "")
         input("\033[?25l")
-        print('\033[?25h', end = '')
+        print('\x1b[1A \x1b[0J\033[?25h', end = '')
                 
         
     @staticmethod
