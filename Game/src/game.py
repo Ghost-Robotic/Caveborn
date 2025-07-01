@@ -74,12 +74,12 @@ class Game():
             CaveDisplay.update_character_display()
             CaveDisplay.display_character()
         elif cls.cave_item is not None and cls.cave_inhabitant is None:
-            CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
+            CaveDisplay.update_item_info(cls.cave_item)
             CaveDisplay.update_item_display()
             CaveDisplay.display_item()
         elif cls.cave_item is not None and cls.cave_inhabitant  is not None:
             CaveDisplay.update_character_info(cls.cave_inhabitant)
-            CaveDisplay.update_item_info(cls.cave_item.name, cls.cave_item.description)
+            CaveDisplay.update_item_info(cls.cave_item)
             CaveDisplay.update_character_display()
             CaveDisplay.update_item_display()
             CaveDisplay.display()
