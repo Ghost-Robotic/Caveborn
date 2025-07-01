@@ -34,6 +34,7 @@ def menu_loop():
     start_sequence()
         
     game_mode = None    
+    game_tip = None
     while True:
         Command.clear_terminal()
         title_display()
@@ -44,12 +45,14 @@ def menu_loop():
         
         if game_mode is not None:
             print(f"Selected game mode: \x1b[38;5;226m{game_mode}\x1b[0m")
+            print(f"    {game_tip}")
         
         command = Command.get_input()
         
         match command:
             case "1" | "default":
                 game_mode = "default"
+                game_tip = "Defeat all enemies"
                 
             case "enter the caves" | "start" | "begin":
                 if game_mode is not None:
