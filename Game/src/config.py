@@ -341,7 +341,7 @@ class CharacterEntities(Character):
         cls.lonelyMage.set_conversation("Hey, didn’t see you there. Wanna buy my stuff?")
         cls.lonelyMage.set_trade(
             item_trades="Mystical Stick",
-            item_wants="Rock"
+            item_wants= "Rock"
         )
 
         cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm.")
@@ -516,9 +516,19 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
 
         cls.emberRift.set_character(cls.flameImp)
 
+        cls.chasmsEnd.set_character(cls.runedSkeletonKing)
+
+        cls.dungeon.set_character(cls.lonelyMage)
+        
+        cls.frozenLake.set_character(cls.snowman)
+
+        cls.arcticPit.set_character(cls.nickSaint)
+
+        cls.ashenVault.set_character(cls.coalMiner)
+
         cls.magmaMines.set_character(cls.pyroAlchemist)
 
-        cls.chasmsEnd.set_character(cls.runedSkeletonKing)
+
  
  
 # class PlayerEntity(Player):
