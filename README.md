@@ -3,6 +3,10 @@
 ## Description
 Caveborn is a text based game where you explore caves, trade items and fight enemies!
 
+## Game Modes
+### Default
+- In the default game mode you must defeat all enemies to win the game
+
 ## How to play
 
 ### The Compass
@@ -15,6 +19,26 @@ The cardinal directions with red text indicates the directions the player is abl
 <img src="assets\example_display.PNG" width="385px" alt="Image showing how player information is show in-game.">   
 
 This area of the display shows import player information such as your health and the items currently in your bag
+
+<img src="assets\bag_example.PNG" width = "385px" alt="Image highlighting location of player bag with example items">
+
+The items you pick up you appear here with their durability displayed next to the item name. Items with infinite durability have the ∞ symbol!
+
+<img src="assets\enemies_to_defeat.PNG" width = "385px" alt="Image highlighting location of enemy counter">
+
+The number of enemies left is displayed here
+
+### Tips
+- Talk!!! you may find some useful information
+- Healing does not count as a turn so heal as much as you want
+- If you are about to die you can always retreat
+
+## Game Mechanics
+### Attacking Enemies
+When using items to attack enemies you have equal chances of rolling a weak attack, strong attack or a critical hit. A weak attack is -30% of the item's base damage, a strong attack is the same as the base damage and a critical hit is +30% of base damage.
+
+### Healing
+You may only heal during a fight but healing does not count as a turn so you can heal as many times as you want!
 
 ## Available Commands
 * __north, south, east, west__: move the player in the cardinal directions
