@@ -346,7 +346,7 @@ class CharacterEntities(Character):
         cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm.")
         cls.snowman.set_conversation("…")
         cls.snowman.set_trade(
-            item_trades="exploding snowballs",
+            item_trades="exploding snowball",
             item_wants="mystical stick"
         )
 
