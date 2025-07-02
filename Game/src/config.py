@@ -17,7 +17,7 @@ class Config():
     def initialise(cls):
         """Initialise game entities"""
         cls.standard_text_colour = ""
-        cls.standard_print_speed = 0.05
+        cls.standard_print_speed = 0.06
         cls.item_text_colour = "\x1b[38;5;207m"
         cls.character_text_colour = "\x1b[38;5;81m"
         cls.health_text_colour = "\x1b[1;38;5;201m"
@@ -139,10 +139,10 @@ class ItemEntities(Item):
     torch = None
     pickaxe = None
     rock = None
-    rubyGem = None
+    coal = None
     iridescentInferno = None
     shabbyShiv = None
-    handGrenade = None
+    explodingSnowball = None
     iceSickle = None
 
     # Healing Items
@@ -157,39 +157,37 @@ class ItemEntities(Item):
         """Initialise Item objects"""
     # Items
         cls.rock = Item("Rock")
-        cls.rock.set_description("It’s a rock! Deals 16 base damage.")
-        cls.rock.set_base_damage(16)
+        cls.rock.set_description("It’s a rock! Deals 20 base damage.")
+        cls.rock.set_base_damage(20)
 
         cls.pickaxe = Item("Pickaxe")
-        cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 22 damage.")
-        cls.pickaxe.set_base_damage(22)
+        cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 33 damage.")
+        cls.pickaxe.set_base_damage(33)
 
-        cls.rubyGem = Item("Coal")
-        cls.rubyGem.set_description("It’s coal…look I don’t know what else you want me to say. Deals 16 base damage. Deals 16 base damage.")
-        cls.rubyGem.set_base_damage(16)
+        cls.coal = Item("Coal")
+        cls.coal.set_description("It’s coal…look I don’t know what else you want me to say. Deals 16 base damage. Deals 16 base damage.")
+        cls.coal.set_base_damage(16)
 
         cls.iridescentInferno = Item("Iridescent Inferno")
         cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 40 base damage.")
         cls.iridescentInferno.set_base_damage(40)
-        cls.iridescentInferno.set_durability(8)
 
         cls.shabbyShiv = Item("Shabby Shiv")
         cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 25 base damage.")
         cls.shabbyShiv.set_base_damage(25)
         cls.shabbyShiv.set_durability(20)
 
-        cls.handGrenade = Item("Hand Grenade")
-        cls.handGrenade.set_description("How did this get down here? Deals 50 base damage.")
-        cls.handGrenade.set_base_damage(50)
-        cls.handGrenade.set_durability(1)
+        cls.explodingSnowball = Item("Exploding Snowball")
+        cls.explodingSnowball.set_description("Looks like a snowball but why do I hear something fizzing. Deals 50 base damage.")
+        cls.explodingSnowball.set_base_damage(50)
+        cls.explodingSnowball.set_durability(1)
 
         cls.iceSickle = Item("Ice Sickle")
         cls.iceSickle.set_description("A sickle made from ice. Deals 30 base damage.")
         cls.iceSickle.set_base_damage(30)
-        cls.iceSickle.set_durability(5)
 
         cls.torch = Item("Torch")
-        cls.torch.set_description("A light for the end of the tunnel.")
+        cls.torch.set_description("A light for the end of the tunnel. Deals 15 base damage.")
 
     # Healing Items
         cls.berries = HealingItem("Berries")
@@ -238,13 +236,13 @@ class CharacterEntities(Character):
     runedSkeletonKing = None
 
     """Trader"""
-    lonelyMage = None
     snowman = None
     nickSaint = None
     coalMiner = None
     pyroAlchemist = None
 
     """Friends"""
+    lonelyMage = None
     mossMan = None
     yeti = None
     salamander = None
@@ -345,40 +343,37 @@ class CharacterEntities(Character):
         cls.runedSkeletonKing.set_attack("skeletal smash", 6)
 
     # Traders
-        cls.lonelyMage = Trader("Lonely Mage", "A weird friendless seller.")
-        cls.lonelyMage.set_conversation("Hey, didn’t see you there. Wanna buy my stuff?")
-        cls.lonelyMage.set_trade(
-            item_trades="mystical stick",
-            item_wants= "rock"
-        )
-
-        cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm.")
+        cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm. (Want: 'mystical stick')")
         cls.snowman.set_conversation("…")
         cls.snowman.set_trade(
-            item_trades="coal",
+            item_trades="exploding snowballs",
             item_wants="mystical stick"
         )
 
         cls.nickSaint = Trader("Nick Saint", "A shady figure in festive rags and a glowing red nose.")
-        cls.nickSaint.set_conversation("Oh, oh, oh, It’s so dark in here. Hi there, wanna look under my coat?")
+        cls.nickSaint.set_conversation("Oh, oh, oh, It’s so dark in here. Hi there, wanna look under my coat? (Want:: 'torch')")
         cls.nickSaint.set_trade(
             item_trades="healing potion",
             item_wants="torch"
         )
 
-        cls.coalMiner = Trader("Coal Miner", "Soot-streaked with glowing goggles and an aching back.")
-        cls.coalMiner.set_conversation("Got a gem? I’ve got the tools if you’ve got the shine.")
+        cls.coalMiner = Trader("Coal Miner", "Soot-streaked dwarf with glowing goggles and an aching back.")
+        cls.coalMiner.set_conversation("I’ve got tools straight from the heart of the mines. (Want: 'coal')")
         cls.coalMiner.set_trade(
             item_trades="pickaxe",
             item_wants="coal"
         )
 
-        cls.pyroAlchemist = Trader("Pyro Alchemist", "Wild eyes, singed robes, and a smoldering grin.")
-        cls.pyroAlchemist.set_conversation("Fire isn't dangerous—until you make it into a sword. Want a sample?")
+        cls.pyroAlchemist = Trader("Pyro Alchemist", "A flashy robed alchemist snickering with a smoldering grin.")
+        cls.pyroAlchemist.set_conversation("Fire isn't dangerous—until you make it into a sword. Want a sample? (Want: 'blaze rod')")
         cls.pyroAlchemist.set_trade(
             item_trades="iridescent inferno",
             item_wants="blaze Rod"
 )
+        
+    # Friends
+        cls.lonelyMage = Friend("Lonely Mage", "A weird friendless cloaked man.")
+        cls.lonelyMage.set_conversation("They say that the Chasm’s End is the final stop before the surface. However, you must vanquish all the threats before you proceed, otherwise, they could mingle with the surface dwellers.")
 
         
         
@@ -467,7 +462,6 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
         # stalactite shaft links
         cls.stalactiteShaft.link_cave(cls.emberRift, "east")
         cls.stalactiteShaft.link_cave(cls.chasmsEnd, "west")
-        cls.stalactiteShaft.link_cave(cls.ashenVault, "south")
 
         # ember rift links
         cls.emberRift.link_cave(cls.magmaMines, "east")
@@ -485,11 +479,12 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
     def initialise_item_locations(cls):
         """Initialise location of items in the caves"""
         cls.grotto.set_item(cls.mysticalStick)
-        cls.overgrownTemple.set_item(cls.shabbyShiv)
+        cls.evergreenGrove.set_item(cls.shabbyShiv)
         cls.mushroomMellows.set_item(cls.healingSpores)
         cls.glacierGeodes.set_item(cls.iceSickle)
         cls.lavaLagoon.set_item(cls.blazeRod)
-        cls.dungeon.set_item(cls.torch)        
+        cls.dungeon.set_item(cls.torch)
+        cls.basaltBurrows.set_item(cls.coal)       
      
     
     @classmethod
