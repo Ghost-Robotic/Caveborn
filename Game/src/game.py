@@ -24,7 +24,7 @@ class Game():
         def wrapper(*args): 
             Command.clear_terminal()
             Title.output()
-            PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
+            PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag, Enemy.enemies_to_defeat) 
             PlayerDisplay.update_display()                    
             PlayerDisplay.output()
             
@@ -58,7 +58,7 @@ class Game():
     @classmethod
     def display_details(cls):
         Title.output()
-        PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
+        PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag, Enemy.enemies_to_defeat) 
         PlayerDisplay.update_display()                    
         PlayerDisplay.output()
         
@@ -88,7 +88,7 @@ class Game():
     def display_fight(cls):
         Command.clear_terminal()
         Title.output()
-        PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag) 
+        PlayerDisplay.update_info(Game.current_cave, Player.health, Player.bag, Enemy.enemies_to_defeat) 
         PlayerDisplay.update_display()                    
         PlayerDisplay.output()
         

@@ -6,6 +6,7 @@ class PlayerDisplay():
     
     health = None
     bag = None
+    enemies = None
     
     height = 7
     
@@ -13,8 +14,9 @@ class PlayerDisplay():
     player_info = []
     
     @classmethod
-    def update_info(cls, current_cave, health, bag):
+    def update_info(cls, current_cave, health, bag, enemies):
         cls.health = health
+        cls.enemies = enemies
         
         if bag == []:
             cls.bag = "Empty"            
@@ -72,7 +74,7 @@ class PlayerDisplay():
             f" \x1b[38;5;46mHealth\x1b[0m: \x1b[1;38;5;201m{cls.health}\x1b[0m",
             f" \x1b[38;5;39mBag\x1b[0m: [\x1b[38;5;207m{cls.bag}\x1b[0m]",
             f" ",
-            f" ",    
+            f" \x1b[38;5;196mEnemies to defeat\x1b[0m: \x1b[38;5;129m{cls.enemies}\x1b[0m",    
             f" ",
             f"" 
         ]                        
