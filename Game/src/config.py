@@ -471,6 +471,7 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
         # ember rift links
         cls.emberRift.link_cave(cls.magmaMines, "east")
         cls.emberRift.link_cave(cls.stalactiteShaft, "west")
+        cls.emberRift.link_cave(cls.lavaLagoon, "south")
 
         # magma mines links
         cls.magmaMines.link_cave(cls.emberRift, "west")
