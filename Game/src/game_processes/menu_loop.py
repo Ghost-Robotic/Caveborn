@@ -1,6 +1,7 @@
 from src.commands.commands import Command
 from src.config import Config
 from src.assets.title import Title
+from sys import stdout
 
 def title_display():
     Title.output()
@@ -21,7 +22,10 @@ start_dialogue = [
 ]
 
 def start_sequence():
-    print("Press \x1b[38;5;226menter\x1b[0m to begin game, type \x1b[38;5;226mskip\x1b[0m to skip intro.")
+    Command.clear_terminal()
+    print("")
+    stdout.write("Press\033[38;5;226m enter\033[0m to begin game, type\033[38;5;226m skip\033[0m to skip intro.\n")
+    stdout.flush()
     command = Command.get_input()
     if command != "skip":
         Command.clear_terminal()

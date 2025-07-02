@@ -22,7 +22,7 @@ def game_loop():
         command_split = command.split(" ", 1)
         
         #Command.clear_terminal()
-        if command is not "":
+        if command != "":
             match command_split[0]:
                 case "north" | "south" | "east" | "west":
                     PlayerCommand.move(command)

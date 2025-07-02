@@ -69,7 +69,7 @@ class PlayerCommand():
                     command = Command.get_input()
                     command_split = command.split(" ", 1)
                     
-                    if command is not "":
+                    if command != "":
                         if command_split[0] == "attack":
                             try: 
                                 item_selected = command_split[1]
