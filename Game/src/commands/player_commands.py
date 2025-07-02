@@ -67,7 +67,7 @@ class PlayerCommand():
                             try: 
                                 item_selected = command_split[1]
                                 item = Item.get_item(item_selected)
-                                if item in Player.bag:
+                                if item in Player.bag and Item(item).not_broken():
                                     
                                     attack, damage = item.select_damage(Command.random_range(0,2))
                                     
@@ -97,7 +97,7 @@ class PlayerCommand():
                                     item_selected = item_selected + " " + command_split[i+2]
                                 
                                 item = Item.get_item(item_selected)
-                                if item in Player.bag:
+                                if item in Player.bag and Item(item).not_broken():
                                     if isinstance(item, HealingItem):
                                         heal_amount = item.get_heals_for()
                                         Player.heal(heal_amount)  

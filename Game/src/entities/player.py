@@ -18,8 +18,9 @@ class Player():
         """
         cls.health = (cls.health if cls.health <= 100 else 100)
         for item in cls.bag:
-            if item.durability == 0:
-                cls.bag.remove(item)
+            if item.durability is not None:
+                if item.durability <= 0:
+                    cls.bag.remove(item)
         
     
     @classmethod

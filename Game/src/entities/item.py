@@ -49,6 +49,15 @@ class Item:
             case 2: #critical hit
                 self.use_item()
                 return ["critical hit" , self.base_damage + self.base_damage*0.3] # +30%
+            
+
+    def not_broken(self):
+        if self.durability is None:
+            return True
+        elif self.durability > 0:
+            return True
+        else:
+            return False
         
     #describe item
     @classmethod

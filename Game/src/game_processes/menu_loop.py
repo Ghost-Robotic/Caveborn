@@ -28,7 +28,7 @@ def start_sequence():
     for line in start_dialogue:
         Command.clear_terminal()
         print("")
-        Command.sequential_print(line, 0.08, "")
+        Command.sequential_print(line, 0.07, "")
         Command.pause(0.7)
 
 
