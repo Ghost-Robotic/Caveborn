@@ -21,15 +21,18 @@ start_dialogue = [
 ]
 
 def start_sequence():
-    Command.clear_terminal()
-    Command.pause(0.7)
-    print("\033[?25l")    
-    
-    for line in start_dialogue:
+    print("Press \x1b[38;5;226menter\x1b[0m to begin game, type \x1b[38;5;226mskip\x1b[0m to skip intro.")
+    command = Command.get_input()
+    if command != "skip":
         Command.clear_terminal()
-        print("")
-        Command.sequential_print(line, 0.07, "")
         Command.pause(0.7)
+        print("\033[?25l")    
+        
+        for line in start_dialogue:
+            Command.clear_terminal()
+            print("")
+            Command.sequential_print(line, 0.07, "")
+            Command.pause(0.7)
 
 
     Title.cascade_output()
