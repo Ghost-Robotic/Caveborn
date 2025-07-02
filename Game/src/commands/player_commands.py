@@ -36,11 +36,18 @@ class PlayerCommand():
         if Game.cave_inhabitant is not None:
             Command.sequential_print_segments(segments = 2, 
                                                   strings = [Game.cave_inhabitant.talk()[0], Game.cave_inhabitant.talk()[1]], 
-                                                  speeds = [0.075, 0.15], 
+                                                  speeds = [0.075, 0.09], 
                                                   colours = [Config.character_text_colour, "\x1b[38;5;208m"])
 
         else: 
             Command.sequential_print("Its so lonely in here...", Config.standard_print_speed, Config.standard_text_colour)
+            
+        if isinstance(Game.cave_inhabitant, Trader):
+            print("")
+            trade_box = Game.cave_inhabitant.get_trade_description()
+            for line in trade_box:
+                print(line)
+            Command.pause(0.3)
             
         Command.wait_for_enter()
     

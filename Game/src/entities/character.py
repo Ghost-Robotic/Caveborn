@@ -115,6 +115,15 @@ class Trader(Friend):
     def get_trade_limit(self):
         return self.trade_limit
     
+    def get_trade_description(self):
+        trade_description = f"\x1b[38;5;118mTrades \x1b[38;5;207m{self.item_trades}\x1b[38;5;118m for a \x1b[38;5;207m{self.item_wants}\x1b[0m"
+        trade_box = [
+            f"╔═" + ((len(trade_description)-48) * "═") + "═╗",
+            f"║ {trade_description} ║",
+            f"╚═" + ((len(trade_description)-48) * "═") + "═╝"
+        ]
+        return trade_box
+    
     def set_trade_limit(self, trade_limit):
         self.trade_limit = trade_limit
         
