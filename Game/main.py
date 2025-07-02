@@ -6,7 +6,7 @@ def main():
     
     #game_mode = menu_loop()
     game_mode = "default"
-    if game_mode is not "exit":
+    if game_mode != "exit":
         startup(game_mode)
         
         game_loop()
