@@ -158,11 +158,11 @@ class ItemEntities(Item):
     # Items
         cls.rock = Item("Rock")
         cls.rock.set_description("It’s a rock! Deals 20 base damage.")
-        cls.rock.set_base_damage(16)
+        cls.rock.set_base_damage(20)
 
         cls.pickaxe = Item("Pickaxe")
         cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 33 damage.")
-        cls.pickaxe.set_base_damage(22)
+        cls.pickaxe.set_base_damage(33)
 
         cls.coal = Item("Coal")
         cls.coal.set_description("It’s coal…look I don’t know what else you want me to say. Deals 16 base damage. Deals 16 base damage.")
@@ -171,7 +171,6 @@ class ItemEntities(Item):
         cls.iridescentInferno = Item("Iridescent Inferno")
         cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 40 base damage.")
         cls.iridescentInferno.set_base_damage(40)
-        cls.iridescentInferno.set_durability(8)
 
         cls.shabbyShiv = Item("Shabby Shiv")
         cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 25 base damage.")
@@ -186,10 +185,9 @@ class ItemEntities(Item):
         cls.iceSickle = Item("Ice Sickle")
         cls.iceSickle.set_description("A sickle made from ice. Deals 30 base damage.")
         cls.iceSickle.set_base_damage(30)
-        cls.iceSickle.set_durability(5)
 
         cls.torch = Item("Torch")
-        cls.torch.set_description("A light for the end of the tunnel.")
+        cls.torch.set_description("A light for the end of the tunnel. Deals 15 base damage.")
 
     # Healing Items
         cls.berries = HealingItem("Berries")
@@ -346,28 +344,28 @@ class CharacterEntities(Character):
 
     # Traders
         cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm.")
-        cls.snowman.set_conversation("“I could really use something to fix this arm. Any kind of stick would work.”")
+        cls.snowman.set_conversation("…")
         cls.snowman.set_trade(
             item_trades="exploding snowballs",
             item_wants="mystical stick"
         )
 
         cls.nickSaint = Trader("Nick Saint", "A shady figure in festive rags and a glowing red nose.")
-        cls.nickSaint.set_conversation("“Oh, oh, oh, I need a torch, It’s so dark in here.")
+        cls.nickSaint.set_conversation("Oh, oh, oh, It’s so dark in here. Hi there, wanna look under my coat?")
         cls.nickSaint.set_trade(
             item_trades="healing potion",
             item_wants="torch"
         )
 
         cls.coalMiner = Trader("Coal Miner", "Soot-streaked dwarf with glowing goggles and an aching back.")
-        cls.coalMiner.set_conversation("“Bring me coal and I’ll trade you tools straight from the heart of the mountain.")
+        cls.coalMiner.set_conversation("I’ve got tools straight from the heart of the mines.")
         cls.coalMiner.set_trade(
             item_trades="pickaxe",
             item_wants="coal"
         )
 
         cls.pyroAlchemist = Trader("Pyro Alchemist", "A flashy robed alchemist snickering with a smoldering grin.")
-        cls.pyroAlchemist.set_conversation("“Bring me a blaze rod and I’ll show you what a real weapon is.")
+        cls.pyroAlchemist.set_conversation("Fire isn't dangerous—until you make it into a sword. Want a sample?")
         cls.pyroAlchemist.set_trade(
             item_trades="iridescent inferno",
             item_wants="blaze Rod"
@@ -375,8 +373,16 @@ class CharacterEntities(Character):
         
     # Friends
         cls.lonelyMage = Friend("Lonely Mage", "A weird friendless cloaked man.")
-        cls.lonelyMage.set_conversation("They say that the Chasm’s End is the final stop before the surface. However, you must vanquish all the threats before you proceed, otherwise, they could mingle with the surface dwellers.")
+        cls.lonelyMage.set_conversation("Chasm’s End leads to the surface, but you must defeat all threats first, no danger can be allowed to escape.")
 
+        cls.mossMan = Friend("Moss Man", "")
+        cls.mossMan.set_conversation("People drop all sorts of stuff, healing items, weapons. Even if you don’t need them, someone else might.")
+
+        cls.yeti = Friend("Yeti", "A friendly, snow-covered beast with glowing eyes and a chilling roar.")
+        cls.yeti.set_conversation("People drop all sorts of stuff, healing items, weapons. Even if you don’t need them, someone else might.")
+
+        cls.salamander = Friend("Salamander", "A friendly, fiery lizard that slinks between flames and stone.")
+        cls.salamander.set_conversation("People drop all sorts of stuff, healing items, weapons. Even if you don’t need them, someone else might.")
         
         
 class Links(CaveEntities, ItemEntities, CharacterEntities):
@@ -464,7 +470,6 @@ class Links(CaveEntities, ItemEntities, CharacterEntities):
         # stalactite shaft links
         cls.stalactiteShaft.link_cave(cls.emberRift, "east")
         cls.stalactiteShaft.link_cave(cls.chasmsEnd, "west")
-        cls.stalactiteShaft.link_cave(cls.ashenVault, "south")
 
         # ember rift links
         cls.emberRift.link_cave(cls.magmaMines, "east")
