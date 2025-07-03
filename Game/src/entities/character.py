@@ -23,11 +23,11 @@ class Character():
             return [f"[{self.name} says]: " , f"{self.conversation}"]
 
         else:
-            return (f"{self.name} doesn't want to talk to you")
+            return (f"{self.name} doesn't want to talk to you.")
 
     #fight character
     def fight(self, combat_item):
-        print(f"{self.name} doesn't want to fight with you")
+        print(f"{self.name} doesn't want to fight with you.")
         return True
     
     @classmethod
@@ -72,7 +72,7 @@ class Enemy(Character):
         self.attacks.update({attack_name : damage})
         
     def damage(self, damage):
-        self.health = self.health - damage
+        self.health -= damage
 
     def fight(self, combat_item):
         if combat_item == self.weakness:
@@ -85,7 +85,7 @@ class Enemy(Character):
             return False
         
     def steal(self):
-        print(f"You steal from {self.name}")
+        print(f"You steal from {self.name}.")
 
 #extends Character class
 class Friend(Character):
@@ -95,7 +95,7 @@ class Friend(Character):
         self.feeling = None
 
     def pat(self):
-        return [f"{self.name} ", "pats you back"]
+        return [f"{self.name} ", "pats you back."]
         
 #extends Character class, allows players to trade item with character
 class Trader(Friend):
