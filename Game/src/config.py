@@ -171,7 +171,7 @@ class ItemEntities(Item):
         cls.iridescentInferno = Item("Iridescent Inferno")
         cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 40 base damage.")
         cls.iridescentInferno.set_base_damage(40)
-        cls.iridescentInferno.set_base_damage(8)
+        cls.iridescentInferno.set_durability(8)
 
         cls.shabbyShiv = Item("Shabby Shiv")
         cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 25 base damage.")
@@ -186,7 +186,7 @@ class ItemEntities(Item):
         cls.iceSickle = Item("Ice Sickle")
         cls.iceSickle.set_description("A sickle made from ice. Deals 30 base damage.")
         cls.iceSickle.set_base_damage(30)
-        cls.iridescentInferno.set_base_damage(6)
+        cls.iceSickle.set_durability(6)
 
         cls.torch = Item("Torch")
         cls.torch.set_description("A light for the end of the tunnel. Deals 15 base damage.")
