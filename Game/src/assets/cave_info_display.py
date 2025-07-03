@@ -12,7 +12,6 @@ class CaveDisplay():
     item_description = None
     item_durability = None
     
-    character_display = []
     character_display= []    
     item_display = []
 
