@@ -72,7 +72,7 @@ class Enemy(Character):
         self.attacks.update({attack_name : damage})
         
     def damage(self, damage):
-        self.health -= damage
+        self.health = self.health - damage
 
     def fight(self, combat_item):
         if combat_item == self.weakness:

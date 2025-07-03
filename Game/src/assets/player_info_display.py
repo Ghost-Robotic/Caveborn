@@ -15,7 +15,7 @@ class PlayerDisplay():
     
     @classmethod
     def update_info(cls, current_cave, health, bag, enemies):
-        cls.health = health
+        cls.health = int(health)
         cls.enemies = enemies
         
         if bag == []:
