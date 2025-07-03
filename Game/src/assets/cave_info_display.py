@@ -3,6 +3,7 @@ from src.entities.item import Item
 from src.commands.commands import Command
 
 class CaveDisplay():
+    """Display for the item and character information"""
     character_symbol = None
     character_name = None
     character_description = None
@@ -85,6 +86,7 @@ class CaveDisplay():
             
             
 class CombatDisplay(CaveDisplay):
+    """Display character information during a fight"""
     character_health = None
     
     @classmethod
@@ -112,6 +114,7 @@ class CombatDisplay(CaveDisplay):
         ]
         
 class DescriptionDisplay(CaveDisplay):
+    """Display item or character information when asked by user"""
     @classmethod
     def update_character_info(cls, character):
         if isinstance(character, Enemy):

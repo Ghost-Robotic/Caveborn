@@ -1,4 +1,5 @@
 class PlayerDisplay():
+    """Displays player relevant information"""
     north = None
     east = None
     south = None
