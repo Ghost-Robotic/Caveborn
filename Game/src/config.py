@@ -12,6 +12,9 @@ class Config():
     item_text_colour = None
     character_text_colour = None
     health_text_colour = None
+    
+    bold = None
+    reset_bold = None
         
     @classmethod
     def initialise(cls):
@@ -21,6 +24,9 @@ class Config():
         cls.item_text_colour = "\x1b[38;5;207m"
         cls.character_text_colour = "\x1b[38;5;81m"
         cls.health_text_colour = "\x1b[1;38;5;201m"
+        
+        cls.bold = "\x1b[1m"
+        cls.reset_bold = "\x1b[22m"
 
 class CaveEntities(Cave):
     """This class contains all the Cave objects"""
