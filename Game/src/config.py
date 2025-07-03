@@ -339,8 +339,8 @@ class CharacterEntities(Character):
 
         cls.runedSkeletonKing = Enemy("Runed Skeleton King", "An ancient skeletal monarch, etched with glowing runes of binding and fire.")
         cls.runedSkeletonKing.set_conversation("You trespass in death’s last kingdom.")
-        cls.runedSkeletonKing.set_health(150)
-        cls.runedSkeletonKing.set_attack("arrow of reckoning", 15)
+        cls.runedSkeletonKing.set_health(200)
+        cls.runedSkeletonKing.set_attack("royal reckoning", 22)
         cls.runedSkeletonKing.set_attack("bone barrage", 10)
         cls.runedSkeletonKing.set_attack("skeletal smash", 6)
 
@@ -348,7 +348,7 @@ class CharacterEntities(Character):
         cls.snowman = Trader("Snowman", "A round snow figure with a carrot as a nose and a missing stick arm.")
         cls.snowman.set_conversation("…")
         cls.snowman.set_trade(
-            item_trades="exploding snowballs",
+            item_trades="exploding snowball",
             item_wants="mystical stick"
         )
 
