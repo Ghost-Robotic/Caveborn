@@ -3,6 +3,7 @@ from src.entities.item import Item
 from src.commands.commands import Command
 
 class CaveDisplay():
+    """Display for the item and character information"""
     character_symbol = None
     character_name = None
     character_description = None
@@ -85,6 +86,7 @@ class CaveDisplay():
             
             
 class CombatDisplay(CaveDisplay):
+    """Display character information during a fight"""
     character_health = None
     
     @classmethod
@@ -92,13 +94,13 @@ class CombatDisplay(CaveDisplay):
         cls.character_symbol = "\x1b[38;5;196m୧༼ಠ益ಠ༽୨\x1b[0m"
         cls.character_name = character.name
         cls.character_description = character.description
-        cls.character_health = character.health
+        cls.character_health = round(character.health, 1)
         
     @classmethod
     def update_display(cls):
         spacing_line_1 = len(cls.character_description) - len(cls.character_name) - len(str(cls.character_health)) - 9
         spacing_line_2 = 0
-        spacing_line_edge = max(len(cls.character_description), len(cls.character_name) + len(str(cls.character_health)) + 10)
+        spacing_line_edge = max(len(cls.character_description), len(cls.character_name) + len(str(cls.character_health)) + 10) + 1
         if spacing_line_1 < 0:
             spacing_line_2 = abs(spacing_line_1)
             spacing_line_1 = 0
@@ -112,6 +114,7 @@ class CombatDisplay(CaveDisplay):
         ]
         
 class DescriptionDisplay(CaveDisplay):
+    """Display item or character information when asked by user"""
     @classmethod
     def update_character_info(cls, character):
         if isinstance(character, Enemy):

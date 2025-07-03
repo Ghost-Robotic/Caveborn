@@ -4,7 +4,7 @@ from sys import stdout
 from random import randint, choice
 
 class Command():         
-            
+    
     @staticmethod
     def sequential_print(string, speed, colour):
         """
@@ -93,7 +93,8 @@ class Command():
         Command.sequential_print("Enter ", 0.02, "\x1b[38;5;226m")
         Command.sequential_print("to Continue", 0.02, "")
         input("\033[?25l\x1b[8m")
-        print('\x1b[1A \x1b[0J\033[?25h', end = '')
+        print('\x1b[1A\x1b[0J\033[?25h\x1b[0m', end = '')
+        Command.pause(0.01)
                 
         
     @staticmethod
@@ -110,14 +111,39 @@ class Command():
     
     @staticmethod
     def random_dict_key(dictionary):
+        """returns a random key of a given dictionary
+
+        Args:
+            dictionary (dict): given dictionary
+
+        Returns:
+            key: random key of the dictionary
+        """
         return choice(list(dictionary.keys()))
     
     @staticmethod
     def random_range(a, b):
+        """returns a random number from the given range (inclusive).
+
+        Args:
+            a (int): range limit 1
+            b (int): range limit 2
+
+        Returns:
+            int: random num
+        """
         return randint(a, b)
     
     @staticmethod
     def is_even(num):
+        """Checks if number is even.
+
+        Args:
+            num (int): integer to be checked
+
+        Returns:
+            bool: returns True if even, False if odd.
+        """
         if num % 2 == 0:
             return True
         else:

@@ -12,6 +12,9 @@ class Config():
     item_text_colour = None
     character_text_colour = None
     health_text_colour = None
+    
+    bold = None
+    reset_bold = None
         
     @classmethod
     def initialise(cls):
@@ -21,6 +24,9 @@ class Config():
         cls.item_text_colour = "\x1b[38;5;207m"
         cls.character_text_colour = "\x1b[38;5;81m"
         cls.health_text_colour = "\x1b[1;38;5;201m"
+        
+        cls.bold = "\x1b[1m"
+        cls.reset_bold = "\x1b[22m"
 
 class CaveEntities(Cave):
     """This class contains all the Cave objects"""
@@ -157,12 +163,12 @@ class ItemEntities(Item):
         """Initialise Item objects"""
     # Items
         cls.rock = Item("Rock")
-        cls.rock.set_description("It’s a rock! Deals 20 base damage.")
-        cls.rock.set_base_damage(20)
+        cls.rock.set_description("It’s a rock! Deals 16 base damage.")
+        cls.rock.set_base_damage(16)
 
         cls.pickaxe = Item("Pickaxe")
-        cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 33 damage.")
-        cls.pickaxe.set_base_damage(33)
+        cls.pickaxe.set_description("An iron pickaxe for mining stone. Deals base 22 damage.")
+        cls.pickaxe.set_base_damage(22)
 
         cls.coal = Item("Coal")
         cls.coal.set_description("It’s coal…look I don’t know what else you want me to say. Deals 16 base damage. Deals 16 base damage.")
@@ -171,6 +177,7 @@ class ItemEntities(Item):
         cls.iridescentInferno = Item("Iridescent Inferno")
         cls.iridescentInferno.set_description("A fiery sword forged by gods. Deals 40 base damage.")
         cls.iridescentInferno.set_base_damage(40)
+        cls.iridescentInferno.set_durability(8)
 
         cls.shabbyShiv = Item("Shabby Shiv")
         cls.shabbyShiv.set_description("More of a threatening tool than a weapon. Deals 25 base damage.")
@@ -185,6 +192,7 @@ class ItemEntities(Item):
         cls.iceSickle = Item("Ice Sickle")
         cls.iceSickle.set_description("A sickle made from ice. Deals 30 base damage.")
         cls.iceSickle.set_base_damage(30)
+        cls.iceSickle.set_durability(6)
 
         cls.torch = Item("Torch")
         cls.torch.set_description("A light for the end of the tunnel. Deals 15 base damage.")
@@ -337,8 +345,8 @@ class CharacterEntities(Character):
 
         cls.runedSkeletonKing = Enemy("Runed Skeleton King", "An ancient skeletal monarch, etched with glowing runes of binding and fire.")
         cls.runedSkeletonKing.set_conversation("You trespass in death’s last kingdom.")
-        cls.runedSkeletonKing.set_health(150)
-        cls.runedSkeletonKing.set_attack("arrow of reckoning", 15)
+        cls.runedSkeletonKing.set_health(200)
+        cls.runedSkeletonKing.set_attack("royal reckoning", 22)
         cls.runedSkeletonKing.set_attack("bone barrage", 10)
         cls.runedSkeletonKing.set_attack("skeletal smash", 6)
 

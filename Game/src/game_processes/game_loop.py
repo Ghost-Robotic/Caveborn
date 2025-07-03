@@ -5,6 +5,7 @@ from src.commands.player_commands import PlayerCommand
 
 
 def game_loop():
+    """main game loop"""
     while Game.run_game == True:
         Command.clear_terminal()
         Game.update_state()   
@@ -47,6 +48,9 @@ def game_loop():
                         PlayerCommand.about(command_split[1])
                     except:   
                         PlayerCommand.invalid()
+                        
+                case "help" | "commands":
+                    PlayerCommand.list_commands()
                         
                 case "exit" | "quit":
                     Game.game_mode = "exit"

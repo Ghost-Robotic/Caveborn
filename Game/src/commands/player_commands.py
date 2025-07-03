@@ -7,6 +7,7 @@ from src.entities.player import Player
 from src.entities.item import Item, HealingItem
 from src.game import Game
 from .commands import Command
+from sys import stdout
 
 class PlayerCommand():
     
@@ -245,6 +246,8 @@ class PlayerCommand():
     @Game.display_decorator
     @staticmethod
     def about(entity):
+        """Displays information about a given entity such as a character or item"""
+        
         item = Item.get_item(entity)
         if item is not None:
             DescriptionDisplay.update_item_info(item)
@@ -265,7 +268,27 @@ class PlayerCommand():
                 Command.wait_for_enter()
             else:
                 raise Exception("entity not found")
+            
+    def list_commands():
+        """Displays a list of available commands"""
+        command_list = [
+            f"\n  * \x1b[38;5;226m{Config.bold}north, south, east, west{Config.reset_bold}\x1b[0m: move the player in the cardinal directions",
+            f"\n  * \x1b[38;5;226m{Config.bold}take{Config.reset_bold}\x1b[0m: places the item located in the current cave in the players bag",
+            f"\n  * \x1b[38;5;226m{Config.bold}fight{Config.reset_bold}\x1b[0m: fight the current inhabitant of the cave is enemy with a chosen item",
+            f"\n  * \x1b[38;5;226m{Config.bold}trade{Config.reset_bold}\x1b[0m: if the current inhabitant of the cave is a trader you can give it an item in your bag in exchange for a different item",
+            f"\n  * \x1b[38;5;226m{Config.bold}talk{Config.reset_bold}\x1b[0m: talk with the current inhabitant of the cave",
+            f"\n  * \x1b[38;5;226m{Config.bold}pat{Config.reset_bold}\x1b[0m: pat the current inhabitant of the cave",
+            f"\n  * \x1b[38;5;226m{Config.bold}retreat{Config.reset_bold}: allows you to escape from a fight",
+            f"\n  * \x1b[38;5;226m{Config.bold}about <character/item name>{Config.reset_bold}\x1b[0m: displays a description of the item/character",
+            f"\n  * \x1b[38;5;226m{Config.bold}exit{Config.reset_bold}\x1b[0m: closes the game"
+        ]     
         
+        Command.clear_terminal()
+        stdout.write(f"{Config.bold}Available Commands:{Config.reset_bold}")
+        for line in command_list:
+            stdout.write(line)
+        stdout.flush()
+        Command.wait_for_enter()
         
     @Game.display_decorator
     @staticmethod
