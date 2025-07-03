@@ -383,14 +383,14 @@ class CharacterEntities(Character):
         cls.lonelyMage = Friend("Lonely Mage", "A weird friendless cloaked man.")
         cls.lonelyMage.set_conversation("Chasm’s End leads to the surface, but you must defeat all threats first, no danger can be allowed to escape.")
 
-        cls.mossMan = Friend("Moss Man", "")
+        cls.mossMan = Friend("Moss Man", "A friendly beast made from moss and mud, the keeper of the Grove.")
         cls.mossMan.set_conversation("People drop all sorts of stuff, healing items, weapons. Even if you don’t need them, someone else might.")
 
         cls.yeti = Friend("Yeti", "A friendly, snow-covered beast with glowing eyes and a chilling roar.")
-        cls.yeti.set_conversation("People drop all sorts of stuff, healing items, weapons. Even if you don’t need them, someone else might.")
+        cls.yeti.set_conversation("The western caves are blazing hot and full of hostile creatures. You’ll need better gear to survive.")
 
         cls.salamander = Friend("Salamander", "A friendly, fiery lizard that slinks between flames and stone.")
-        cls.salamander.set_conversation("People drop all sorts of stuff, healing items, weapons. Even if you don’t need them, someone else might.")
+        cls.salamander.set_conversation("You're near Chasm’s End, just head north. But be warned, the enemies ahead are strong, especially the Skeleton King.")
         
         
 class Links(CaveEntities, ItemEntities, CharacterEntities):
