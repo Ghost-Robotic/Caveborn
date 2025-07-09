@@ -1,7 +1,11 @@
 # Caveborn
 
 ## Description
-Caveborn is a text based game where you explore caves, trade items and fight enemies!
+You are a child who has been living in Solace for your whole life. Your parents disappeared when you were younger and you have no recollection of them. Now, after 20 years, you feel curious about your past and what lies beyond the complex cave system that you are trapped in.
+
+However, as you find your way out, you will meet many formidable foes, determined to stop you in your tracks. You must find powerful weapons to continue your fight for freedom.
+
+Do you think you have a shot?
 
 ## Game Modes
 ### Default
