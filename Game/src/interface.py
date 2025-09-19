@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from os import system, name
+from tkinter import font
 
 # def calculate(*args):
 #     try:
@@ -11,12 +12,16 @@ from os import system, name
 #         pass
 
 # Create main window
+
 root = Tk()
 root.title("Caveborn")
 #root.iconbitmap("assets\Caveborn_Icon_2.ico")
-root.iconphoto(True, tk.PhotoImage(file=r"assets\Caveborn_Icon_2.png"))
+#root.iconphoto(True, tk.PhotoImage(file=r"assets\Caveborn_Icon_2.png"))
 root.configure(bg="#1c2526")
 system(root.state('zoomed') if name == 'nt' else root.attributes('-zoomed', True))
+
+NORMAL_FONT = 'Consolas 14'
+BOLD_FONT = font.Font(font='Consolas', size=14, weight='bold')
 
 # Create style
 style = ttk.Style()
@@ -48,10 +53,9 @@ style.configure("TFrame",
                 background="#1c2526")
 
 
-titleframe = ttk.Frame(root, padding="3 3 12 13")
+titleframe = ttk.Frame(root, padding="3 3 12 12")
 titleframe.grid(column=0, row=0, sticky=(N, W, E, S))
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
+
 
 title = r"""╔───────────────────────────────────────────────╗
 │    ___                _                       │
@@ -68,13 +72,56 @@ title_text = tk.Text(titleframe,
                      bg="#1c2526", 
                      fg="#eb3636", 
                      borderwidth=0,
-                     font=("Courier", 17),
+                     font=("Courier", 13),
                      wrap="none")
 title_text.insert(tk.END, title)
 title_text.grid(column=0, row=0, padx=0, ipadx=0, ipady=0, pady=0, sticky=(N, W))
 
-compass = ttk.Frame(root, padding="3 3 12 12")
-compass.grid(column=0, row=1, sticky=(N, W, E, S))
+
+# available moves compass
+compass_frame = Canvas(root, height=101, width=101, bg="#1c2526", relief="groove")
+compass_frame.grid(column=0, row=1, sticky=(N, W), padx=16, pady=16)
+
+compass_frame.create_text(52, 51, text='○', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff")
+compass_frame.create_text(52, 33, text='▲', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff")
+compass_frame.create_text(71, 52, text='▶', font='TkMenuFont, 20', anchor=tk.CENTER, fill = "#ffffff")
+compass_frame.create_text(52, 71, text='▼', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff")
+compass_frame.create_text(34, 52, text='◀', font='TkMenuFont, 20', anchor=tk.CENTER, fill = "#ffffff")
+
+compass_frame.create_text(52, 15, text='N', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+compass_frame.create_text(87, 52, text='E', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+compass_frame.create_text(52, 90, text='S', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+compass_frame.create_text(14, 52, text='W', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+
+
+# player information
+
+
+# cave information
+cave_frame = ttk.Frame(root)
+cave_frame.grid(column=0, row=2, padx=15, pady=16, sticky=(N, W))
+
+ttk.Label(cave_frame, font=NORMAL_FONT, text="----------").grid(column=0, row=0, sticky=(N, W))
+ttk.Label(cave_frame, font=BOLD_FONT, text="Solace").grid(column=0, row=1, sticky=(N, W))
+ttk.Label(cave_frame, font=NORMAL_FONT, text="----------").grid(column=0, row=2, sticky=(N, W))
+
+
+
+# frame = tk.Frame(root)
+# frame.grid(column=1, row=1)
+
+# compass_font = "Arial"
+# ttk.Label(frame, text="N", font=compass_font).grid(column=3, row=1)
+# ttk.Label(frame, text="▴", font=compass_font, anchor="s").grid(column=3, row=2)
+# ttk.Label(frame, text="○", font=compass_font).grid(column=3, row=3)
+# ttk.Label(frame, text="▾", font=compass_font).grid(column=3, row=4)
+
+# ttk.Label(frame, text="W", font=compass_font).grid(column=1, row=3)
+# ttk.Label(frame, text="◂", font=compass_font).grid(column=2, row=3)
+# ttk.Label(frame, text="▸", font=compass_font).grid(column=4, row=3)
+
+# ttk.Label(frame, text="S", font=compass_font).grid(column=3, row=5)
+# ttk.Label(frame, text="E", font=compass_font).grid(column=5, row=3)
 
 # mainframe = ttk.Frame(root, padding="3 3 12 12")
 # mainframe.grid(column=0, row=1, sticky=(N, W, E, S))
