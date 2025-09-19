@@ -95,7 +95,8 @@ compass_frame.create_text(14, 52, text='W', font='TkMenuFont, 12', anchor=tk.CEN
 
 
 # player information
-
+info_frame = ttk.Frame(root) 
+info_frame.grid(column=1, row=1, sticky=(N, W), padx=16, pady=16)
 
 # cave information
 cave_frame = ttk.Frame(root)
@@ -105,6 +106,9 @@ ttk.Label(cave_frame, font=NORMAL_FONT, text="----------").grid(column=0, row=0,
 ttk.Label(cave_frame, font=BOLD_FONT, text="Solace").grid(column=0, row=1, sticky=(N, W))
 ttk.Label(cave_frame, font=NORMAL_FONT, text="----------").grid(column=0, row=2, sticky=(N, W))
 
+# command line
+command_frame = ttk.Frame(root)
+cave_frame.grid(column=0, row=3, padx=10, pady=10, sticky=(S, W))
 
 
 # frame = tk.Frame(root)
