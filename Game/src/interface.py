@@ -47,7 +47,8 @@ style.configure("TLabel",
 style.configure("TEntry", 
                 fieldbackground="#2e3b3e", 
                 foreground="#ffffff",
-                insertcolor="#ffffff")  # Cursor color
+                insertcolor="#ffffff",
+                kw="hello")  # Cursor color
 
 style.configure("TFrame", 
                 background="#1c2526")
@@ -70,7 +71,7 @@ title_text = tk.Text(titleframe,
                      height=8, 
                      width=49, 
                      bg="#1c2526", 
-                     fg="#eb3636", 
+                     fg="#ffffff", 
                      borderwidth=0,
                      font=("Courier", 13),
                      wrap="none")
@@ -103,13 +104,19 @@ cave_frame = ttk.Frame(root)
 cave_frame.grid(column=0, row=2, padx=15, pady=16, sticky=(N, W))
 
 ttk.Label(cave_frame, font=NORMAL_FONT, text="----------").grid(column=0, row=0, sticky=(N, W))
-ttk.Label(cave_frame, font=BOLD_FONT, text="Solace").grid(column=0, row=1, sticky=(N, W))
+ttk.Label(cave_frame, font=(BOLD_FONT, 13), text="Solace", foreground="#eb3636").grid(column=0, row=1, sticky=(N, W))
 ttk.Label(cave_frame, font=NORMAL_FONT, text="----------").grid(column=0, row=2, sticky=(N, W))
 
 # command line
 command_frame = ttk.Frame(root)
-cave_frame.grid(column=0, row=3, padx=10, pady=10, sticky=(S, W))
+command_frame.grid(column=0, row=3, padx=10, pady=10, sticky=(S, W))
 
+command = StringVar()
+command_symbol = ttk.Label(command_frame, text=">", font=('calibre', 16, 'bold'))
+command_symbol.grid(column=0, row=1, sticky=(S, W), padx=5)
+command_line = Entry(command_frame,textvariable=command)
+command_line.configure(width=30, borderwidth=0, insertbackground="#ecf00c", bg="#2f3738", fg="#fbff00", font=('calibre', 13), highlightthickness=3, highlightcolor="#A2D498")
+command_line.grid(column=1, row=1, sticky=(S, W))
 
 # frame = tk.Frame(root)
 # frame.grid(column=1, row=1)
@@ -151,4 +158,5 @@ cave_frame.grid(column=0, row=3, padx=10, pady=10, sticky=(S, W))
 # feet_entry.focus()
 # root.bind("<Return>", calculate)
 
+#command_line.focus()
 root.mainloop()
