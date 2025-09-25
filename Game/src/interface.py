@@ -4,6 +4,16 @@ import tkinter as tk
 from os import system, name
 from tkinter import font
 
+class interface_access:
+    
+    @staticmethod 
+    def run_mainloop():
+        root.mainloop()
+        
+    @staticmethod
+    def test():
+        health.configure(text="100")
+
 # def calculate(*args):
 #     try:
 #         value = float(feet.get())
@@ -103,6 +113,9 @@ info_frame.grid(column=1, row=0, sticky=(N, W), padx=16, pady=16)
 
 ttk.Label(info_frame, font=(BOLD_FONT, 12), text="Health ", foreground="#08de3d").grid(column=0, row=0, sticky=(N, W))
 ttk.Label(info_frame, font=(BOLD_FONT, 14), text=": ", foreground="#ffffff").grid(column=1, row=0, sticky=(N, W))
+health = ttk.Label(info_frame, font=(BOLD_FONT, 12), text="null", foreground="#f700ff")
+health.grid(column=2, row=0, sticky=(N, W))
+
 ttk.Label(info_frame, font=(BOLD_FONT, 12), text="Bag ", foreground="#2ca3de").grid(column=0, row=1, sticky=(N, W))
 ttk.Label(info_frame, font=(BOLD_FONT, 14), text=": ", foreground="#ffffff").grid(column=1, row=1, sticky=(N, W))
 
@@ -173,4 +186,6 @@ command_line.grid(column=1, row=1, sticky=(S, W))
 # root.bind("<Return>", calculate)
 
 #command_line.focus()
-root.mainloop()
+
+# root.mainloop()
+
