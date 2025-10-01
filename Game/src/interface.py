@@ -102,20 +102,22 @@ class GameFrame(ttk.Frame):
         mid_frame = ttk.Frame(self)
         mid_frame.grid(column=0, row=1, sticky=(N, W, E, S))
 
-        # available moves compass
-        compass_frame = Canvas(mid_frame, height=101, width=101, bg="#1c2526", relief="groove")
-        compass_frame.grid(column=0, row=0, sticky=(N, W), padx=16, pady=16)
+        # available moves compass        
+        self.compass_frame = Canvas(mid_frame, height=101, width=101, bg="#1c2526", relief="groove")
+        self.compass_frame.grid(column=0, row=0, sticky=(N, W), padx=16, pady=16)
 
-        compass_frame.create_text(52, 51, text='○', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff")
-        compass_frame.create_text(52, 33, text='▲', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff")
-        compass_frame.create_text(71, 52, text='▶', font='TkMenuFont, 20', anchor=tk.CENTER, fill = "#ffffff")
-        compass_frame.create_text(52, 71, text='▼', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff")
-        compass_frame.create_text(34, 52, text='◀', font='TkMenuFont, 20', anchor=tk.CENTER, fill = "#ffffff")
+        self.compass_frame.create_text(52, 51, text='○', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff")        
+        north = self.compass_frame.create_text(52, 33, text='▲', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff"),
+        east = self.compass_frame.create_text(71, 52, text='▶', font='TkMenuFont, 20', anchor=tk.CENTER, fill = "#ffffff"),
+        south = self.compass_frame.create_text(52, 71, text='▼', font='TkMenuFont, 14', anchor=tk.CENTER, fill = "#ffffff"),
+        west = self.compass_frame.create_text(34, 52, text='◀', font='TkMenuFont, 20', anchor=tk.CENTER, fill = "#ffffff")
+        
+        self.directions = {"north":north, "east":east, "south":south, "west":west}
 
-        compass_frame.create_text(52, 15, text='N', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
-        compass_frame.create_text(87, 52, text='E', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
-        compass_frame.create_text(52, 90, text='S', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
-        compass_frame.create_text(14, 52, text='W', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+        self.compass_frame.create_text(52, 15, text='N', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+        self.compass_frame.create_text(87, 52, text='E', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+        self.compass_frame.create_text(52, 90, text='S', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
+        self.compass_frame.create_text(14, 52, text='W', font='TkMenuFont, 12', anchor=tk.CENTER, fill = "#ffffff")
 
 
         # player information
@@ -158,11 +160,21 @@ class GameFrame(ttk.Frame):
         self.command_line.grid(column=1, row=1, sticky=(S, W))
         
         self.command_line.focus()
-        self.bind("<Return>", self.send_command)
+        controller.bind("<Return>", self.send_command)
 
     def send_command(self, *args):
-        self.health.set(str(self.command.get()))
+        #self.health.set(str(self.command.get()))
+        self.update_compass([self.command.get()])
         self.command_line.delete(0, tk.END)
+        
+    def update_compass(self, available):
+        for direction in self.directions.values():
+            self.health.set("hello")
+            self.compass_frame.itemconfig(direction, fill="#ffffff")
+            
+        for direction in available:
+            arrow = self.directions[direction]
+            self.compass_frame.itemconfig(arrow, fill="#ff0808")
         
 class MenuFrame(tk.Frame):
     def __init__(self, parent, controller):
