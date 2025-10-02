@@ -121,20 +121,24 @@ class GameFrame(ttk.Frame):
 
 
         # player information
-        info_frame = ttk.Frame(mid_frame, width=30, height=30) 
+        info_frame = ttk.Frame(mid_frame) 
         info_frame.grid(column=1, row=0, sticky=(N, W), padx=16, pady=16)
 
+        text_frame = ttk.Frame(info_frame)
+        text_frame.grid(column=0, row=0, sticky=(N, W))
+        
         self.health = StringVar()
-        ttk.Label(info_frame, font=(controller.BOLD_FONT, 12), text="Health ", foreground="#08de3d").grid(column=0, row=0, sticky=(N, W))
-        ttk.Label(info_frame, font=(controller.BOLD_FONT, 14), text=": ", foreground="#ffffff").grid(column=1, row=0, sticky=(N, W))
-        health_label = ttk.Label(info_frame, font=(controller.BOLD_FONT, 12), textvariable=self.health, foreground="#f700ff")
+        ttk.Label(text_frame, font=(controller.BOLD_FONT, 12), text="Health ", foreground="#08de3d").grid(column=0, row=0, sticky=(N, W))
+        ttk.Label(text_frame, font=(controller.BOLD_FONT, 14), text=": ", foreground="#ffffff").grid(column=1, row=0, sticky=(N, W))
+        health_label = ttk.Label(text_frame, font=(controller.BOLD_FONT, 12), textvariable=self.health, foreground="#f700ff")
         health_label.grid(column=2, row=0, sticky=(N, W))
 
-        ttk.Label(info_frame, font=(controller.BOLD_FONT, 12), text="Bag ", foreground="#2ca3de").grid(column=0, row=1, sticky=(N, W))
-        ttk.Label(info_frame, font=(controller.BOLD_FONT, 14), text=": ", foreground="#ffffff").grid(column=1, row=1, sticky=(N, W))
+        ttk.Label(text_frame, font=(controller.BOLD_FONT, 12), text="Bag ", foreground="#2ca3de").grid(column=0, row=1, sticky=(N, W), columnspan=2)
+        # ttk.Label(text_frame, font=(controller.BOLD_FONT, 14), text=": ", foreground="#ffffff").grid(column=1, row=1, sticky=(N, W))
 
-        # bag_box = tk.Text(info_frame, height=10, width=25)
-        # bag_box.grid(column=0, row=2, sticky=(N, W), columnspan=3)
+        # bag_frame = ttk.Frame(info_frame)
+        bag_box = tk.Text(info_frame, height=3, width=22, bg="#1c2526", fg="#ffffff", borderwidth=3)
+        bag_box.grid(column=0, row=1, sticky=(N, W), columnspan=3)
 
         mode_specific_info = ttk.Frame(mid_frame)
         mode_specific_info.grid(column=2, row=0, sticky=(N, W), padx=16, pady=16)
@@ -163,13 +167,12 @@ class GameFrame(ttk.Frame):
         controller.bind("<Return>", self.send_command)
 
     def send_command(self, *args):
-        #self.health.set(str(self.command.get()))
-        self.update_compass([self.command.get()])
+        self.health.set(str(self.command.get()))
+        self.update_compass(["north", "south", "west"])
         self.command_line.delete(0, tk.END)
         
     def update_compass(self, available):
         for direction in self.directions.values():
-            self.health.set("hello")
             self.compass_frame.itemconfig(direction, fill="#ffffff")
             
         for direction in available:
